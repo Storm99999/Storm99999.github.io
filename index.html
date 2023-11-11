@@ -1,81 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPP</title>
     <style>
         body {
-            background-color: #1f1f1f;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Hide overflow to prevent horizontal scrollbars */
         }
 
         .container {
-            text-align: center;
-            padding: 30px;
-            border: 2px solid #4ca1af;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(76, 161, 175, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #1a1a1a;
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Container glow effect */
         }
 
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
+        .profile-picture {
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(255, 255, 255, 0.8); /* Intense glow effect */
         }
 
-        p {
-            font-size: 1.2em;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        .profile-picture img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Profile picture glow effect */
         }
 
-        a {
-            color: #4ca1af;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
+        .snowflake {
+            position: absolute;
+            color: #fff;
+            font-size: 16px;
+            pointer-events: none;
+            animation: falling linear infinite;
         }
 
-        a:hover {
-            color: #3e7a8f;
+        @keyframes falling {
+            0% {
+                transform: translateY(-100vh);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
         }
     </style>
 </head>
-
 <body>
-
     <div class="container">
+        <div class="profile-picture">
+            <img src="your-profile-picture.jpg" alt="Profile Picture">
+        </div>
         <h1>GitHub++</h1>
-        <p>Web Developer | Designer | Explorer</p>
-        <p>Introducing GitHub++. The #1 GitHub Theming Utility
-            Feel free to <a href="https://discord.com/users/">contact me</a>.</p>
+        <p>The #1 GitHub Theming Utility</p>
+    </div>
 
-        <h2>About Me</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget tincidunt mauris. Suspendisse potenti.
-            Proin fermentum, quam ut scelerisque elementum, nulla mauris luctus odio, id posuere nunc justo sit amet
-            elit.</p>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
 
-        <h2>Skills</h2>
-        <p>My skills include:</p>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Node.js</li>
-        </ul>
+            function createSnowflake() {
+                const snowflake = document.createElement('span');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = '❄';
+                snowflake.style.left = Math.random() * window.innerWidth + 'px';
+                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+                container.appendChild(snowflake);
+                snowflake.addEventListener('animationend', function() {
+                    snowflake.remove();
+                });
+            }
 
-       </div>
-
+            // Create snowflakes at intervals
+            setInterval(createSnowflake, 500);
+        });
+    </script>
 </body>
-
 </html>
