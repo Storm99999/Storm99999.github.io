@@ -118,7 +118,7 @@
             <option value="" disabled selected>Select a map</option>
             <option value="https://raw.githubusercontent.com/Storm99999/abyss/refs/heads/main/docks.png">Docks</option>
             <option value="map2.jpg">Big Crossroads</option>
-            <option value="map3.jpg">Big Arena</option>
+            <option value="https://raw.githubusercontent.com/Storm99999/abyss/refs/heads/main/bigarena.png">Big Arena</option>
             <option value="map4.jpg">Arena</option>
         </select>
         <button onclick="loadMap()">Load Map</button>
@@ -298,58 +298,141 @@
             });
         }
 
+        
+        let panX = 0;
+        let panY = 0;
+        let zoomLevel = 1;
+
+        mapContainer.addEventListener('wheel', (event) => {
+            event.preventDefault();
+
+            const rect = mapDrawing.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+
+            const zoomFactor = event.deltaY > 0 ? 0.9 : 1.1;
+
+            const newZoomLevel = zoomLevel * zoomFactor;
+
+            // Reset to original zoom if zooming out is too far, causes glitches tho
+            if (newZoomLevel < 1) {
+                zoomLevel = 1;
+                panX = 0;
+                panY = 0;
+            } else {
+                panX = mouseX - (mouseX - panX) * zoomFactor;
+                panY = mouseY - (mouseY - panY) * zoomFactor;
+                zoomLevel = newZoomLevel;
+            }
+
+            applyZoom();
+        });
+
+        function applyZoom() {
+            // Reset transformations, important !!
+            ctxBackground.setTransform(1, 0, 0, 1, 0, 0);
+            ctxDrawing.setTransform(1, 0, 0, 1, 0, 0);
+
+            ctxBackground.translate(panX, panY);
+            ctxBackground.scale(zoomLevel, zoomLevel);
+
+            ctxDrawing.translate(panX, panY);
+            ctxDrawing.scale(zoomLevel, zoomLevel);
+
+            ctxBackground.clearRect(0, 0, mapBackground.width, mapBackground.height);
+            ctxBackground.drawImage(mapImage, 0, 0);
+
+            // Clear and clip the drawing canvas
+            ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height);
+            ctxDrawing.save(); // Save the clipping region
+            ctxDrawing.rect(0, 0, mapBackground.width, mapBackground.height);
+            ctxDrawing.clip();
+
+            // Redraw drawing lulz
+            redrawDrawing();
+
+            ctxDrawing.restore(); // Restore 
+        }
+
+        function redrawDrawing() {
+            ctxDrawing.setTransform(1, 0, 0, 1, 0, 0);
+            ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height);
+            ctxDrawing.translate(panX, panY);
+            ctxDrawing.scale(zoomLevel, zoomLevel);
+
+            drawHistory.forEach((entry) => {
+                ctxDrawing.putImageData(entry.imageData, entry.x, entry.y);
+            });
+        }
+
+
+
+        function getTransformedCoordinates(event) {
+            const rect = mapDrawing.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+
+            const x = (mouseX - panX) / zoomLevel;
+            const y = (mouseY - panY) / zoomLevel;
+
+            return { x, y };
+        }
+
+
         function setupDrawing() {
             mapDrawing.addEventListener('mousedown', (event) => {
-                if (referenceMode) return; 
+                const { x, y } = getTransformedCoordinates(event);
                 drawing = true;
-                const rect = mapDrawing.getBoundingClientRect();
-                const x = event.clientX - rect.left;
-                const y = event.clientY - rect.top;
+
                 ctxDrawing.beginPath();
                 ctxDrawing.moveTo(x, y);
             });
 
             mapDrawing.addEventListener('mouseup', () => {
                 drawing = false;
-                saveCurrentState(); 
+                saveCurrentState();
                 ctxDrawing.beginPath();
             });
 
             mapDrawing.addEventListener('mousemove', (event) => {
-                if (!drawing || referenceMode) return;
+                if (!drawing) return;
 
-                const rect = mapDrawing.getBoundingClientRect();
-                const x = event.clientX - rect.left;
-                const y = event.clientY - rect.top;
+                const { x, y } = getTransformedCoordinates(event);
 
-                ctxDrawing.lineWidth = 3;
+                ctxDrawing.lineWidth = eraserMode ? eraserSize : brushSize;
                 ctxDrawing.lineCap = 'round';
-
-                if (eraserMode) {
-                    ctxDrawing.lineWidth = eraserSize;
-                    ctxDrawing.globalCompositeOperation = 'destination-out'; 
-                    ctxDrawing.strokeStyle = '#FFFFFF'; 
-                } else {
-                    ctxDrawing.lineWidth = brushSize;
-                    ctxDrawing.globalCompositeOperation = 'source-over';
-                    ctxDrawing.strokeStyle = drawingColor;
-                }
+                ctxDrawing.globalCompositeOperation = eraserMode
+                    ? 'destination-out'
+                    : 'source-over';
+                ctxDrawing.strokeStyle = eraserMode ? '#FFFFFF' : drawingColor;
 
                 ctxDrawing.lineTo(x, y);
                 ctxDrawing.stroke();
                 ctxDrawing.beginPath();
                 ctxDrawing.moveTo(x, y);
             });
-
-            mapDrawing.addEventListener('mouseleave', () => {
-                drawing = false;
-                ctxDrawing.beginPath();
-            });
         }
+
+
+
+
+
+
+
 
         function saveCurrentState() {
             drawHistory.push(ctxDrawing.getImageData(0, 0, mapDrawing.width, mapDrawing.height));
         }
+
+
+        function redrawDrawing() {
+            ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height);
+            drawHistory.forEach((imageData) => {
+                ctxDrawing.putImageData(imageData, 0, 0);
+            });
+        }
+
+
 
         window.addEventListener('keydown', (event) => {
             if (event.ctrlKey && event.key === 'z') {
