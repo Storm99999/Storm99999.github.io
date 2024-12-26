@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-    <title>SNOWSEC</title>
+    <title>Celeste P32 - Map Planning Tool</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=GreyCliff+CF:wght@300&display=swap');
-
+        /* Dark Mode Style i think it looks cool! */
         body {
             margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: 'GreyCliff CF', sans-serif;
-            background-color: #f0f0f0;
-        }
-
-        .container {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -26,338 +18,343 @@
             height: 100vh;
         }
 
-        #fullscreen-bg {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        #fullscreen-bg video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        #overlay {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            font-family: 'GreyCliff CF', sans-serif;
-            z-index: 999;
-        }
-
-        #moving-text {
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            z-index: 1;
-            font-family: 'GreyCliff CF', sans-serif;
-            white-space: nowrap;
-            overflow: hidden;
-            animation: moveCircles 8s linear infinite;
-        }
-
-        #moving-text h1 {
-            font-size: 36px;
+        #map-selector {
             margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
         }
 
-        #word {
-            position: absolute;
-            top: 25%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            z-index: 1;
-            font-family: 'GreyCliff CF', sans-serif;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        #word p {
-            font-size: 24px;
-        }
-
-      #links-container {
-          position: absolute;
-          top: 70%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          background-color: rgba(255, 255, 255, 0); /* Set the background color with transparency */
-          backdrop-filter: blur(5px);
-          padding: 10px;
-          border-radius: 8px;
-         font-family: 'system-ui';
-      }
-
-
-        #links-container a {
-            text-decoration: none;
-            color: white;
-            margin: 5px;
-          font-family: 'system-ui';
-        }
-
-        #audio-container {
+        #map-container {
             position: relative;
-            width: 100%;
-            margin-top: 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
             display: none;
         }
 
-        #audio {
-            width: 100%;
-        }
-
-        @keyframes moveCircles {
-            0% {
-                transform: translateX(-50%, -50%) rotate(0deg);
-            }
-            25% {
-                transform: translateX(-50%, -50%) rotate(90deg);
-            }
-            50% {
-                transform: translateX(-50%, -50%) rotate(180deg);
-            }
-            75% {
-                transform: translateX(-50%, -50%) rotate(270deg);
-            }
-            100% {
-                transform: translateX(-50%, -50%) rotate(360deg);
-            }
-        }
-
-        video {
+        canvas {
             display: block;
-            height: 50%;
+            cursor: crosshair;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        img {
+            display: block;
             width: 100%;
+            height: auto;
+        }
+
+        #tool-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #1e1e1e;
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input[type="color"] {
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #1e88e5;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #1565c0;
+        }
+
+
+       
+
+        select {
+            background-color: #1e1e1e;
+            color: white;
+            border: 1px solid #333;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        /* Hide buttons initially because i dont want htem to be seen XD*/
+        #show-reference-btn, #share-btn {
+            visibility: hidden;
         }
     </style>
 </head>
-
 <body>
-    <div id="particles-js"></div>
-    <div class="container">
-        <div id="fullscreen-bg">
-            <video autoplay muted loop style="object-fit: fill; height: 100%; width: 100%;" id="autoplayVideo">
-                <source src="https://replit.com/@dangggggstormdo/sc#winter-snow-street-light-moewalls-com.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-
-        <!-- Click to Enter Overlay -->
-        <div id="overlay" onclick="startExperience()">
-            Click to enter
-        </div>
-
-        <!-- Content with Big Text -->
-        <div id="moving-text">
-            <h1>SNOWSEC</h1>
-        </div>
-
-        <!-- Author Label -->
-        <div id="word">
-            <p></p>
-        </div>
-
-        <!-- Links Container -->
-        <div id="links-container">
-            <a>[DOXXES]</a>
-            <a href="https://doxbin.com/upload/SkxddedPedo" target="_blank">/upload/SkxddedPedo</a>
-            <a href="https://doxbin.com/upload/NearTheSkid" target="_blank">/upload/NearTheSkid</a>
-            <a href="https://doxbin.com/upload/SnoopyOfficial" target="_blank">/upload/SnoopyOfficial</a>
-            <a href="https://doxbin.com/upload/NEBULASDOXX" target="_blank">/upload/NEBULASDOXX</a>
-        </div>
-
-        <!-- Audio Container -->
-        <div id="audio-container">
-            <audio id="audio" controls>
-                <source src="https://replit.com/@dangggggstormdo/sc#neheart%20%20this%20feeling.mp3" type="audio/mp3">
-                Your browser does not support the audio tag.
-            </audio>
-        </div>
+    <div id="map-selector">
+        <select id="map-list">
+            <option value="" disabled selected>Select a map</option>
+            <option value="https://raw.githubusercontent.com/Storm99999/abyss/refs/heads/main/docks.png">Docks</option>
+            <option value="map2.jpg">Big Crossroads</option>
+            <option value="map3.jpg">Big Arena</option>
+            <option value="map4.jpg">Arena</option>
+        </select>
+        <button onclick="loadMap()">Load Map</button>
+        <button id="show-reference-btn" onclick="toggleReference()">Show Reference</button>
+        <button id="share-btn" onclick="shareMap()">Share</button>
     </div>
 
+    <div id="tool-container">
+        <input type="color" id="color-picker" value="#ff0000" />
+        <button id="erase-btn" onclick="toggleErase()">Erase</button>
+        <button id="clear-btn" onclick="clearAllDrawing()">Clear</button>
+
+    </div>
+
+    <div id="map-container">
+        <img id="map-image" src="" alt="Map Image">
+        <canvas id="map-background"></canvas> 
+        <canvas id="map-drawing"></canvas>     
+    </div>
+
+
     <script>
-        function startExperience() {
-            var overlay = document.getElementById('overlay');
-            overlay.style.display = 'none';
+        const mapList = document.getElementById('map-list');
+        const mapContainer = document.getElementById('map-container');
+        const mapBackground = document.getElementById('map-background');
+        const mapDrawing = document.getElementById('map-drawing');
+        const ctxBackground = mapBackground.getContext('2d');
+        const ctxDrawing = mapDrawing.getContext('2d');
+        const mapImage = document.getElementById('map-image');
 
-            var audio = document.getElementById('audio');
-            audio.play();
-        }
-      var words = ['newguy', 'gameboy', 'insignia', 'ulaxus', 'caketime'],
-          part,
-          i = 0,
-          offset = 0,
-          len = words.length,
-          forwards = true,
-          skip_count = 0,
-          skip_delay = 15,
-          speed = 70;
+        const showReferenceBtn = document.getElementById('show-reference-btn');
+        const shareBtn = document.getElementById('share-btn');
 
-      var wordflick = function () {
-          setInterval(function () {
-              if (forwards) {
-                  if (offset >= words[i].length) {
-                      ++skip_count;
-                      if (skip_count == skip_delay) {
-                          forwards = false;
-                          skip_count = 0;
-                      }
-                  }
-              }
-              else {
-                  if (offset == 0) {
-                      forwards = true;
-                      i++;
-                      offset = 0;
-                      if (i >= len) {
-                          i = 0;
-                      }
-                  }
-              }
-              part = words[i].substr(0, offset);
-              if (skip_count == 0) {
-                  if (forwards) {
-                      offset++;
-                  }
-                  else {
-                      offset--;
-                  }
-              }
-              document.getElementById('word').innerText = part;
-          }, speed);
-      };
+        let drawing = false;
+        let drawHistory = []; 
+        let referenceMode = false; 
+        let selectedMap = null;
+        let drawingColor = '#ff0000';
+        let eraserMode = false; 
+        let eraserSize = 10; 
+        let brushSize = 3; 
 
-      window.onload = function () {
-          wordflick();
-      };
-
-        document.addEventListener('DOMContentLoaded', function () {
-            particlesJS('particles-js', {
-                particles: {
-                    number: {
-                        value: 100,
-                        density: {
-                            enable: true,
-                            value_area: 800
-                        }
-                    },
-                    shape: {
-                        type: 'circle',
-                        stroke: {
-                            width: 0,
-                            color: '#ffffff'
-                        },
-                        polygon: {
-                            nb_sides: 5
-                        }
-                    },
-                    opacity: {
-                        value: 0.5,
-                        random: false,
-                        anim: {
-                            enable: false,
-                            speed: 1,
-                            opacity_min: 0.1,
-                            sync: false
-                        }
-                    },
-                    size: {
-                        value: 3,
-                        random: true,
-                        anim: {
-                            enable: false,
-                            speed: 40,
-                            size_min: 0.1,
-                            sync: false
-                        }
-                    },
-                    line_linked: {
-                        enable: false
-                    },
-                    move: {
-                        enable: true,
-                        speed: 6,
-                        direction: 'bottom',
-                        random: true,
-                        straight: false,
-                        out_mode: 'out',
-                        bounce: false,
-                        attract: {
-                            enable: false,
-                            rotateX: 600,
-                            rotateY: 1200
-                        }
-                    }
-                },
-                interactivity: {
-                    detect_on: 'canvas',
-                    events: {
-                        onhover: {
-                            enable: true,
-                            mode: 'repulse'
-                        },
-                        onclick: {
-                            enable: true,
-                            mode: 'push'
-                        },
-                        resize: true
-                    },
-                    modes: {
-                        grab: {
-                            distance: 400,
-                            line_linked: {
-                                opacity: 1
-                            }
-                        },
-                        bubble: {
-                            distance: 400,
-                            size: 40,
-                            duration: 2,
-                            opacity: 8,
-                            speed: 3
-                        },
-                        repulse: {
-                            distance: 200,
-                            duration: 0.4
-                        },
-                        push: {
-                            particles_nb: 4
-                        },
-                        remove: {
-                            particles_nb: 2
-                        }
-                    }
-                },
-                retina_detect: true
-            });
+        const colorPicker = document.getElementById('color-picker');
+        colorPicker.addEventListener('input', (event) => {
+            drawingColor = event.target.value;
         });
 
+        function clearAllDrawing() {
+            ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height); 
+            drawHistory = []; 
+        }
+
+        function toggleErase() {
+            eraserMode = !eraserMode;
+            if (eraserMode) {
+                document.getElementById('erase-btn').textContent = 'Draw';
+            } else {
+                document.getElementById('erase-btn').textContent = 'Erase';
+            }
+        }
+
+
+        function loadMap() {
+            selectedMap = mapList.value;
+
+            if (selectedMap) {
+                mapImage.src = selectedMap;
+
+                mapImage.onload = () => {
+                    mapBackground.width = mapImage.width;
+                    mapBackground.height = mapImage.height;
+                    mapDrawing.width = mapImage.width;
+                    mapDrawing.height = mapImage.height;
+
+                    mapContainer.style.display = 'block';
+
+                    ctxBackground.drawImage(mapImage, 0, 0);
+
+                    showReferenceBtn.style.visibility = 'visible';
+                    shareBtn.style.visibility = 'visible';
+
+                    setupDrawing();
+                };
+            }
+        }
+
+        function toggleReference() {
+            if (referenceMode) {
+                showReferenceBtn.textContent = 'Show Reference';
+                ctxBackground.clearRect(0, 0, mapBackground.width, mapBackground.height);
+                ctxBackground.drawImage(mapImage, 0, 0);
+                redrawDrawing();
+                referenceMode = false;
+            } else {
+                showReferenceBtn.textContent = 'Hide Reference';
+                ctxBackground.clearRect(0, 0, mapBackground.width, mapBackground.height);
+
+                const selectedMapName = mapList.value.split('/').pop().split('.')[0]; // cancer
+
+                const referenceImageURL = `https://raw.githubusercontent.com/Storm99999/abyss/refs/heads/main/${selectedMapName}ref.png`;
+
+                const referenceImage = new Image();
+                referenceImage.src = referenceImageURL;
+                referenceImage.onload = () => {
+                    ctxBackground.drawImage(referenceImage, 0, 0); 
+                };
+
+                clearDrawing(); 
+                referenceMode = true; // w
+            }
+        }
+
+        function redrawDrawing() {
+            for (let i = 0; i < drawHistory.length; i++) {
+                ctxDrawing.putImageData(drawHistory[i], 0, 0);
+            }
+        }
+
+        function clearDrawing() {
+            ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height);
+        }
+
+        // this is my sui cide arc!!
+        async function shareMap() {
+            const combinedCanvas = document.createElement('canvas');
+            const combinedCtx = combinedCanvas.getContext('2d');
+
+            combinedCanvas.width = mapBackground.width;
+            combinedCanvas.height = mapBackground.height;
+
+            const base64Image = await convertToBase64(mapImage.src);
+            
+            const img = new Image();
+            img.setAttribute('crossorigin', 'anonymous'); // works for me
+            img.onload = function() {
+                combinedCtx.drawImage(img, 0, 0);
+
+                combinedCtx.drawImage(mapDrawing, 0, 0);
+
+                combinedCanvas.toBlob(async (imageBlob) => {
+                    if (navigator.clipboard && navigator.clipboard.write) {
+                        const item = new ClipboardItem({
+                            "image/png": imageBlob
+                        });
+
+                        try {
+                            // Write the image to clipboard
+                            await navigator.clipboard.write([item]);
+                            alert('Map with drawing copied to clipboard!');
+                        } catch (err) {
+                            alert('Failed to copy image to clipboard: ' + err);
+                        }
+                    } else {
+                        alert('Clipboard API not available in this browser.');
+                    }
+                }, 'image/png');
+            };
+            img.src = base64Image;
+        }
+
+        function convertToBase64(imgSrc) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.setAttribute('crossorigin', 'anonymous'); // works for me
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                    resolve(canvas.toDataURL('image/png'));
+                };
+                img.onerror = reject;
+                img.src = imgSrc;
+            });
+        }
+
+        function setupDrawing() {
+            mapDrawing.addEventListener('mousedown', (event) => {
+                if (referenceMode) return; 
+                drawing = true;
+                const rect = mapDrawing.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                ctxDrawing.beginPath();
+                ctxDrawing.moveTo(x, y);
+            });
+
+            mapDrawing.addEventListener('mouseup', () => {
+                drawing = false;
+                saveCurrentState(); 
+                ctxDrawing.beginPath();
+            });
+
+            mapDrawing.addEventListener('mousemove', (event) => {
+                if (!drawing || referenceMode) return;
+
+                const rect = mapDrawing.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                ctxDrawing.lineWidth = 3;
+                ctxDrawing.lineCap = 'round';
+
+                if (eraserMode) {
+                    ctxDrawing.lineWidth = eraserSize;
+                    ctxDrawing.globalCompositeOperation = 'destination-out'; 
+                    ctxDrawing.strokeStyle = '#FFFFFF'; 
+                } else {
+                    ctxDrawing.lineWidth = brushSize;
+                    ctxDrawing.globalCompositeOperation = 'source-over';
+                    ctxDrawing.strokeStyle = drawingColor;
+                }
+
+                ctxDrawing.lineTo(x, y);
+                ctxDrawing.stroke();
+                ctxDrawing.beginPath();
+                ctxDrawing.moveTo(x, y);
+            });
+
+            mapDrawing.addEventListener('mouseleave', () => {
+                drawing = false;
+                ctxDrawing.beginPath();
+            });
+        }
+
+        function saveCurrentState() {
+            drawHistory.push(ctxDrawing.getImageData(0, 0, mapDrawing.width, mapDrawing.height));
+        }
+
+        window.addEventListener('keydown', (event) => {
+            if (event.ctrlKey && event.key === 'z') {
+                undo();
+            }
+        });
+
+    
+
+        function undo() {
+            if (drawHistory.length > 0) {
+                drawHistory.pop();
+                if (drawHistory.length > 0) {
+                    ctxDrawing.putImageData(drawHistory[drawHistory.length - 1], 0, 0);
+                } else {
+                    ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height);
+                }
+            }
+        }
     </script>
-
 </body>
-
 </html>
