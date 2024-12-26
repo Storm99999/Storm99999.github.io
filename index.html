@@ -354,16 +354,7 @@
             ctxDrawing.restore(); // Restore 
         }
 
-        function redrawDrawing() {
-            ctxDrawing.setTransform(1, 0, 0, 1, 0, 0);
-            ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height);
-            ctxDrawing.translate(panX, panY);
-            ctxDrawing.scale(zoomLevel, zoomLevel);
-
-            drawHistory.forEach((entry) => {
-                ctxDrawing.putImageData(entry.imageData, entry.x, entry.y);
-            });
-        }
+        
 
 
 
