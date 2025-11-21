@@ -1,449 +1,639 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Celeste P32">
-    <meta property="og:description" content="Roblox Rivals map planning tool">
-    <meta property="og:image" content="cel.ico">
-    <meta property="og:url" content="https://storm99999.github.io/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Celeste P32">
-    <title>Celeste P32 - Map Planning Tool</title>
-    <link rel="icon" type="image/x-icon" href="cel.ico">
-    <style>
-        /* Dark Mode Style i think it looks cool! */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta property="og:title" content="Nocturnal – Premium Software" />
+  <meta property="og:description" content="Choose between Nocturnal Basic or Lifetime. Smooth UI, clean animations, and fast support." />
+  <meta property="og:image" content="" />
+  <meta property="og:url" content="" />
+  <meta name="theme-color" content="#2b1b3a">
+  <title>nocturnal.vip — main</title>
+  <link rel="icon" type="icon" href="assets/favicon.ico">
 
-        #map-selector {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 20px;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
-        #map-container {
-            position: relative;
-            border: 2px solid #333;
-            border-radius: 10px;
-            overflow: hidden;
-            display: none;
-        }
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-        canvas {
-            display: block;
-            cursor: crosshair;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+  <style>
+    :root{
+      --bg-1: #0f0b16;
+      --bg-2: #2b1b3a;
+      --accent: #8b5cf6;
+      --muted: rgba(255,255,255,0.08);
+      --glass: rgba(255,255,255,0.06);
+      --glass-2: rgba(255,255,255,0.03);
+      --card-radius: 14px;
+      --transition: 280ms cubic-bezier(.2,.9,.25,1);
+    }
 
-        img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
+    *{box-sizing: border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Roboto', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 100%);
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow: auto;
+    }
 
-        #tool-container {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #1e1e1e;
-            padding: 10px;
-            border-radius: 4px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+    /* particles canvassssss */
+    #particles-js {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-        input[type="color"] {
-            padding: 5px;
-            border-radius: 4px;
-        }
+    .wrap{
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      z-index: 1;
+    }
 
-        button {
-            background-color: #1e88e5;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
+    .panel {
+      width: 980px;
+      max-width: calc(100% - 48px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius: var(--card-radius);
+      padding: 28px;
+      box-shadow: 0 10px 40px rgba(2,2,10,0.6);
+      backdrop-filter: blur(8px) saturate(120%);
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 22px;
+      align-items: start;
+      overflow: hidden;
+      position: relative;
+    }
 
-        button:hover {
-            background-color: #1565c0;
-        }
+    /* Left : product  */
+    .brand {
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      align-items:flex-start;
+    }
+    .logo {
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo .mark{
+      width:56px; height:56px; border-radius:10px;
+      background: linear-gradient(135deg, rgba(139,92,246,0.18), rgba(139,92,246,0.35));
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 6px 20px rgba(139,92,246,0.12), inset 0 -6px 20px rgba(0,0,0,0.2);
+      transform: translateZ(0);
+      transition: transform var(--transition);
+    }
+    .logo .mark:hover { transform: translateY(-6px) rotate(-6deg) scale(1.03); }
+    .logo h1 { margin:0; font-size:20px; letter-spacing:0.4px; font-weight:700; color:#fff; }
+    .sub { font-size:13px; color:rgba(255,255,255,0.8); opacity:0.88; max-width: 320px; }
 
+    /* Product list */
+    .products {
+      margin-top:8px;
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
 
-        footer {
-            text-align: center;
-            color: #888; 
-            font-size: 12px;
-            margin-top: 20px;
-        }
+    .product-card {
+      background: linear-gradient(180deg,var(--glass) 0%, var(--glass-2) 100%);
+      border-radius: 12px;
+      padding: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      cursor:pointer;
+      border: 1px solid transparent;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
+      transform-origin: left center;
+    }
 
-        select {
-            background-color: #1e1e1e;
-            color: white;
-            border: 1px solid #333;
-            padding: 10px;
-            border-radius: 4px;
-        }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+      border-color: rgba(139,92,246,0.18);
+    }
 
-        /* Hide buttons initially because i dont want htem to be seen XD*/
-        #show-reference-btn, #share-btn {
-            visibility: hidden;
-        }
-    </style>
+    .product-card.selected {
+      background: linear-gradient(90deg, rgba(139,92,246,0.12), rgba(139,92,246,0.06));
+      border-color: rgba(139,92,246,0.32);
+      box-shadow: 0 18px 50px rgba(139,92,246,0.08);
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    .product-meta {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+
+    .product-icon{
+      width:46px; height:46px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: inset 0 -6px 18px rgba(0,0,0,0.35);
+      flex-shrink:0;
+    }
+
+    .product-info { display:flex; flex-direction:column; gap:4px; }
+    .product-title { font-weight:700; letter-spacing:0.2px; }
+    .product-desc { font-size:13px; color:rgba(255,255,255,0.75); }
+
+    .price {
+      min-width:92px;
+      text-align:right;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      align-items:flex-end;
+    }
+    .price .amount { font-weight:700; font-size:18px; }
+    .price .freq { font-size:12px; color:rgba(255,255,255,0.78); }
+
+    /* Right : details */
+    .details {
+      padding: 16px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      min-height: 320px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .details h2 { margin:0; font-size:20px; }
+    .features { display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+    .feature {
+      background: rgba(255,255,255,0.03);
+      padding:10px 12px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      transition: transform var(--transition);
+    }
+    .feature:hover { transform: translateX(6px); }
+
+    .cta {
+      margin-top:auto;
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+
+    .btn {
+      border: none;
+      background: linear-gradient(90deg, var(--accent), #5eead4 120%);
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight:700;
+      cursor:pointer;
+      color: #0b0b0b;
+      box-shadow: 0 8px 28px rgba(139,92,246,0.14);
+      transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+      transform-origin:center;
+    }
+    .btn:active { transform: translateY(2px) scale(0.996); }
+    .btn.ghost {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: none;
+    }
+
+    .pulse {
+      animation: pulse 2.6s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-6px); opacity: 0.95; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .faq-wrap {
+      margin-top: 22px;
+      width: 980px;
+      max-width: calc(100% - 48px);
+      display:block;
+      z-index:1;
+
+    }
+    .faq {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      backdrop-filter: blur(8px) saturate(120%);
+
+    }
+    .q {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:12px;
+      border-radius:10px;
+      cursor:pointer;
+      transition: background var(--transition), transform var(--transition);
+      margin-bottom:8px;
+    }
+    .q:hover { background: rgba(255,255,255,0.02); transform: translateX(6px); }
+    .q .label { font-weight:700; }
+    .ans {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 450ms cubic-bezier(.2,.9,.25,1), padding 260ms ease;
+      padding: 0 12px;
+      font-size:14px;
+      color: rgba(255,255,255,0.85);
+      background: linear-gradient(180deg, rgba(255,255,255,0.005), rgba(255,255,255,0.001));
+      border-radius: 8px;
+      margin-bottom:10px;
+    }
+    .ans.open { padding: 12px; max-height: 260px; }
+
+    .note {
+      margin-top:10px;
+      font-size:13px;
+      color:rgba(255,255,255,0.66);
+    }
+
+    /* responsive */
+    @media (max-width: 880px){
+      .panel { grid-template-columns: 1fr; padding:18px; }
+      .brand { order:2 }
+      .details { order:1 }
+      .faq-wrap, .panel { width: 100%; max-width:100%; }
+    }
+  </style>
 </head>
 <body>
-    <div id="map-selector">
-        <select id="map-list">
-            <option value="" disabled selected>Select a map</option>
-            <option value="https://raw.githubusercontent.com/Storm99999/abyss/refs/heads/main/docks.png">Docks</option>
-            <option value="map2.jpg">Big Crossroads</option>
-            <option value="https://raw.githubusercontent.com/Storm99999/abyss/refs/heads/main/bigarena.png">Big Arena</option>
-            <option value="map4.jpg">Arena</option>
-        </select>
-        <button onclick="loadMap()">Load Map</button>
-        <button id="show-reference-btn" onclick="toggleReference()">Show Reference</button>
-        <button id="share-btn" onclick="shareMap()">Share</button>
+  <div id="particles-js"></div>
+
+  <div class="wrap">
+    <div class="panel" role="region" aria-label="Nocturnal product panel">
+      <div class="brand" aria-hidden="false">
+        <div class="logo" aria-hidden="false">
+          <div class="mark" title="Nocturnal logo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="white" opacity="0.95"/>
+            </svg>
+          </div>
+          <div>
+            <h1>Nocturnal</h1>
+            <div class="sub">By way of deception, you shall wage war.</div>
+          </div>
+        </div>
+
+        <div class="products" id="products" role="list" aria-label="Products list">
+          <!-- populated by JS anyway -->
+        </div>
+
+        <div style="margin-top:6px; display:flex; gap:8px;">
+          <button class="btn ghost" id="compare-btn" title="Compare features">Purchase</button>
+        </div>
+
+      </div>
+
+      <div class="details" id="details" aria-live="polite">
+        <div>
+          <h2 id="detail-title">Select a plan</h2>
+          <div id="detail-sub" style="color:rgba(255,255,255,0.78); margin-top:6px;">Choose Nocturnal Basic or Nocturnal Lifetime to see features and pricing.</div>
+        </div>
+
+        <div class="features" id="features">
+        </div>
+
+        <div class="cta">
+          <div id="price-block" style="display:flex; flex-direction:column; gap:4px;">
+            <div style="font-size:13px; color:rgba(255,255,255,0.84)">Price</div>
+            <div style="display:flex; gap:8px; align-items:baseline;">
+              <div style="font-size:20px; font-weight:800" id="price-amount">—</div>
+              <div style="font-size:13px; color:rgba(255,255,255,0.78)" id="price-freq"></div>
+            </div>
+          </div>
+
+          <div style="margin-left:auto; display:flex; gap:8px;">
+            <!-- <button class="btn ghost" id="details-more">Details</button> -->
+            <!--<button class="btn pulse" id="purchase">Purchase</button> -->
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div id="tool-container">
-        <input type="color" id="color-picker" value="#ff0000" />
-        <button id="erase-btn" onclick="toggleErase()">Erase</button>
-        <button id="clear-btn" onclick="clearAllDrawing()">Clear</button>
+  <!-- FAQ -->
+  <div class="wrap faq-wrap" aria-hidden="false">
+    <div class="faq" aria-label="FAQ about Nocturnal">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px;">
+        <h3 style="margin:0">FAQ</h3>
+        <div style="font-size:13px; color:rgba(255,255,255,0.75)">Common questions</div>
+      </div>
 
+      <div id="faq-list">
+        <div class="q" data-i="0" tabindex="0" role="button" aria-expanded="false">
+          <div class="label">Is Nocturnal detectable?</div>
+          <div class="chev">✚</div>
+        </div>
+        <div class="ans" id="a-0">As any script, there are chances of detection when using extremely blatant rage features, on Secured servers. Nocturnal aims to minimize detections, and has no history of ban-waves happening.</div>
+
+        <div class="q" data-i="1" tabindex="0" role="button" aria-expanded="false">
+          <div class="label">What payment plan is best?</div>
+          <div class="chev">✚</div>
+        </div>
+        <div class="ans" id="a-1">Nocturnal has two plans: <strong>Basic</strong> (monthly) and <strong>Lifetime</strong>. If you are going for short-term usage, monthly is best.</div>
+
+        <div class="q" data-i="2" tabindex="0" role="button" aria-expanded="false">
+          <div class="label">How can I reset my HWID?</div>
+          <div class="chev">✚</div>
+        </div>
+<div class="ans" id="a-2">
+    For authentication inquiries, visit our <a href="https://discord.gg/qv2xWWn44N" target="_blank">Discord</a>
+</div>
+
+        <div class="q" data-i="3" tabindex="0" role="button" aria-expanded="false">
+          <div class="label">What is the privacy policy?</div>
+          <div class="chev">✚</div>
+        </div>
+        <div class="ans" id="a-3">Nocturnal does not log any information other than your User data (HWID, UID, NAME, etc). These are required for a paid script. No information is able to get leaked.</div>
+
+      </div>
+
+      <div class="note">Note: Refunds are not accepted, unless a rare exception is made.</div>
     </div>
+  </div>
 
-    <div id="map-container">
-        <img id="map-image" src="" alt="Map Image">
-        <canvas id="map-background"></canvas> 
-        <canvas id="map-drawing"></canvas>     
-    </div>
+  <script>
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 60, density: { enable: true, value_area: 900 } },
+        color: { value: '#bba3ff' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.6, random: true, anim: { enable: true, speed: 1, opacity_min: 0.15, sync: false } },
+        size: { value: 4, random: true },
+        line_linked: { enable: false },
+        move: { enable: true, speed: 1.6, out_mode: 'out' }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+        modes: { grab: { distance: 160, line_linked: { opacity: 0.9 } }, push: { particles_nb: 3 } }
+      },
+      retina_detect: true
+    });
 
-    <footer>
-        &copy; 2024 Celeste Softworks. All rights reserved.
-    </footer>
-    <script>
-        const mapList = document.getElementById('map-list');
-        const mapContainer = document.getElementById('map-container');
-        const mapBackground = document.getElementById('map-background');
-        const mapDrawing = document.getElementById('map-drawing');
-        const ctxBackground = mapBackground.getContext('2d');
-        const ctxDrawing = mapDrawing.getContext('2d');
-        const mapImage = document.getElementById('map-image');
+    const products = [
+      {
+        id: 'basic-monthly',
+        title: 'Nocturnal — Basic',
+        price: 5,
+        freq: '/month',
+        short: 'A monthly subscription, good for short-term users.',
+        features: [
+          'Core Script',
+          'Rage bot',
+          'Legit bot',
+          'Visuals'
+        ]
+      },
+      {
+        id: 'lifetime',
+        title: 'Nocturnal — Lifetime',
+        price: 15,
+        freq: 'one-time',
+        short: 'Lifetime access to everything in Basic.',
+        features: [
+          'All Basic features',
+          'Lifetime access',
+          'Priority updates',
+          'Premium configs and visuals'
+        ]
+      }
+    ];
 
-        const showReferenceBtn = document.getElementById('show-reference-btn');
-        const shareBtn = document.getElementById('share-btn');
+    const productsEl = document.getElementById('products');
+    const detailsTitle = document.getElementById('detail-title');
+    const detailSub = document.getElementById('detail-sub');
+    const featuresEl = document.getElementById('features');
+    const priceAmount = document.getElementById('price-amount');
+    const priceFreq = document.getElementById('price-freq');
+    const purchaseBtn = document.getElementById('purchase');
+    const detailsMore = document.getElementById('details-more');
 
-        let drawing = false;
-        let drawHistory = []; 
-        let referenceMode = false; 
-        let selectedMap = null;
-        let drawingColor = '#ff0000';
-        let eraserMode = false; 
-        let eraserSize = 30; 
-        let brushSize = 3; 
+    let selectedId = products[0].id;
 
-        const colorPicker = document.getElementById('color-picker');
-        colorPicker.addEventListener('input', (event) => {
-            drawingColor = event.target.value;
+    function createProductCard(p){
+      const el = document.createElement('div');
+      el.className = 'product-card';
+      el.setAttribute('role','listitem');
+      el.dataset.id = p.id;
+      el.innerHTML = `
+        <div class="product-meta">
+          <div class="product-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="opacity:0.98">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="white"/>
+            </svg>
+          </div>
+          <div class="product-info">
+            <div class="product-title">${p.title}</div>
+            <div class="product-desc">${p.short}</div>
+          </div>
+        </div>
+        <div class="price">
+          <div class="amount">$${p.price}</div>
+          <div class="freq">${p.freq}</div>
+        </div>
+      `;
+      // click selection
+      el.addEventListener('click', () => selectProduct(p.id, el));
+      // keyboard support
+      el.tabIndex = 0;
+      el.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); el.click(); } });
+      return el;
+    }
+
+    products.forEach((p,i) => {
+      const card = createProductCard(p);
+      card.style.opacity = 0;
+      card.style.transform = 'translateY(12px) scale(0.996)';
+      productsEl.appendChild(card);
+      setTimeout(()=> {
+        card.style.transition = 'opacity 420ms ease, transform 520ms cubic-bezier(.2,.9,.25,1)';
+        card.style.opacity = 1;
+        card.style.transform = 'translateY(0) scale(1)';
+        // auto select first
+        if (i === 0) selectProduct(products[0].id, card, true);
+      }, 80 * i);
+    });
+
+    function selectProduct(id, cardEl=null, silent=false){
+      selectedId = id;
+      // visualstates
+      document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+      if (!cardEl) cardEl = document.querySelector(`.product-card[data-id="${id}"]`);
+      if (cardEl) cardEl.classList.add('selected');
+
+      const p = products.find(x => x.id === id);
+      detailsTitle.style.transform = 'translateY(-8px)';
+      detailsTitle.style.opacity = '0';
+      detailSub.style.transform = 'translateY(-8px)';
+      detailSub.style.opacity = '0';
+      setTimeout(()=> {
+        detailsTitle.textContent = p.title;
+        detailSub.textContent = p.short;
+        detailsTitle.style.transform = '';
+        detailsTitle.style.opacity = '';
+        detailSub.style.transform = '';
+        detailSub.style.opacity = '';
+      }, 160);
+
+      featuresEl.style.opacity = 0;
+      featuresEl.style.transform = 'translateY(8px)';
+      setTimeout(()=> {
+        featuresEl.innerHTML = '';
+        p.features.forEach(f => {
+          const fe = document.createElement('div');
+          fe.className = 'feature';
+          fe.innerHTML = `<div style="width:10px; height:10px; border-radius:4px; background:linear-gradient(90deg,var(--accent), #5eead4); flex-shrink:0"></div>
+                          <div style="font-weight:600">${f}</div>`;
+          featuresEl.appendChild(fe);
         });
-
-        function clearAllDrawing() {
-            ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height); 
-            drawHistory = []; 
-        }
-
-        function toggleErase() {
-            eraserMode = !eraserMode;
-            if (eraserMode) {
-                document.getElementById('erase-btn').textContent = 'Draw';
-            } else {
-                document.getElementById('erase-btn').textContent = 'Erase';
-            }
-        }
-
-
-        function loadMap() {
-            selectedMap = mapList.value;
-
-            if (selectedMap) {
-                mapImage.src = selectedMap;
-
-                mapImage.onload = () => {
-                    mapBackground.width = mapImage.width;
-                    mapBackground.height = mapImage.height;
-                    mapDrawing.width = mapImage.width;
-                    mapDrawing.height = mapImage.height;
-
-                    mapContainer.style.display = 'block';
-
-                    ctxBackground.drawImage(mapImage, 0, 0);
-
-                    showReferenceBtn.style.visibility = 'visible';
-                    shareBtn.style.visibility = 'visible';
-
-                    setupDrawing();
-                };
-            }
-        }
-
-        function toggleReference() {
-            if (referenceMode) {
-                showReferenceBtn.textContent = 'Show Reference';
-                ctxBackground.clearRect(0, 0, mapBackground.width, mapBackground.height);
-                ctxBackground.drawImage(mapImage, 0, 0);
-                redrawDrawing();
-                referenceMode = false;
-            } else {
-                showReferenceBtn.textContent = 'Hide Reference';
-                ctxBackground.clearRect(0, 0, mapBackground.width, mapBackground.height);
-
-                const selectedMapName = mapList.value.split('/').pop().split('.')[0]; // cancer
-
-                const referenceImageURL = `https://raw.githubusercontent.com/Storm99999/abyss/refs/heads/main/${selectedMapName}ref.png`;
-
-                const referenceImage = new Image();
-                referenceImage.src = referenceImageURL;
-                referenceImage.onload = () => {
-                    ctxBackground.drawImage(referenceImage, 0, 0); 
-                };
-
-                clearDrawing(); 
-                referenceMode = true; // w
-            }
-        }
-
-        function redrawDrawing() {
-            for (let i = 0; i < drawHistory.length; i++) {
-                ctxDrawing.putImageData(drawHistory[i], 0, 0);
-            }
-        }
-
-        function clearDrawing() {
-            ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height);
-        }
-
-        // this is my sui cide arc!!
-        async function shareMap() {
-            const combinedCanvas = document.createElement('canvas');
-            const combinedCtx = combinedCanvas.getContext('2d');
-
-            combinedCanvas.width = mapBackground.width;
-            combinedCanvas.height = mapBackground.height;
-
-            const base64Image = await convertToBase64(mapImage.src);
-            
-            const img = new Image();
-            img.setAttribute('crossorigin', 'anonymous'); // works for me
-            img.onload = function() {
-                combinedCtx.drawImage(img, 0, 0);
-
-                combinedCtx.drawImage(mapDrawing, 0, 0);
-
-                combinedCanvas.toBlob(async (imageBlob) => {
-                    if (navigator.clipboard && navigator.clipboard.write) {
-                        const item = new ClipboardItem({
-                            "image/png": imageBlob
-                        });
-
-                        try {
-                            // Write the image to clipboard
-                            await navigator.clipboard.write([item]);
-                            alert('Map with drawing copied to clipboard!');
-                        } catch (err) {
-                            alert('Failed to copy image to clipboard: ' + err);
-                        }
-                    } else {
-                        alert('Clipboard API not available in this browser.');
-                    }
-                }, 'image/png');
-            };
-            img.src = base64Image;
-        }
-
-        function convertToBase64(imgSrc) {
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                img.setAttribute('crossorigin', 'anonymous'); // works for me
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    ctx.drawImage(img, 0, 0);
-                    resolve(canvas.toDataURL('image/png'));
-                };
-                img.onerror = reject;
-                img.src = imgSrc;
-            });
-        }
-
-        
-        let panX = 0;
-        let panY = 0;
-        let zoomLevel = 1;
-
-        mapContainer.addEventListener('wheel', (event) => {
-            event.preventDefault();
-
-            const rect = mapDrawing.getBoundingClientRect();
-            const mouseX = event.clientX - rect.left;
-            const mouseY = event.clientY - rect.top;
-
-            const zoomFactor = event.deltaY > 0 ? 0.9 : 1.1;
-
-            const newZoomLevel = zoomLevel * zoomFactor;
-
-            // Reset to original zoom if zooming out is too far, causes glitches tho
-            if (newZoomLevel < 1) {
-                zoomLevel = 1;
-                panX = 0;
-                panY = 0;
-            } else {
-                panX = mouseX - (mouseX - panX) * zoomFactor;
-                panY = mouseY - (mouseY - panY) * zoomFactor;
-                zoomLevel = newZoomLevel;
-            }
-
-            applyZoom();
-        });
-
-        function applyZoom() {
-            // Reset transformations, important !!
-            ctxBackground.setTransform(1, 0, 0, 1, 0, 0);
-            ctxDrawing.setTransform(1, 0, 0, 1, 0, 0);
-
-            ctxBackground.translate(panX, panY);
-            ctxBackground.scale(zoomLevel, zoomLevel);
-
-            ctxDrawing.translate(panX, panY);
-            ctxDrawing.scale(zoomLevel, zoomLevel);
-
-            ctxBackground.clearRect(0, 0, mapBackground.width, mapBackground.height);
-            ctxBackground.drawImage(mapImage, 0, 0);
-
-            // Clear and clip the drawing canvas
-            ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height);
-            ctxDrawing.save(); // Save the clipping region
-            ctxDrawing.rect(0, 0, mapBackground.width, mapBackground.height);
-            ctxDrawing.clip();
-
-            // Redraw drawing lulz
-            redrawDrawing();
-
-            ctxDrawing.restore(); // Restore 
-        }
-
-        
-
-
-
-        function getTransformedCoordinates(event) {
-            const rect = mapDrawing.getBoundingClientRect();
-            const mouseX = event.clientX - rect.left;
-            const mouseY = event.clientY - rect.top;
-
-            const x = (mouseX - panX) / zoomLevel;
-            const y = (mouseY - panY) / zoomLevel;
-
-            return { x, y };
-        }
-
-
-        function setupDrawing() {
-            mapDrawing.addEventListener('mousedown', (event) => {
-                const { x, y } = getTransformedCoordinates(event);
-                drawing = true;
-
-                ctxDrawing.beginPath();
-                ctxDrawing.moveTo(x, y);
-            });
-
-            mapDrawing.addEventListener('mouseup', () => {
-                drawing = false;
-                saveCurrentState();
-                ctxDrawing.beginPath();
-            });
-
-            mapDrawing.addEventListener('mousemove', (event) => {
-                if (!drawing) return;
-
-                const { x, y } = getTransformedCoordinates(event);
-
-                ctxDrawing.lineWidth = eraserMode ? eraserSize : brushSize;
-                ctxDrawing.lineCap = 'round';
-                ctxDrawing.globalCompositeOperation = eraserMode
-                    ? 'destination-out'
-                    : 'source-over';
-                ctxDrawing.strokeStyle = eraserMode ? '#FFFFFF' : drawingColor;
-
-                ctxDrawing.lineTo(x, y);
-                ctxDrawing.stroke();
-                ctxDrawing.beginPath();
-                ctxDrawing.moveTo(x, y);
-            });
-        }
-
-
-
-
-
-
-
-
-        function saveCurrentState() {
-            drawHistory.push(ctxDrawing.getImageData(0, 0, mapDrawing.width, mapDrawing.height));
-        }
-
-
-        function redrawDrawing() {
-            ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height);
-            drawHistory.forEach((imageData) => {
-                ctxDrawing.putImageData(imageData, 0, 0);
-            });
-        }
-
-
-
-        window.addEventListener('keydown', (event) => {
-            if (event.ctrlKey && event.key === 'z') {
-                undo();
-            }
-        });
+        featuresEl.style.opacity = 1;
+        featuresEl.style.transform = '';
+      }, 180);
+
+      animatePrice(p.price, p.freq);
+
+      if (!silent) {
+        cardEl.animate([{ transform: 'scale(1.02)' }, { transform: 'scale(1)' }], { duration: 240, easing: 'ease-out' });
+      }
+    }
+
+    function animatePrice(amount, freq){
+      const start = parseFloat(priceAmount.dataset.current || 0);
+      const end = amount;
+      const duration = 420;
+      const startTime = performance.now();
+      priceFreq.textContent = freq === 'one-time' ? 'one-time' : freq;
+      function tick(now){
+        const t = Math.min(1, (now - startTime)/duration);
+        const eased = t*(2-t); // simple ease-out
+        const value = (start + (end - start)*eased).toFixed(0);
+        priceAmount.textContent = '$' + value;
+        priceAmount.dataset.current = value;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
 
     
 
-        function undo() {
-            if (drawHistory.length > 0) {
-                drawHistory.pop();
-                if (drawHistory.length > 0) {
-                    ctxDrawing.putImageData(drawHistory[drawHistory.length - 1], 0, 0);
-                } else {
-                    ctxDrawing.clearRect(0, 0, mapDrawing.width, mapDrawing.height);
-                }
-            }
+    function burst(product){
+      const btn = document.getElementById('purchase');
+      const rect = btn.getBoundingClientRect();
+      const root = document.createElement('div');
+      root.style.position = 'fixed';
+      root.style.left = (rect.left + rect.width/2) + 'px';
+      root.style.top = (rect.top + rect.height/2) + 'px';
+      root.style.pointerEvents = 'none';
+      root.style.zIndex = 9999;
+      document.body.appendChild(root);
+
+      for (let i=0;i<8;i++){
+        const c = document.createElement('div');
+        c.style.width = c.style.height = (6 + Math.random()*8) + 'px';
+        c.style.borderRadius = '50%';
+        c.style.background = `hsl(${220 + Math.random()*60}deg 80% 70%)`;
+        c.style.position = 'absolute';
+        c.style.left = '0px';
+        c.style.top = '0px';
+        c.style.opacity = '0.95';
+        root.appendChild(c);
+        const angle = Math.random()*Math.PI*2;
+        const dist = 40 + Math.random()*90;
+        const dx = Math.cos(angle) * dist;
+        const dy = Math.sin(angle) * dist * 0.7;
+        c.animate([
+          { transform: 'translate(0px,0px) scale(1)', opacity: 1 },
+          { transform: `translate(${dx}px,${dy}px) scale(0.3)`, opacity: 0 }
+        ], { duration: 700 + Math.random()*400, easing: 'cubic-bezier(.2,.9,.25,1)'});
+      }
+
+      setTimeout(()=> root.remove(), 1300);
+    }
+
+    
+
+    document.getElementById('compare-btn').addEventListener('click', () => {
+      const overlay = document.createElement('div');
+      overlay.style.position='fixed';
+      overlay.style.inset='0';
+      overlay.style.background='linear-gradient(180deg, rgba(2,2,6,0.6), rgba(2,2,6,0.8))';
+      overlay.style.display='flex';
+      overlay.style.alignItems='center';
+      overlay.style.justifyContent='center';
+      overlay.style.zIndex=9999;
+      overlay.innerHTML = `<div style="width:720px; max-width:calc(100% - 32px); padding:18px; border-radius:12px; background:rgba(255,255,255,0.03); color:#fff;">
+        <h3 style="margin-top:0">Compare plans</h3>
+        <table style="width:100%; border-collapse:collapse; color:rgba(255,255,255,0.92); font-size:14px;">
+          <thead><tr><th style="text-align:left;padding:8px">Feature</th><th style="padding:8px">Basic</th><th style="padding:8px">Lifetime</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:8px">Core UI</td><td style="padding:8px;text-align:center">✔</td><td style="padding:8px;text-align:center">✔</td></tr>
+            <tr><td style="padding:8px">Monthly updates</td><td style="padding:8px;text-align:center">✔</td><td style="padding:8px;text-align:center">✔</td></tr>
+            <tr><td style="padding:8px">Lifetime access</td><td style="padding:8px;text-align:center">—</td><td style="padding:8px;text-align:center">✔</td></tr>
+            <tr><td style="padding:8px">Priority updates</td><td style="padding:8px;text-align:center">—</td><td style="padding:8px;text-align:center">✔</td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:12px;">
+          <button id="close-compare" style="padding:8px 12px; border-radius:8px; border:none; background:rgba(255,255,255,0.06); color:#fff; cursor:pointer">Close</button>
+        </div>
+      </div>`;
+      document.body.appendChild(overlay);
+      document.getElementById('close-compare').addEventListener('click', ()=> overlay.remove());
+    });
+
+
+
+    document.querySelectorAll('.q').forEach(q => {
+      q.addEventListener('click', () => {
+        const i = q.dataset.i;
+        const ans = document.getElementById('a-'+i);
+        const open = ans.classList.contains('open');
+        // close all
+        document.querySelectorAll('.ans').forEach(a => a.classList.remove('open'));
+        document.querySelectorAll('.q').forEach(x => x.setAttribute('aria-expanded','false'));
+        if (!open) {
+          ans.classList.add('open');
+          q.setAttribute('aria-expanded','true');
+          setTimeout(()=> q.scrollIntoView({behavior:'smooth', block:'center'}), 160);
         }
-    </script>
+      });
+      q.addEventListener('keydown', (ev)=>{
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); q.click(); }
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.faq')) {
+        document.querySelectorAll('.ans').forEach(a => a.classList.remove('open'));
+        document.querySelectorAll('.q').forEach(x => x.setAttribute('aria-expanded','false'));
+      }
+    });
+
+    animatePrice(products[0].price, products[0].freq);
+
+  </script>
 </body>
 </html>
