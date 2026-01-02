@@ -1,3672 +1,3672 @@
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local PARENT = (game:GetService("RunService"):IsStudio() and player.PlayerGui or game:GetService("CoreGui"))
-
-local function fetch(a, k)
-	return loadstring(game:HttpGet("https://raw.githubusercontent.com/Storm99999/nocturnal/refs/heads/main/in.luau"))()
-end
-
-local Notification = fetch("notifications", 0x0)
-getgenv().noct_notif = Notification
-
-local function RenderObject(className: string, props: { any }): Instance
-	props = props or {}
-	local parent = props.Parent
-	props.Parent = nil
-
-	local inst: Instance = Instance.new(className)
-    
-	for property, value in props do
-		pcall(function()
-			inst[property] = value
-		end)
-	end
-
-	if parent then
-		pcall(function()
-			inst.Parent = parent
-		end)
-	end
-
-	return inst
-end;
-
-local refs: { [Instance]: Instance } = {};
-
-do
-	refs.Loader = RenderObject("ScreenGui", {
-		Name = "Loader",
-		
-		AutoLocalize = true,
-		
-		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-		
-		Parent = PARENT,
-		
-		IgnoreGuiInset = true,
-		
-		DisplayOrder = 1000,
-		
-		ResetOnSpawn = false
-	})
-end
-
-do
-	refs.Loader_2 = RenderObject("Frame", {
-		Name = "Loader",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.360958, 0, 0.298734, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 452, 0, 318),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 5,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.Loader,
-	})
-end
-
-do
-	refs.UIStroke = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 2,
-		Color = Color3.fromRGB(123, 79, 144),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.Loader_2,
-	})
-end
-
-do
-	refs.UIStroke_2 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.Loader_2,
-	})
-end
-
-do
-	refs.SignedIn = RenderObject("Frame", {
-		Name = "SignedIn",
-		BackgroundColor3 = Color3.fromRGB(25, 25, 25),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.0154867, 0, 0.0283019, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 438, 0, 301),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = false,
-		ZIndex = 6,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.Loader_2,
-	})
-end
-
-do
-	refs.UIStroke_3 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.SignedIn,
-	})
-end
-
-do
-	refs.UIStroke_4 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.SignedIn,
-	})
-end
-
-do
-	refs.stats = RenderObject("Frame", {
-		Name = "stats",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.0273973, 0, 0.421927, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 413, 0, 163),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.SignedIn,
-	})
-end
-
-do
-	refs.Frame = RenderObject("Frame", {
-		Name = "Frame",
-		BackgroundColor3 = Color3.fromRGB(25, 25, 25),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.0225546, 0, 0.0866836, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 394, 0, 140),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.stats,
-	})
-end
-
-do
-	refs.UIStroke_5 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.Frame,
-	})
-end
-
-do
-	refs.UIStroke_6 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.Frame,
-	})
-end
-
-do
-	refs.UIListLayout = RenderObject("UIListLayout", {
-		Name = "UIListLayout",
-		FillDirection = Enum.FillDirection.Vertical,
-		HorizontalAlignment = Enum.HorizontalAlignment.Left,
-		VerticalAlignment = Enum.VerticalAlignment.Top,
-		SortOrder = Enum.SortOrder.LayoutOrder,
-		Padding = UDim.new(0, 0),
-		Parent = refs.Frame,
-	})
-end
-
-do
-	refs.UIPadding = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 1),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 1),
-		Parent = refs.Frame,
-	})
-end
-
-do
-	refs.Frame_2 = RenderObject("Frame", {
-		Name = "Frame",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.997, 0, 0, 20),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.Frame,
-	})
-end
-
-do
-	refs.TextLabel = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 1, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "Connected",
-		TextColor3 = Color3.fromRGB(123, 79, 144),
-		TextSize = 13,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.Frame_2,
-	})
-end
-
-do
-	refs.UIPadding_2 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel,
-	})
-end
-
-do
-	refs.Frame_3 = RenderObject("Frame", {
-		Name = "Frame",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.998, 0, 0, 20),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.Frame,
-	})
-end
-
-do
-	refs.TextLabel_2 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 1, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "Welcome back, Astrolemic",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 13,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.Frame_3,
-	})
-end
-
-do
-	refs.UIPadding_3 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_2,
-	})
-end
-
-do
-	refs.expire = RenderObject("Frame", {
-		Name = "expire",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.998, 0, 0, 20),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.Frame,
-	})
-end
-
-do
-	refs.TextLabel_3 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 1, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "Your license will expire in 18 days.",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 13,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.expire,
-	})
-end
-
-do
-	refs.UIPadding_4 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_3,
-	})
-end
-
-do
-	refs.Frame_4 = RenderObject("Frame", {
-		Name = "Frame",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.998, 0, 0, 20),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.Frame,
-	})
-end
-
-do
-	refs.TextLabel_4 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 1, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "Warning: Executor is too weak to run 'getcustomasset'",
-		TextColor3 = Color3.fromRGB(255, 239, 66),
-		TextSize = 13,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.Frame_4,
-	})
-end
-
-do
-	refs.UIPadding_5 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_4,
-	})
-end
-
-do
-	refs.UIStroke_7 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 6565,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.stats,
-	})
-end
-
-do
-	refs.UIStroke_8 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 756765756,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.stats,
-	})
-end
-
-do
-	refs.TextLabel_5 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, -0.048, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 0.0806372, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "Status",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 12,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.stats,
-	})
-end
-
-do
-	refs.UIPadding_6 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_5,
-	})
-end
-
-do
-	refs.usr = RenderObject("Frame", {
-		Name = "usr",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.0273973, 0, 0.0389969, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 254, 0, 98),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.SignedIn,
-	})
-end
-
-do
-	refs.TextLabel_6 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, -0.048, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 0.0806372, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "User",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 12,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.usr,
-	})
-end
-
-do
-	refs.UIPadding_7 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_6,
-	})
-end
-
-do
-	refs.UIStroke_9 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 6565,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.usr,
-	})
-end
-
-do
-	refs.UIStroke_10 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 756765756,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.usr,
-	})
-end
-
-do
-	refs.ImageLabel = RenderObject("ImageLabel", {
-		Name = "ImageLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.0354331, 0, 0.168543, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 67, 0, 68),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		ScaleType = Enum.ScaleType.Fit,
-		Image = "https://www.roblox.com/headshot-thumbnail/image?userId=3253932134&width=420&height=420&format=png",
-		ImageTransparency = 0,
-		ImageRectOffset = Vector2.new(0, 0),
-		ImageRectSize = Vector2.new(0, 0),
-		ImageColor3 = Color3.fromRGB(255, 255, 255),
-		Parent = refs.usr,
-	})
-end
-
-do
-	refs.UIStroke_11 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 756765756,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.ImageLabel,
-	})
-end
-
-do
-	refs.UIStroke_12 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 6565,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.ImageLabel,
-	})
-end
-
-do
-	refs.Frame_5 = RenderObject("Frame", {
-		Name = "Frame",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.314961, 0, 0.134061, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 167, 0, 71),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.usr,
-	})
-end
-
-do
-	refs.u = RenderObject("TextLabel", {
-		Name = "u",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.314961, 0, 0.342805, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.685039, 0, 0.0806372, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "Uid: 1",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 12,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.Frame_5,
-	})
-end
-
-do
-	refs.UIPadding_8 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.u,
-	})
-end
-
-do
-	refs.n = RenderObject("TextLabel", {
-		Name = "n",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.314961, 0, 0.158897, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.685039, 0, 0.0806372, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = -6,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "Name: Astrolemic",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 12,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.Frame_5,
-	})
-end
-
-do
-	refs.UIPadding_9 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.n,
-	})
-end
-
-do
-	refs.UIListLayout_2 = RenderObject("UIListLayout", {
-		Name = "UIListLayout",
-		FillDirection = Enum.FillDirection.Vertical,
-		HorizontalAlignment = Enum.HorizontalAlignment.Left,
-		VerticalAlignment = Enum.VerticalAlignment.Top,
-		SortOrder = Enum.SortOrder.LayoutOrder,
-		Padding = UDim.new(0, 10),
-		Parent = refs.Frame_5,
-	})
-end
-
-do
-	refs.UIPadding_10 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 3),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 0),
-		Parent = refs.Frame_5,
-	})
-end
-
-do
-	refs.ld = RenderObject("Frame", {
-		Name = "ld",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.312006, 0, 0.482936, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 163, 0, 37),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 65,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.usr,
-	})
-end
-
-do
-	refs.TextButton = RenderObject("TextButton", {
-		Name = "TextButton",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, -0.0277778, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.993903, 0, 1.02778, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 65,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.ButtonStyle.Custom,
-		Selectable = true,
-		Active = true,
-		Modal = false,
-		RichText = false,
-		Text = "Load",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 13,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Selected = false,
-		Parent = refs.ld,
-	})
-end
-
-do
-	refs.LocalScript = RenderObject("LocalScript", {
-		Name = "LocalScript",
-		Parent = refs.TextButton,
-	})
-end
-
-do
-	refs.UIStroke_13 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.ld,
-	})
-end
-
-do
-	refs.UIStroke_14 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.ld,
-	})
-end
-
-do
-	refs.UIGradient = RenderObject("UIGradient", {
-		Name = "UIGradient",
-		Rotation = -90,
-		Color = ColorSequence.new({
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 24, 24)),
-		}),
-		Offset = Vector2.new(0, 0),
-		Transparency = NumberSequence.new({
-			NumberSequenceKeypoint.new(0, 0),
-			NumberSequenceKeypoint.new(0.2969, 0.588957),
-			NumberSequenceKeypoint.new(1, 1),
-		}),
-		Parent = refs.ld,
-	})
-end
-
-do
-	refs.ImageLabel_2 = RenderObject("ImageLabel", {
-		Name = "ImageLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.563927, 0, 0.0290815, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 184, 0, 135),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = false,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		ScaleType = Enum.ScaleType.Crop,
-		Image = "rbxassetid://94832656724877",
-		ImageTransparency = 0,
-		ImageRectOffset = Vector2.new(0, 0),
-		ImageRectSize = Vector2.new(0, 0),
-		ImageColor3 = Color3.fromRGB(255, 255, 255),
-		Parent = refs.SignedIn,
-	})
-end
-
-do
-	refs.TextLabel_7 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.607306, 0, 0.0996678, 0),
-		Rotation = 5,
-		Size = UDim2.new(0, 78, 0, 76),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = false,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "N",
-		TextColor3 = Color3.fromRGB(85, 0, 255),
-		TextSize = 100,
-		Font = Enum.Font.Highway,
-		TextTransparency = 0,
-		TextStrokeTransparency = 1,
-		TextWrapped = true,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.SignedIn,
-	})
-end
-
-do
-	refs.bell = RenderObject("Frame", {
-		Name = "bell",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.525114, 0, 0.0730897, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 24, 0, 20),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.SignedIn,
-	})
-end
-
-do
-	refs.UIStroke_15 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 756765756,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.bell,
-	})
-end
-
-do
-	refs.UIStroke_16 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 6565,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.bell,
-	})
-end
-
-do
-	refs.ImageButton = RenderObject("ImageButton", {
-		Name = "ImageButton",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.125, 0, 0.15, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.708333, 0, 0.7, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.ButtonStyle.Custom,
-		Selectable = true,
-		Active = true,
-		Modal = false,
-		ScaleType = Enum.ScaleType.Fit,
-		Image = "rbxassetid://13492315901",
-		ImageTransparency = 0,
-		ImageRectOffset = Vector2.new(0, 0),
-		ImageRectSize = Vector2.new(0, 0),
-		ImageColor3 = Color3.fromRGB(79, 79, 79),
-		Selected = false,
-		Parent = refs.bell,
-	})
-end
-
-do
-	refs.new = RenderObject("TextLabel", {
-		Name = "new",
-		BackgroundColor3 = Color3.fromRGB(123, 79, 144),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.708333, 0, -0.25, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 13, 0, 15),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = false,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "1",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 12,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = true,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.bell,
-	})
-end
-
-do
-	refs.UICorner = RenderObject("UICorner", {
-		Name = "UICorner",
-		CornerRadius = UDim.new(1, 0),
-		Parent = refs.new,
-	})
-end
-
-do
-	refs.UIStroke_17 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.new,
-	})
-end
-
-do
-	refs.updateLog = RenderObject("Frame", {
-		Name = "updateLog",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.0273973, 0, 0.421927, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 413, 0, 163),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = false,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.SignedIn,
-	})
-end
-
-do
-	refs.TextLabel_8 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, -0.048, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 0.0806372, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "Update Log",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 12,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.updateLog,
-	})
-end
-
-do
-	refs.UIPadding_11 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_8,
-	})
-end
-
-do
-	refs.UIStroke_18 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 6565,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.updateLog,
-	})
-end
-
-do
-	refs.UIStroke_19 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 756765756,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.updateLog,
-	})
-end
-
-do
-	refs.ScrollingFrame = RenderObject("ScrollingFrame", {
-		Name = "ScrollingFrame",
-		BackgroundColor3 = Color3.fromRGB(25, 25, 25),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = true,
-		Position = UDim2.new(0.023, 0, 0.087, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 394, 0, 140),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = true,
-		Active = true,
-		ScrollBarThickness = 1,
-		ScrollingDirection = Enum.ScrollingDirection.Y,
-		CanvasSize = UDim2.new(0, 0, 2, 0),
-		CanvasPosition = Vector2.new(0, 0),
-		AutomaticCanvasSize = Enum.AutomaticSize.XY,
-		Parent = refs.updateLog,
-	})
-end
-
-do
-	refs.UIListLayout_3 = RenderObject("UIListLayout", {
-		Name = "UIListLayout",
-		FillDirection = Enum.FillDirection.Vertical,
-		HorizontalAlignment = Enum.HorizontalAlignment.Left,
-		VerticalAlignment = Enum.VerticalAlignment.Top,
-		SortOrder = Enum.SortOrder.LayoutOrder,
-		Padding = UDim.new(0, 0),
-		Parent = refs.ScrollingFrame,
-	})
-end
-
-do
-	refs.UIPadding_12 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 1),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 1),
-		Parent = refs.ScrollingFrame,
-	})
-end
-
-do
-	refs.UIStroke_20 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.ScrollingFrame,
-	})
-end
-
-do
-	refs.UIStroke_21 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.ScrollingFrame,
-	})
-end
-
-do
-	refs.Frame_6 = RenderObject("Frame", {
-		Name = "Frame",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.998, 0, 0, 20),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.ScrollingFrame,
-	})
-end
-
-do
-	refs.TextLabel_9 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 1, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "[-] exploits - kill all",
-		TextColor3 = Color3.fromRGB(85, 0, 0),
-		TextSize = 13,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.Frame_6,
-	})
-end
-
-do
-	refs.UIPadding_13 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_9,
-	})
-end
-
-do
-	refs.Frame_7 = RenderObject("Frame", {
-		Name = "Frame",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.998, 0, 0, 20),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = -5,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.ScrollingFrame,
-	})
-end
-
-do
-	refs.TextLabel_10 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 1, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "[+] rage - anti aim",
-		TextColor3 = Color3.fromRGB(85, 255, 127),
-		TextSize = 13,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.Frame_7,
-	})
-end
-
-do
-	refs.UIPadding_14 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_10,
-	})
-end
-
-do
-	refs.gmdate = RenderObject("Frame", {
-		Name = "gmdate",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.626, 0, 0.039, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 151, 0, 98),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.SignedIn,
-	})
-end
-
-do
-	refs.Frame_8 = RenderObject("Frame", {
-		Name = "Frame",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0.103448, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 120, 0, 71),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.gmdate,
-	})
-end
-
-do
-	refs.TextLabel_11 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.314961, 0, 0.342805, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.685039, 0, 0.0806372, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = true,
-		Text = "Updated: <font color=\"#32FF72\">true</font>",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 11,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.Frame_8,
-	})
-end
-
-do
-	refs.UIPadding_15 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_11,
-	})
-end
-
-do
-	refs.TextLabel_12 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(-0.227545, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.685039, 0, 0.0806372, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = -6,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "Product: Defuse Division",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 11,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.Frame_8,
-	})
-end
-
-do
-	refs.UIPadding_16 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_12,
-	})
-end
-
-do
-	refs.UIListLayout_4 = RenderObject("UIListLayout", {
-		Name = "UIListLayout",
-		FillDirection = Enum.FillDirection.Vertical,
-		HorizontalAlignment = Enum.HorizontalAlignment.Left,
-		VerticalAlignment = Enum.VerticalAlignment.Top,
-		SortOrder = Enum.SortOrder.LayoutOrder,
-		Padding = UDim.new(0, 10),
-		Parent = refs.Frame_8,
-	})
-end
-
-do
-	refs.UIPadding_17 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 3),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 0),
-		Parent = refs.Frame_8,
-	})
-end
-
-do
-	refs.TextLabel_13 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, -0.048, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 0.0806372, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "Game",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 12,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Left,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.gmdate,
-	})
-end
-
-do
-	refs.UIPadding_18 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_13,
-	})
-end
-
-do
-	refs.UIStroke_22 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 6565,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.gmdate,
-	})
-end
-
-do
-	refs.UIStroke_23 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 756765756,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.gmdate,
-	})
-end
-
-do
-	refs.dscd = RenderObject("Frame", {
-		Name = "dscd",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.0404829, 0, 0.574772, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 28, 0, 27),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 65,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.gmdate or PARENT, -- prefer existing gmdate
-	})
-end
-
-do
-	refs.TextButton_2 = RenderObject("TextButton", {
-		Name = "TextButton",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, -0.0277778, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.993903, 0, 1.02778, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 65,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.ButtonStyle.Custom,
-		Selectable = true,
-		Active = true,
-		Modal = false,
-		RichText = false,
-		Text = "",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 13,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Selected = false,
-		Parent = refs.dscd,
-	})
-end
-
-do
-	refs.LocalScript_2 = RenderObject("LocalScript", {
-		Name = "LocalScript",
-		Parent = refs.TextButton_2,
-	})
-end
-
-do
-	refs.UIStroke_24 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.dscd,
-	})
-end
-
-do
-	refs.UIStroke_25 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.dscd,
-	})
-end
-
-do
-	refs.UIGradient_2 = RenderObject("UIGradient", {
-		Name = "UIGradient",
-		Rotation = -90,
-		Color = ColorSequence.new({
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 24, 24)),
-		}),
-		Offset = Vector2.new(0, 0),
-		Transparency = NumberSequence.new({
-			NumberSequenceKeypoint.new(0, 0),
-			NumberSequenceKeypoint.new(0.2969, 0.588957),
-			NumberSequenceKeypoint.new(1, 1),
-		}),
-		Parent = refs.dscd,
-	})
-end
-
-do
-	refs.ImageLabel_3 = RenderObject("ImageLabel", {
-		Name = "ImageLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 1, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		ScaleType = Enum.ScaleType.Fit,
-		Image = "rbxassetid://84828491431270",
-		ImageTransparency = 0,
-		ImageRectOffset = Vector2.new(0, 0),
-		ImageRectSize = Vector2.new(0, 0),
-		ImageColor3 = Color3.fromRGB(123, 79, 144),
-		Parent = refs.dscd,
-	})
-end
-
-do
-	refs.yt = RenderObject("Frame", {
-		Name = "yt",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.285516, 0, 0.574772, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 28, 0, 27),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 65,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.gmdate or PARENT,
-	})
-end
-
-do
-	refs.TextButton_3 = RenderObject("TextButton", {
-		Name = "TextButton",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, -0.0277778, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.993903, 0, 1.02778, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 65,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.ButtonStyle.Custom,
-		Selectable = true,
-		Active = true,
-		Modal = false,
-		RichText = false,
-		Text = "",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 13,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Selected = false,
-		Parent = refs.yt,
-	})
-end
-
-do
-	refs.LocalScript_3 = RenderObject("LocalScript", {
-		Name = "LocalScript",
-		Parent = refs.TextButton_3,
-	})
-end
-
-do
-	refs.UIStroke_26 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.yt,
-	})
-end
-
-do
-	refs.UIStroke_27 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.yt,
-	})
-end
-
-do
-	refs.UIGradient_3 = RenderObject("UIGradient", {
-		Name = "UIGradient",
-		Rotation = -90,
-		Color = ColorSequence.new({
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 24, 24)),
-		}),
-		Offset = Vector2.new(0, 0),
-		Transparency = NumberSequence.new({
-			NumberSequenceKeypoint.new(0, 0),
-			NumberSequenceKeypoint.new(0.2969, 0.588957),
-			NumberSequenceKeypoint.new(1, 1),
-		}),
-		Parent = refs.yt,
-	})
-end
-
-do
-	refs.ImageLabel_4 = RenderObject("ImageLabel", {
-		Name = "ImageLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0.148148, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 0.703704, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		ScaleType = Enum.ScaleType.Fit,
-		Image = "rbxassetid://97134863403472",
-		ImageTransparency = 0,
-		ImageRectOffset = Vector2.new(0, 0),
-		ImageRectSize = Vector2.new(0, 0),
-		ImageColor3 = Color3.fromRGB(123, 79, 144),
-		Parent = refs.yt,
-	})
-end
-
-do
-	refs.dshb = RenderObject("Frame", {
-		Name = "dshb",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.537172, 0, 0.574772, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 28, 0, 27),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 65,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.gmdate or PARENT,
-	})
-end
-
-do
-	refs.TextButton_4 = RenderObject("TextButton", {
-		Name = "TextButton",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, -0.0277778, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.993903, 0, 1.02778, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 65,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.ButtonStyle.Custom,
-		Selectable = true,
-		Active = true,
-		Modal = false,
-		RichText = false,
-		Text = "",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 13,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Selected = false,
-		Parent = refs.dshb,
-	})
-end
-
-do
-	refs.LocalScript_4 = RenderObject("LocalScript", {
-		Name = "LocalScript",
-		Parent = refs.TextButton_4,
-	})
-end
-
-do
-	refs.UIStroke_28 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.dshb,
-	})
-end
-
-do
-	refs.UIStroke_29 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.dshb,
-	})
-end
-
-do
-	refs.UIGradient_4 = RenderObject("UIGradient", {
-		Name = "UIGradient",
-		Rotation = -90,
-		Color = ColorSequence.new({
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 24, 24)),
-		}),
-		Offset = Vector2.new(0, 0),
-		Transparency = NumberSequence.new({
-			NumberSequenceKeypoint.new(0, 0),
-			NumberSequenceKeypoint.new(0.2969, 0.588957),
-			NumberSequenceKeypoint.new(1, 1),
-		}),
-		Parent = refs.dshb,
-	})
-end
-
-do
-	refs.ImageLabel_5 = RenderObject("ImageLabel", {
-		Name = "ImageLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0.037037, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 0.852148, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		ScaleType = Enum.ScaleType.Fit,
-		Image = "rbxassetid://81489458260315",
-		ImageTransparency = 0,
-		ImageRectOffset = Vector2.new(0, 0),
-		ImageRectSize = Vector2.new(0, 0),
-		ImageColor3 = Color3.fromRGB(123, 79, 144),
-		Parent = refs.dshb,
-	})
-end
-
-do
-	refs.LogIn = RenderObject("Frame", {
-		Name = "LogIn",
-		BackgroundColor3 = Color3.fromRGB(25, 25, 25),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.0154867, 0, 0.0283019, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 438, 0, 301),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 6,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.Loader_2 or PARENT:FindFirstChild("Loader"),
-	})
-end
-
-do
-	refs.logg = RenderObject("Frame", {
-		Name = "logg",
-		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.0182648, 0, 0.0229703, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 419, 0, 287),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.LogIn,
-	})
-end
-
-do
-	refs.LocalScript_5 = RenderObject("LocalScript", {
-		Name = "LocalScript",
-		Parent = refs.logg,
-	})
-end
-
-do
-	refs.ImageLabel_6 = RenderObject("ImageLabel", {
-		Name = "ImageLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.466426, 0, 0.163548, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 26, 0, 23),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		ScaleType = Enum.ScaleType.Fit,
-		Image = "rbxassetid://81489458260315",
-		ImageTransparency = 0,
-		ImageRectOffset = Vector2.new(0, 0),
-		ImageRectSize = Vector2.new(0, 0),
-		ImageColor3 = Color3.fromRGB(255, 255, 255),
-		Parent = refs.logg,
-	})
-end
-
-do
-	refs.UIStroke_30 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 756765756,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.ImageLabel_6,
-	})
-end
-
-do
-	refs.UIStroke_31 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 6565,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.ImageLabel_6,
-	})
-end
-
-do
-	refs.TextLabel_14 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(-0.00277324, 0, -0.00318818, 0),
-		Rotation = 0,
-		Size = UDim2.new(1, 0, 0.0806372, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = true,
-		Text = "nocturnal<font color=\"#724b84\">.vip</font>",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 15,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.logg,
-	})
-end
-
-do
-	refs.UIPadding_19 = RenderObject("UIPadding", {
-		Name = "UIPadding",
-		PaddingTop = UDim.new(0, 0),
-		PaddingRight = UDim.new(0, 0),
-		PaddingBottom = UDim.new(0, 0),
-		PaddingLeft = UDim.new(0, 5),
-		Parent = refs.TextLabel_14,
-	})
-end
-
-do
-	refs.UIStroke_32 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 6565,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.logg,
-	})
-end
-
-do
-	refs.UIStroke_33 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 756765756,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.logg,
-	})
-end
-
-do
-	refs.un = RenderObject("TextBox", {
-		Name = "un",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.25908, 0, 0.284044, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 200, 0, 23),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = true,
-		Active = true,
-		RichText = false,
-		Text = "",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 14,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = true,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		PlaceholderText = "Username",
-		PlaceholderColor3 = Color3.fromRGB(75, 75, 75),
-		ClearTextOnFocus = false,
-		MultiLine = false,
-		CursorPosition = 1,
-		SelectionStart = -1,
-		ShowNativeInput = true,
-		Parent = refs.logg,
-	})
-end
-
-do
-	refs.UIStroke_34 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.un,
-	})
-end
-
-do
-	refs.UIStroke_35 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.un,
-	})
-end
-
-do
-	refs.ImageLabel_7 = RenderObject("ImageLabel", {
-		Name = "ImageLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.464109, 0, 0.406994, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 26, 0, 23),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		ScaleType = Enum.ScaleType.Fit,
-		Image = "rbxassetid://16149081299",
-		ImageTransparency = 0,
-		ImageRectOffset = Vector2.new(0, 0),
-		ImageRectSize = Vector2.new(0, 0),
-		ImageColor3 = Color3.fromRGB(255, 255, 255),
-		Parent = refs.logg,
-	})
-end
-
-do
-	refs.UIStroke_36 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 756765756,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.ImageLabel_7,
-	})
-end
-
-do
-	refs.UIStroke_37 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 6565,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.ImageLabel_7,
-	})
-end
-
-do
-	refs.pw = RenderObject("TextBox", {
-		Name = "pw",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.25908, 0, 0.538726, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 200, 0, 23),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = false,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = true,
-		Active = true,
-		RichText = false,
-		Text = "",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 14,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = true,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		PlaceholderText = "Password",
-		PlaceholderColor3 = Color3.fromRGB(75, 75, 75),
-		ClearTextOnFocus = false,
-		MultiLine = false,
-		CursorPosition = 1,
-		SelectionStart = -1,
-		ShowNativeInput = true,
-		Parent = refs.logg,
-	})
-end
-
-do
-	refs.UIStroke_38 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.pw,
-	})
-end
-
-do
-	refs.UIStroke_39 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.pw,
-	})
-end
-
-do
-	refs.displaybox = RenderObject("TextBox", {
-		Name = "displaybox",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.25908, 0, 0.538726, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 200, 0, 23),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = true,
-		Active = true,
-		RichText = false,
-		Text = "",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 14,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = true,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		PlaceholderText = "Password",
-		PlaceholderColor3 = Color3.fromRGB(75, 75, 75),
-		ClearTextOnFocus = false,
-		MultiLine = false,
-		CursorPosition = 1,
-		SelectionStart = -1,
-		ShowNativeInput = true,
-		Parent = refs.logg,
-	})
-	
-	task.spawn(function()
-		local realBox: TextBox = refs.pw
-		local displayBox: TextBox = refs.displaybox
-
-		local realText: string = ""
-		local lastDisplayText: string = ""        
-		local updatingMask: boolean = false       
-
-		realBox.Text = ""
-		displayBox.Text = ""
-		displayBox.CursorPosition = 1
-
-		local function setMaskedStars(maskLen: number)
-			updatingMask = true
-			displayBox.Text = string.rep("*", maskLen)
-			displayBox.CursorPosition = maskLen + 1
-			updatingMask = false
-		end
-
-		displayBox:GetPropertyChangedSignal("Text"):Connect(function()
-			if updatingMask then
-				return
-			end
-
-			local currentRaw: string = displayBox.Text or ""
-			local lastLen: number = #lastDisplayText
-			local curLen: number = #currentRaw
-
-			if curLen > lastLen then
-				local added: string = currentRaw:sub(lastLen + 1, curLen)
-				realText = realText .. added
-
-			elseif curLen < lastLen then
-				local delta: number = lastLen - curLen
-				if delta >= #realText then
-					realText = ""
-				else
-					realText = realText:sub(1, #realText - delta)
-				end
-			end
-
-			if curLen == lastLen and currentRaw ~= lastDisplayText then
-				realText = currentRaw
-			end
-
-			realBox.Text = realText
-
-			setMaskedStars(#realText)
-
-			lastDisplayText = displayBox.Text
-		end)
-
-		local function getPassword(): string
-			return realText
-		end
-
-		local function clearPassword(): nil
-			realText = ""
-			realBox.Text = ""
-			setMaskedStars(0)
-			lastDisplayText = ""
-		end
-	end)
-end
-
-do
-	refs.UIStroke_40 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.displaybox,
-	})
-end
-
-do
-	refs.UIStroke_41 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.displaybox,
-	})
-end
-
-do
-	refs.UIStroke_42 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.LogIn,
-	})
-end
-
-do
-	refs.UIStroke_43 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.LogIn,
-	})
-end
-
-do
-	refs.login = RenderObject("Frame", {
-		Name = "login",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.3101, 0, 0.83588, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 163, 0, 30),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 65,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.FrameStyle.Custom,
-		Selectable = false,
-		Active = false,
-		Parent = refs.LogIn,
-	})
-end
-
-do
-	refs.TextButton_5 = RenderObject("TextButton", {
-		Name = "TextButton",
-		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, -0.0279226, 0),
-		Rotation = 0,
-		Size = UDim2.new(0.993903, 0, 1.0009, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 65,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.ButtonStyle.Custom,
-		Selectable = true,
-		Active = true,
-		Modal = false,
-		RichText = false,
-		Text = "Login",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 13,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Selected = false,
-		Parent = refs.login,
-	})
-	
-	task.spawn(function()
-		refs.TextButton_5.MouseButton1Click:Connect(function()
-			if refs.displaybox.Text == "" or refs.pw.Text == "" then Notification.new("Invalid key") return end;
-			Notification.new("Requesting server. Be patient!")
-			local url = "https://nocturnalauth.onrender.com/getusr?key=" .. refs.pw.Text
-
-			local success, response = pcall(function()
-				return request({Url = url, Method = "GET"}).Body
-					--game:GetService("HttpService"):GetAsync(url)
-			end)
-
-			if not success then
-				Notification.new("Failed to request server: " .. response)
-				return nil
-			end
-
-			local data
-			
-			success, data = pcall(function()
-				return game:GetService("HttpService"):JSONDecode(response)
-			end)
-
-			if not success then
-				Notification.new("Invalid login")
-				return nil
-			end
-
-			if data then
-				Notification.new("Success!")
-				refs.login.Parent.Visible = false
-				refs.login.Parent.Parent.SignedIn.Visible = true
-				local expirationDate = DateTime.fromIsoDate(data.expiration)
-
-				if not expirationDate then
-					warn("Invalid expiration date format")
-					return
-				end
-
-				getgenv().n_key = refs.pw.Text;
-				refs.ImageLabel.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. player.UserId .. "width=420&height=420&format=png"
-
-				local expTable = expirationDate:ToUniversalTime()
-
-				local expirationTimestamp = os.time{
-					year = expTable.Year,
-					month = expTable.Month,
-					day = expTable.Day,
-					hour = expTable.Hour,
-					min = expTable.Minute,
-					sec = expTable.Second
-				}
-
-				local currentTime = os.time()
-				local secondsLeft = expirationTimestamp - currentTime
-
-				local frame = refs.Frame_5;
-
-				if secondsLeft <= 0 then
-					refs.TextLabel_3.Text = "Your license has expired."
-				else
-					local daysLeft = math.floor(secondsLeft / (24 * 60 * 60))
-					refs.TextLabel_3.Text = "Your license will expire in " .. daysLeft .. " day" .. (daysLeft ~= 1 and "s" or "") .. "."
-				end
-
-				frame.n.Text = "Name: " .. data.name
-				frame.u.Text = "Uid: " .. data.uid
-
-
-
-				local executor, _ = identifyexecutor();
-				local body = request({
-					Url = "https://httpbin.org/get",
-					Method = "GET"
-				}).Body
-
-				local decoded = game:GetService("HttpService"):JSONDecode(body)
-				local hwid = decoded.headers[executor .. "-Fingerprint"]
-
-				local authResponse
-				local success, err = pcall(function()
-					authResponse = request({
-						Url = "https://nocturnalauth.onrender.com/auth"
-							.. "?key=" .. refs.pw.Text
-							.. "&hwid=" .. hwid,
-						Method = "GET"
-					})
-				end)
-
-				if not success or not authResponse then
-					Notification.new("Auth request failed")
-					return
-				end
-
-				if authResponse.StatusCode == 403 then
-					Notification.new("HWID mismatch. Reset your HWID!")
-					return
-				elseif authResponse.StatusCode == 401 then
-					Notification.new("Invalid or expired key")
-					return
-				elseif authResponse.StatusCode ~= 200 then
-					Notification.new("Auth error (" .. authResponse.StatusCode .. ")")
-					return
-				end
-
-				local mainScript = authResponse.Body
-
-
-				if not mainScript then
-					Notification.new("Failed to fetch main script")
-					return nil
-				end
-				
-				local TweenModes = {};
-				TweenModes.Linear = function(t: number) return t end;
-				TweenModes.Quad = function(t: number) return t * t end;
-				TweenModes.Cubic = function(t: number) return t * t * t end;
-				TweenModes.Quart = function(t: number) return t * t * t * t end;
-				TweenModes.Quint = function(t: number) return t * t * t * t * t end;
-				TweenModes.Circ = function(t: number) return 1 - math.sqrt(1 - t * t) end;
-				TweenModes.Sine = function(t: number) return 1 - math.cos((t * math.pi) / 2) end;
-				TweenModes.Expo = function(t: number) if t == 0 then return 0 end; return 2 ^ (10 * (t - 1)) end;
-				TweenModes.Elastic = function(t: number)
-					if t == 0 or t == 1 then return t end;
-					local p = 0.3;
-					local s = p / 4;
-					return -(2 ^ (10 * (t - 1))) * math.sin(((t - 1 - s) * (2 * math.pi)) / p);
-				end;
-
-				TweenModes.Back = function(t: number)
-					local s = 1.70158;
-					return t * t * ((s + 1) * t - s);
-				end;
-
-				--// genuinely no clue what this one is supposed to look like, My best guess.
-				local function bounceOut(t: number)
-					if t < (1 / 2.75) then
-						return 7.5625 * t * t;
-					elseif t < (2 / 2.75) then
-						t = t - (1.5 / 2.75);
-						return 7.5625 * t * t + 0.75;
-					elseif t < (2.5 / 2.75) then
-						t = t - (2.25 / 2.75);
-						return 7.5625 * t * t + 0.9375;
-					else
-						t = t - (2.625 / 2.75);
-						return 7.5625 * t * t + 0.984375;
-					end
-				end;
-
-				TweenModes.Bounce = bounceOut;
-
-				local function CreateTween(startProps: { [string]: Interpolatable }, targetProps: { [string]: Interpolatable }, opts: TweenOptions?): {
-					Play: (self: any) -> (),
-					Pause: (self: any) -> (),
-					Resume: (self: any) -> (),
-					Stop: (self: any, jumpToEnd: boolean?) -> (),
-					Seek: (self: any, timePosition: number) -> (),
-					IsPlaying: (self: any) -> boolean,
-					SetOnUpdate: (self: any, fn: OnUpdateFn?) -> (),
-					SetOnComplete: (self: any, fn: OnCompleteFn?) -> (),
-					SetOptions: (self: any, o: TweenOptions) -> (),
-					Chain: (self: any, nextTween: any) -> (),
-					}
-					assert(type(startProps) == "table" and type(targetProps) == "table", "CreateTween expects tables for start and target"); 
-
-					local options: TweenOptions = {
-						Duration = (opts and opts.Duration) or 1.0,
-						Easing = (opts and opts.Easing) or "Linear",
-						Direction = (opts and opts.Direction) or "In",
-						Delay = (opts and opts.Delay) or 0,
-						RepeatCount = (opts and opts.RepeatCount) or 0,
-						Reverse = (opts and opts.Reverse) or false,
-						IgnoreTimeScale = (opts and opts.IgnoreTimeScale) or false,
-						AutoPlay = (opts and opts.AutoPlay) or false,
-					}; 
-
-					local function clamp(n: number, a: number, b: number): number
-						if n < a then return a end;
-						if n > b then return b end;
-						return n;
-					end;
-
-					local function lerpNumber(a: number, b: number, t: number): number
-						return a + (b - a) * t;
-					end;
-
-					local function lerpVector2(a: Vector2, b: Vector2, t: number): Vector2
-						return Vector2.new(lerpNumber(a.X, b.X, t), lerpNumber(a.Y, b.Y, t));
-					end;
-
-					local function lerpVector3(a: Vector3, b: Vector3, t: number): Vector3
-						return Vector3.new(lerpNumber(a.X, b.X, t), lerpNumber(a.Y, b.Y, t), lerpNumber(a.Z, b.Z, t));
-					end;
-
-					local function lerpColor3(a: Color3, b: Color3, t: number): Color3
-						return Color3.fromRGB(
-							math.floor(lerpNumber(a.R * 255, b.R * 255, t) + 0.5),
-							math.floor(lerpNumber(a.G * 255, b.G * 255, t) + 0.5),
-							math.floor(lerpNumber(a.B * 255, b.B * 255, t) + 0.5)
-						);
-					end;
-
-					local function lerpUDim2(a: UDim2, b: UDim2, t: number): UDim2
-						local ax, ay = a.X.Scale, a.X.Offset;
-						local bx, by = b.X.Scale, b.X.Offset;
-						local cx, cy = a.Y.Scale, a.Y.Offset;
-						local dx, dy = b.Y.Scale, b.Y.Offset;
-						return UDim2.new(lerpNumber(ax, bx, t), lerpNumber(ay, by, t), lerpNumber(cx, dx, t), lerpNumber(cy, dy, t));
-					end;
-
-					local function slerpCFrame(a: CFrame, b: CFrame, t: number): CFrame
-						return a:Lerp(b, t);
-					end;
-
-					local function interpolate(a: Interpolatable, b: Interpolatable, alpha: number): Interpolatable
-						local ta = typeof(a);
-						local tb = typeof(b);
-						if ta ~= tb then
-							if ta == "number" and (tb == "number" or tb == "number") then
-								return lerpNumber(a :: number, b :: number, alpha);
-							end;
-							if alpha >= 1 then return b end;
-							return a;
-						end;
-
-						if ta == "number" then
-							return lerpNumber(a :: number, b :: number, alpha);
-						elseif ta == "Vector2" then
-							return lerpVector2(a :: Vector2, b :: Vector2, alpha);
-						elseif ta == "Vector3" then
-							return lerpVector3(a :: Vector3, b :: Vector3, alpha);
-						elseif ta == "Color3" then
-							return lerpColor3(a :: Color3, b :: Color3, alpha);
-						elseif ta == "UDim2" then
-							return lerpUDim2(a :: UDim2, b :: UDim2, alpha);
-						elseif ta == "CFrame" then
-							return slerpCFrame(a :: CFrame, b :: CFrame, alpha);
-						else
-							if alpha >= 1 then return b end;
-							return a;
-						end
-					end;
-
-					local function getEasedAlpha(baseT: number): number
-						local baseName: string = tostring(options.Easing or "Linear");
-						local baseFn: (number) -> number = TweenModes[baseName] or TweenModes.Linear;
-						local dir: string = options.Direction or "In";
-
-						if dir == "In" then
-							return clamp(baseFn(baseT), 0, 1);
-						elseif dir == "Out" then
-							--// Out variant: f_out(t) = 1 - f_in(1 - t)
-							return clamp(1 - baseFn(1 - baseT), 0, 1);
-						elseif dir == "InOut" then
-							if baseT < 0.5 then
-								return clamp(baseFn(baseT * 2) * 0.5, 0, 1);
-							else
-								return clamp(1 - baseFn((1 - baseT) * 2) * 0.5, 0, 1);
-							end;
-						else
-							return clamp(baseFn(baseT), 0, 1);
-						end;
-					end;
-
-					local id: string = game:GetService"HttpService":GenerateGUID(false);
-					local duration: number = math.max(0.0001, (options.Duration or 1)); 
-					local delay: number = math.max(0, (options.Delay or 0));
-					local repeatCount: number = (options.RepeatCount == nil) and 0 or (options.RepeatCount);
-					local reverseOnRepeat: boolean = options.Reverse == true;
-					local ignoreTimeScale: boolean = options.IgnoreTimeScale == true;
-					local playing: boolean = false;
-					local paused: boolean = false;
-					local startClock: number = 0;
-					local pausedAt: number? = nil;
-					local elapsed: number = 0;
-					local currentRepeatIndex: number = 0;
-					local forward: boolean = true;
-					local onUpdate: OnUpdateFn? = nil;
-					local onComplete: OnCompleteFn? = nil;
-					local lastTickConnection: RBXScriptConnection? = nil;
-					local chainedTween: any? = nil;
-					local finished: boolean = false;
-					local currentValues: { [string]: Interpolatable } = {};
-					local initialValues: { [string]: Interpolatable } = {};
-					local targetValues: { [string]: Interpolatable } = {};
-
-					for k, v in startProps do
-						initialValues[k] = v;
-					end;
-
-					for k, v in targetProps do
-						targetValues[k] = v;
-					end;
-
-					for k, v in initialValues do
-						currentValues[k] = v;
-					end;
-
-					local function emitUpdate(alpha: number)
-						if onUpdate then
-							local ok, err = pcall(onUpdate, currentValues, alpha);
-							if not ok then
-								warn("Tween: OnUpdate error: " .. tostring(err));
-							end;
-						end;
-					end;
-
-					local function computeAlphaFromElapsed(elapsedTime: number): number
-						if duration <= 0 then return 1 end;
-						local t = clamp(elapsedTime / duration, 0, 1);
-						if not forward then
-							--// if backwards, invert t
-							t = 1 - t;
-						end;
-						return getEasedAlpha(t);
-					end;
-
-					local function tick(dt: number)
-						if finished or not playing or paused then return end;
-
-						if ignoreTimeScale then
-							local now = os.clock();
-							if startClock == 0 then startClock = now - elapsed end;
-							elapsed = now - startClock;
-						else
-							elapsed = elapsed + dt;
-						end;
-
-						if elapsed < delay then
-							emitUpdate(0);
-							return;
-						end;
-
-						local effectiveElapsed = elapsed - delay;
-						--// clamp duration * (repeatCount+1)
-						local cycleDuration = duration;
-						local iteration = math.floor(effectiveElapsed / cycleDuration);
-						local iterTime = effectiveElapsed - (iteration * cycleDuration);
-
-						if repeatCount >= 0 and iteration > repeatCount then
-							iteration = repeatCount;
-							iterTime = cycleDuration;
-						end;
-
-						local isReverseIteration = reverseOnRepeat and (iteration % 2 == 1);
-						forward = not isReverseIteration;
-
-						local rawAlpha = computeAlphaFromElapsed(iterTime);
-						local easedAlpha = clamp(rawAlpha, 0, 1);
-
-						for k, sv in initialValues do
-							local tv = targetValues[k];
-							if tv == nil then
-								currentValues[k] = sv;
-							else
-								currentValues[k] = interpolate(sv, tv, easedAlpha);
-							end;
-						end;
-
-						emitUpdate(easedAlpha);
-
-						if repeatCount >= 0 and iteration >= repeatCount and iterTime >= cycleDuration - 1e-6 then
-							playing = false;
-							finished = true;
-
-							for k, _ in initialValues do
-								currentValues[k] = targetValues[k] or currentValues[k];
-							end;
-
-							emitUpdate(1);
-							if onComplete then
-								pcall(onComplete);
-							end;
-
-							if chainedTween then
-								pcall(function() chainedTween:Play() end);
-							end;
-
-							if lastTickConnection then
-								pcall(function() lastTickConnection:Disconnect() end);
-								lastTickConnection = nil;
-							end;
-						elseif iterTime >= cycleDuration - 1e-6 and (repeatCount < 0 or iteration <= repeatCount) then
-							local leftover = effectiveElapsed - ((iteration + 1) * cycleDuration);
-							startClock = (ignoreTimeScale and os.clock() - (leftover + delay)) or 0;
-							elapsed = delay + leftover;
-						end;
-					end;
-
-					local function connectTick()
-						if lastTickConnection then return end;
-						lastTickConnection = game:GetService"RunService".Heartbeat:Connect(function(dt) tick(dt) end);
-					end;
-
-					local function disconnectTick()
-						if lastTickConnection then
-							pcall(function() lastTickConnection:Disconnect() end);
-							lastTickConnection = nil;
-						end;
-					end;
-
-					local api: any = {};
-
-					function api.Play(self: any)
-						if finished then
-							finished = false;
-							elapsed = 0;
-							currentRepeatIndex = 0;
-						end;
-						playing = true;
-						paused = false;
-						if ignoreTimeScale then
-							startClock = os.clock() - elapsed;
-						end;
-						connectTick();
-					end;
-
-					function api.Pause(self: any)
-						if not playing or paused then return end;
-						paused = true;
-						if ignoreTimeScale then
-							pausedAt = os.clock();
-						end;
-					end;
-
-					function api.Resume(self: any)
-						if not paused then return end;
-						paused = false;
-						if ignoreTimeScale and pausedAt then
-							local now = os.clock();
-							local pausedDuration = now - pausedAt;
-							startClock = startClock + pausedDuration;
-							pausedAt = nil;
-						end;
-					end;
-
-					function api.Stop(self: any, jumpToEnd: boolean?)
-						playing = false;
-						paused = false;
-						disconnectTick();
-						if jumpToEnd then
-							for k, _ in initialValues do
-								currentValues[k] = targetValues[k] or currentValues[k];
-							end;
-
-							emitUpdate(1);
-							if onComplete then pcall(onComplete) end;
-						end;
-					end;
-
-					function api.Seek(self: any, timePosition: number)
-						timePosition = math.max(0, timePosition or 0);
-
-						if ignoreTimeScale then
-							startClock = os.clock() - timePosition;
-							elapsed = timePosition;
-						else
-							elapsed = timePosition;
-						end;
-
-						local localElapsed = elapsed - delay;
-						local iteration = 0;
-						if localElapsed > 0 then iteration = math.floor(localElapsed / duration) end;
-						local iterTime = math.clamp((localElapsed - iteration * duration), 0, duration);
-						local isReverseIteration = reverseOnRepeat and (iteration % 2 == 1);
-						forward = not isReverseIteration;
-						local alpha = computeAlphaFromElapsed(iterTime);
-
-						for k, sv in initialValues do
-							local tv = targetValues[k];
-							if tv == nil then
-								currentValues[k] = sv;
-							else
-								currentValues[k] = interpolate(sv, tv, alpha);
-							end;
-						end;
-
-						emitUpdate(alpha);
-					end;
-
-					function api.IsPlaying(self: any): boolean
-						return playing and not paused;
-					end;
-
-					function api.SetOnUpdate(self: any, fn: OnUpdateFn?)
-						onUpdate = fn;
-					end;
-
-					function api.SetOnComplete(self: any, fn: OnCompleteFn?)
-						onComplete = fn;
-					end;
-
-					function api.SetOptions(self: any, o: TweenOptions)
-						options = o or options;
-						duration = math.max(0.0001, options.Duration or duration);
-						delay = math.max(0, options.Delay or delay);
-						repeatCount = (options.RepeatCount == nil) and repeatCount or options.RepeatCount;
-						reverseOnRepeat = options.Reverse == true;
-						ignoreTimeScale = options.IgnoreTimeScale == true;
-					end;
-
-					function api.Chain(self: any, nextTween: any)
-						chainedTween = nextTween;
-					end;
-
-					if options.AutoPlay then
-						api.Play(api);
-					end;
-
-					return {
-						Play = api.Play;
-						Pause = api.Pause;
-						Resume = api.Resume;
-						Stop = api.Stop;
-						Seek = api.Seek;
-						IsPlaying = api.IsPlaying;
-						SetOnUpdate = api.SetOnUpdate;
-						SetOnComplete = api.SetOnComplete;
-						SetOptions = api.SetOptions;
-						Chain = api.Chain;
-					};
-				end;
-				local function collectProperties(element)
-					local propsStart = {};
-					local found = false;
-
-					local ok, val;
-					local propNames = {"Transparency", "BackgroundTransparency", "TextTransparency", "ImageTransparency", "TextStrokeTransparency"};
-
-					for _, prop in propNames do
-						ok, val = pcall(function() return element[prop] end);
-						if ok then
-							propsStart[prop] = val;
-							found = true;
-						end
-					end
-
-					return propsStart, found;
-				end;
-
-				local uiGradient: UIGradient = refs.ld:WaitForChild("UIGradient")
-				local currentTween: any = nil
-
-				local function tweenRotation(targetRotation)
-					if currentTween then
-						currentTween:Stop(true)
-					end
-
-					local tween = CreateTween(
-						{ Rotation = uiGradient.Rotation },
-						{ Rotation = targetRotation },
-						{
-							Duration = 0.16,
-							Easing = "Quad",
-							Direction = "InOut",
-							AutoPlay = false
-						}
-					)
-
-					currentTween = tween
-
-					tween:SetOnUpdate(function(currentValues)
-						uiGradient.Rotation = currentValues.Rotation
-					end)
-
-					tween:Play()
-				end
-
-				refs.TextButton.MouseEnter:Connect(function()
-					tweenRotation(90)
-				end)
-
-				refs.TextButton.MouseLeave:Connect(function()
-					tweenRotation(-90)
-				end)
-				
-				refs.TextButton.MouseButton1Click:Connect(function()
-					local tweens = {};
-
-					for _, element in refs.Loader:GetDescendants() do
-
-						local propsStart, found = collectProperties(element);
-						if not found then continue end;
-
-						local propsTarget = {};
-
-						for k in propsStart do
-							propsTarget[k] = 1
-						end
-
-
-						local tweenHandle = CreateTween(propsStart, propsTarget, {
-							Duration = 0.25;
-							Easing = "Linear";
-							Direction = "In";
-							AutoPlay = false;
-						});
-
-						tweenHandle:SetOnUpdate(function(newProps)
-							for prop, val in newProps do
-								--// Only clamp ts if it's a number or it errors
-								if typeof(val) == "number" then
-									pcall(function()
-										val = math.clamp(val, 0, 1)
-									end)
-								end
-
-								--// Assign
-								pcall(function()
-									element[prop] = val
-								end)
-							end
-						end)
-
-
-						table.insert(tweens, tweenHandle)
-					end
-
-					local completedCount = 0;
-					local totalTweens = #tweens;
-
-					for _, tween in tweens do
-						tween:SetOnComplete(function()
-							completedCount = completedCount + 1
-							if completedCount >= totalTweens then
-								refs.Loader.Enabled = false
-							end
-						end)
-
-						tween:Play()
-
-					end
+dne
+)}	
+,wolG.sfer = tneraP		
+,)}		
+,)0 ,1(wen.tniopyeKecneuqeSrebmuN			
+,)0 ,0(wen.tniopyeKecneuqeSrebmuN			
+{(wen.ecneuqeSrebmuN = ycnerapsnarT		
+,)0 ,0(wen.2rotceV = tesffO		
+,)}		
+,))441 ,97 ,321(BGRmorf.3roloC ,1(wen.tniopyeKecneuqeSroloC			
+,))441 ,97 ,321(BGRmorf.3roloC ,0(wen.tniopyeKecneuqeSroloC			
+{(wen.ecneuqeSroloC = roloC		
+,0 = noitatoR		
+,"tneidarGIU" = emaN		
+{ ,"tneidarGIU"(tcejbOredneR = 6_tneidarGIU.sfer	
+od
+
+dne
+)}	
+,2_redaoL.sfer = tneraP		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCegamI		
+,)0 ,0(wen.2rotceV = eziStceRegamI		
+,)0 ,0(wen.2rotceV = tesffOtceRegamI		
+,5.0 = ycnerapsnarTegamI		
+,"85920371941//:ditessaxbr" = egamI		
+,hctertS.epyTelacS.munE = epyTelacS		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,5- = xednIZ		
+,eslaf = elbisiV		
+,)5.0 ,5.0(wen.2rotceV = tnioProhcnA		
+,)574 ,0 ,925 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)851 ,0 ,912 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"wolG" = emaN		
+{ ,"lebaLegamI"(tcejbOredneR = wolG.sfer	
+od
+
+dne
+)}	
+,2_redaoL.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,41 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"moc.rednerno.htualanrutcon//:sptth tisiv ,seiriuqni roF" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)5.0 ,5.0(wen.2rotceV = tnioProhcnA		
+,)71 ,0 ,254 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,65927.1 ,0 ,315484.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 51_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,2_redaoL.sfer = tneraP		
+,eslaf = detceleS		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,1 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,snaSecruoS.tnoF.munE = tnoF		
+,41 = eziStxeT		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCtxeT		
+,"" = txeT		
+,eslaf = txeThciR		
+,eurt = ladoM		
+,eurt = evitcA		
+,eurt = elbatceleS		
+,motsuC.elytSnottuB.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,0 ,0 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"nottuBtxeT" = emaN		
+{ ,"nottuBtxeT"(tcejbOredneR = 6_nottuBtxeT.sfer	
+od
+
+dne
+)}	
+,nigol.sfer = tneraP		
+,)}		
+,)1 ,1(wen.tniopyeKecneuqeSrebmuN			
+,)759885.0 ,9692.0(wen.tniopyeKecneuqeSrebmuN			
+,)0 ,0(wen.tniopyeKecneuqeSrebmuN			
+{(wen.ecneuqeSrebmuN = ycnerapsnarT		
+,)0 ,0(wen.2rotceV = tesffO		
+,)}		
+,))42 ,42 ,42(BGRmorf.3roloC ,1(wen.tniopyeKecneuqeSroloC			
+,))42 ,42 ,42(BGRmorf.3roloC ,0(wen.tniopyeKecneuqeSroloC			
+{(wen.ecneuqeSroloC = roloC		
+,09- = noitatoR		
+,"tneidarGIU" = emaN		
+{ ,"tneidarGIU"(tcejbOredneR = 5_tneidarGIU.sfer	
+od
+
+dne
+)}	
+,nigol.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"retuo" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = retuo.sfer	
+od
+
+dne
+)}	
+,nigol.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 44_ekortSIU.sfer	
+od
+
+dne
+)}	
+,5_nottuBtxeT.sfer = tneraP		
+,"tpircSlacoL" = emaN		
+{ ,"tpircSlacoL"(tcejbOredneR = 6_tpircSlacoL.sfer	
+od
+
+dne
+)dne	
+)dne		
+dne			
+)dne				
+)dne					
+)(yortseD:redaoL.sfer						
+)(noitcnuf ,1(yaled.ksat					
+)()tpircSniam(gnirtsdaol					
 					
-					loadstring(mainScript)()
-					task.delay(1, function()
-						refs.Loader:Destroy()
-					end)
-				end)
-			end
-		end)
-	end)
-end
+dne					
 
-do
-	refs.LocalScript_6 = RenderObject("LocalScript", {
-		Name = "LocalScript",
-		Parent = refs.TextButton_5,
-	})
-end
+)(yalP:neewt						
 
-do
-	refs.UIStroke_44 = RenderObject("UIStroke", {
-		Name = "UIStroke",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(50, 50, 50),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
-		Parent = refs.login,
-	})
-end
+)dne						
+dne							
+eslaf = delbanE.redaoL.sfer								
+neht sneewTlatot => tnuoCdetelpmoc fi							
+1 + tnuoCdetelpmoc = tnuoCdetelpmoc							
+)(noitcnuf(etelpmoCnOteS:neewt						
+od sneewt ni neewt ,_ rof					
 
-do
-	refs.outer = RenderObject("UIStroke", {
-		Name = "outer",
-		ZIndex = 1,
-		Thickness = 1,
-		Color = Color3.fromRGB(0, 0, 0),
-		Transparency = 0,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
-		Parent = refs.login,
-	})
-end
+;sneewt# = sneewTlatot lacol					
+;0 = tnuoCdetelpmoc lacol					
 
-do
-	refs.UIGradient_5 = RenderObject("UIGradient", {
-		Name = "UIGradient",
-		Rotation = -90,
-		Color = ColorSequence.new({
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 24, 24)),
-		}),
-		Offset = Vector2.new(0, 0),
-		Transparency = NumberSequence.new({
-			NumberSequenceKeypoint.new(0, 0),
-			NumberSequenceKeypoint.new(0.2969, 0.588957),
-			NumberSequenceKeypoint.new(1, 1),
-		}),
-		Parent = refs.login,
-	})
-end
+dne					
+)eldnaHneewt ,sneewt(tresni.elbat						
 
-do
-	refs.TextButton_6 = RenderObject("TextButton", {
-		Name = "TextButton",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 0,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 0, 0, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 0, 0, 0),
-		AnchorPoint = Vector2.new(0, 0),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Style = Enum.ButtonStyle.Custom,
-		Selectable = true,
-		Active = true,
-		Modal = true,
-		RichText = false,
-		Text = "",
-		TextColor3 = Color3.fromRGB(0, 0, 0),
-		TextSize = 14,
-		Font = Enum.Font.SourceSans,
-		TextTransparency = 0,
-		TextStrokeTransparency = 1,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Selected = false,
-		Parent = refs.Loader_2,
-	})
-end
 
-do
-	refs.TextLabel_15 = RenderObject("TextLabel", {
-		Name = "TextLabel",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0.484513, 0, 1.72956, 0),
-		Rotation = 0,
-		Size = UDim2.new(0, 452, 0, 17),
-		AnchorPoint = Vector2.new(0.5, 0.5),
-		Visible = true,
-		ZIndex = 1,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		RichText = false,
-		Text = "For inquiries, visit https://nocturnalauth.onrender.com",
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextSize = 14,
-		Font = Enum.Font.Code,
-		TextTransparency = 0,
-		TextStrokeTransparency = 0,
-		TextWrapped = false,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		TextScaled = false,
-		LineHeight = 1,
-		TextTruncate = Enum.TextTruncate.None,
-		Parent = refs.Loader_2,
-	})
-end
+)dne						
+dne							
+)dne								
+lav = ]porp[tnemele									
+)(noitcnuf(llacp								
+ngissA //--								
 
-do
-	refs.Glow = RenderObject("ImageLabel", {
-		Name = "Glow",
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1,
-		BorderColor3 = Color3.fromRGB(0, 0, 0),
-		BorderMode = Enum.BorderMode.Outline,
-		BorderSizePixel = 0,
-		ClipsDescendants = false,
-		Position = UDim2.new(0, 219, 0, 158),
-		Rotation = 0,
-		Size = UDim2.new(0, 529, 0, 475),
-		AnchorPoint = Vector2.new(0.5, 0.5),
-		Visible = false,
-		ZIndex = -5,
-		LayoutOrder = 0,
-		AutomaticSize = Enum.AutomaticSize.None,
-		AutoLocalize = true,
-		Selectable = false,
-		Active = false,
-		ScaleType = Enum.ScaleType.Stretch,
-		Image = "rbxassetid://14917302958",
-		ImageTransparency = 0.5,
-		ImageRectOffset = Vector2.new(0, 0),
-		ImageRectSize = Vector2.new(0, 0),
-		ImageColor3 = Color3.fromRGB(255, 255, 255),
-		Parent = refs.Loader_2,
-	})
-end
+dne								
+)dne									
+)1 ,0 ,lav(pmalc.htam = lav										
+)(noitcnuf(llacp									
+neht "rebmun" == )lav(foepyt fi								
+srorre ti ro rebmun a s'ti fi st pmalc ylnO //--								
+od sporPwen ni lav ,porp rof							
+)sporPwen(noitcnuf(etadpUnOteS:eldnaHneewt						
 
-do
-	refs.UIGradient_6 = RenderObject("UIGradient", {
-		Name = "UIGradient",
-		Rotation = 0,
-		Color = ColorSequence.new({
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(123, 79, 144)),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(123, 79, 144)),
-		}),
-		Offset = Vector2.new(0, 0),
-		Transparency = NumberSequence.new({
-			NumberSequenceKeypoint.new(0, 0),
-			NumberSequenceKeypoint.new(1, 0),
-		}),
-		Parent = refs.Glow,
-	})
-end
+;)}						
+;eslaf = yalPotuA							
+;"nI" = noitceriD							
+;"raeniL" = gnisaE							
+;52.0 = noitaruD							
+{ ,tegraTsporp ,tratSsporp(neewTetaerC = eldnaHneewt lacol						
+
+
+dne						
+1 = ]k[tegraTsporp							
+od tratSsporp ni k rof						
+
+;}{ = tegraTsporp lacol						
+
+;dne eunitnoc neht dnuof ton fi						
+;)tnemele(seitreporPtcelloc = dnuof ,tratSsporp lacol						
+
+od )(stnadnecseDteG:redaoL.sfer ni tnemele ,_ rof					
+
+;}{ = sneewt lacol					
+)(noitcnuf(tcennoC:kcilC1nottuBesuoM.nottuBtxeT.sfer				
+				
+)dne				
+)09-(noitatoRneewt					
+)(noitcnuf(tcennoC:evaeLesuoM.nottuBtxeT.sfer				
+
+)dne				
+)09(noitatoRneewt					
+)(noitcnuf(tcennoC:retnEesuoM.nottuBtxeT.sfer				
+
+dne				
+)(yalP:neewt					
+
+)dne					
+noitatoR.seulaVtnerruc = noitatoR.tneidarGiu						
+)seulaVtnerruc(noitcnuf(etadpUnOteS:neewt					
+
+neewt = neewTtnerruc					
+
+)					
+}						
+eslaf = yalPotuA							
+,"tuOnI" = noitceriD							
+,"dauQ" = gnisaE							
+,61.0 = noitaruD							
+{						
+,} noitatoRtegrat = noitatoR {						
+,} noitatoR.tneidarGiu = noitatoR {						
+(neewTetaerC = neewt lacol					
+
+dne					
+)eurt(potS:neewTtnerruc						
+neht neewTtnerruc fi					
+)noitatoRtegrat(noitatoRneewt noitcnuf lacol				
+
+lin = yna :neewTtnerruc lacol				
+)"tneidarGIU"(dlihCroFtiaW:dl.sfer = tneidarGIU :tneidarGiu lacol				
+
+;dne				
+;dnuof ,tratSsporp nruter					
+
+dne					
+dne						
+;eurt = dnuof							
+;lav = ]porp[tratSsporp							
+neht ko fi						
+;)dne ]porp[tnemele nruter )(noitcnuf(llacp = lav ,ko						
+od semaNporp ni porp ,_ rof					
+
+;}"ycnerapsnarTekortStxeT" ,"ycnerapsnarTegamI" ,"ycnerapsnarTtxeT" ,"ycnerapsnarTdnuorgkcaB" ,"ycnerapsnarT"{ = semaNporp lacol					
+;lav ,ko lacol					
+
+;eslaf = dnuof lacol					
+;}{ = tratSsporp lacol					
+)tnemele(seitreporPtcelloc noitcnuf lacol				
+;dne				
+;}					
+;niahC.ipa = niahC						
+;snoitpOteS.ipa = snoitpOteS						
+;etelpmoCnOteS.ipa = etelpmoCnOteS						
+;etadpUnOteS.ipa = etadpUnOteS						
+;gniyalPsI.ipa = gniyalPsI						
+;keeS.ipa = keeS						
+;potS.ipa = potS						
+;emuseR.ipa = emuseR						
+;esuaP.ipa = esuaP						
+;yalP.ipa = yalP						
+{ nruter					
+
+;dne					
+;)ipa(yalP.ipa						
+neht yalPotuA.snoitpo fi					
+
+;dne					
+;neewTtxen = neewTdeniahc						
+)yna :neewTtxen ,yna :fles(niahC.ipa noitcnuf					
+
+;dne					
+;eurt == elacSemiTerongI.snoitpo = elacSemiTerongi						
+;eurt == esreveR.snoitpo = taepeRnOesrever						
+;tnuoCtaepeR.snoitpo ro tnuoCtaeper dna )lin == tnuoCtaepeR.snoitpo( = tnuoCtaeper						
+;)yaled ro yaleD.snoitpo ,0(xam.htam = yaled						
+;)noitarud ro noitaruD.snoitpo ,1000.0(xam.htam = noitarud						
+;snoitpo ro o = snoitpo						
+)snoitpOneewT :o ,yna :fles(snoitpOteS.ipa noitcnuf					
+
+;dne					
+;nf = etelpmoCno						
+)?nFetelpmoCnO :nf ,yna :fles(etelpmoCnOteS.ipa noitcnuf					
+
+;dne					
+;nf = etadpUno						
+)?nFetadpUnO :nf ,yna :fles(etadpUnOteS.ipa noitcnuf					
+
+;dne					
+;desuap ton dna gniyalp nruter						
+naeloob :)yna :fles(gniyalPsI.ipa noitcnuf					
+
+;dne					
+;)ahpla(etadpUtime						
+
+;dne						
+;dne							
+;)ahpla ,vt ,vs(etalopretni = ]k[seulaVtnerruc								
+esle							
+;vs = ]k[seulaVtnerruc								
+neht lin == vt fi							
+;]k[seulaVtegrat = vt lacol							
+od seulaVlaitini ni vs ,k rof						
+
+;)emiTreti(despalEmorFahplAetupmoc = ahpla lacol						
+;noitaretIesreveRsi ton = drawrof						
+;)1 == 2 % noitareti( dna taepeRnOesrever = noitaretIesreveRsi lacol						
+;)noitarud ,0 ,)noitarud * noitareti - despalElacol((pmalc.htam = emiTreti lacol						
+;dne )noitarud / despalElacol(roolf.htam = noitareti neht 0 > despalElacol fi						
+;0 = noitareti lacol						
+;yaled - despale = despalElacol lacol						
+
+;dne						
+;noitisoPemit = despale							
+esle						
+;noitisoPemit = despale							
+;noitisoPemit - )(kcolc.so = kcolCtrats							
+neht elacSemiTerongi fi						
+
+;)0 ro noitisoPemit ,0(xam.htam = noitisoPemit						
+)rebmun :noitisoPemit ,yna :fles(keeS.ipa noitcnuf					
+
+;dne					
+;dne						
+;dne )etelpmoCno(llacp neht etelpmoCno fi							
+;)1(etadpUtime							
+
+;dne							
+;]k[seulaVtnerruc ro ]k[seulaVtegrat = ]k[seulaVtnerruc								
+od seulaVlaitini ni _ ,k rof							
+neht dnEoTpmuj fi						
+;)(kciTtcennocsid						
+;eslaf = desuap						
+;eslaf = gniyalp						
+)?naeloob :dnEoTpmuj ,yna :fles(potS.ipa noitcnuf					
+
+;dne					
+;dne						
+;lin = tAdesuap							
+;noitaruDdesuap + kcolCtrats = kcolCtrats							
+;tAdesuap - won = noitaruDdesuap lacol							
+;)(kcolc.so = won lacol							
+neht tAdesuap dna elacSemiTerongi fi						
+;eslaf = desuap						
+;dne nruter neht desuap ton fi						
+)yna :fles(emuseR.ipa noitcnuf					
+
+;dne					
+;dne						
+;)(kcolc.so = tAdesuap							
+neht elacSemiTerongi fi						
+;eurt = desuap						
+;dne nruter neht desuap ro gniyalp ton fi						
+)yna :fles(esuaP.ipa noitcnuf					
+
+;dne					
+;)(kciTtcennoc						
+;dne						
+;despale - )(kcolc.so = kcolCtrats							
+neht elacSemiTerongi fi						
+;eslaf = desuap						
+;eurt = gniyalp						
+;dne						
+;0 = xednItaepeRtnerruc							
+;0 = despale							
+;eslaf = dehsinif							
+neht dehsinif fi						
+)yna :fles(yalP.ipa noitcnuf					
+
+;}{ = yna :ipa lacol					
+
+;dne					
+;dne						
+;lin = noitcennoCkciTtsal							
+;)dne )(tcennocsiD:noitcennoCkciTtsal )(noitcnuf(llacp							
+neht noitcennoCkciTtsal fi						
+)(kciTtcennocsid noitcnuf lacol					
+
+;dne					
+;)dne )td(kcit )td(noitcnuf(tcennoC:taebtraeH."ecivreSnuR"ecivreSteG:emag = noitcennoCkciTtsal						
+;dne nruter neht noitcennoCkciTtsal fi						
+)(kciTtcennoc noitcnuf lacol					
+
+;dne					
+;dne						
+;revotfel + yaled = despale							
+;0 ro ))yaled + revotfel( - )(kcolc.so dna elacSemiTerongi( = kcolCtrats							
+;)noitaruDelcyc * )1 + noitareti(( - despalEevitceffe = revotfel lacol							
+neht )tnuoCtaeper =< noitareti ro 0 < tnuoCtaeper( dna 6-e1 - noitaruDelcyc => emiTreti fiesle						
+;dne							
+;lin = noitcennoCkciTtsal								
+;)dne )(tcennocsiD:noitcennoCkciTtsal )(noitcnuf(llacp								
+neht noitcennoCkciTtsal fi							
+
+;dne							
+;)dne )(yalP:neewTdeniahc )(noitcnuf(llacp								
+neht neewTdeniahc fi							
+
+;dne							
+;)etelpmoCno(llacp								
+neht etelpmoCno fi							
+;)1(etadpUtime							
+
+;dne							
+;]k[seulaVtnerruc ro ]k[seulaVtegrat = ]k[seulaVtnerruc								
+od seulaVlaitini ni _ ,k rof							
+
+;eurt = dehsinif							
+;eslaf = gniyalp							
+neht 6-e1 - noitaruDelcyc => emiTreti dna tnuoCtaeper => noitareti dna 0 => tnuoCtaeper fi						
+
+;)ahplAdesae(etadpUtime						
+
+;dne						
+;dne							
+;)ahplAdesae ,vt ,vs(etalopretni = ]k[seulaVtnerruc								
+esle							
+;vs = ]k[seulaVtnerruc								
+neht lin == vt fi							
+;]k[seulaVtegrat = vt lacol							
+od seulaVlaitini ni vs ,k rof						
+
+;)1 ,0 ,ahplAwar(pmalc = ahplAdesae lacol						
+;)emiTreti(despalEmorFahplAetupmoc = ahplAwar lacol						
+
+;noitaretIesreveRsi ton = drawrof						
+;)1 == 2 % noitareti( dna taepeRnOesrever = noitaretIesreveRsi lacol						
+
+;dne						
+;noitaruDelcyc = emiTreti							
+;tnuoCtaeper = noitareti							
+neht tnuoCtaeper > noitareti dna 0 => tnuoCtaeper fi						
+
+;)noitaruDelcyc * noitareti( - despalEevitceffe = emiTreti lacol						
+;)noitaruDelcyc / despalEevitceffe(roolf.htam = noitareti lacol						
+;noitarud = noitaruDelcyc lacol						
+)1+tnuoCtaeper( * noitarud pmalc //--						
+;yaled - despale = despalEevitceffe lacol						
+
+;dne						
+;nruter							
+;)0(etadpUtime							
+neht yaled < despale fi						
+
+;dne						
+;td + despale = despale							
+esle						
+;kcolCtrats - won = despale							
+;dne despale - won = kcolCtrats neht 0 == kcolCtrats fi							
+;)(kcolc.so = won lacol							
+neht elacSemiTerongi fi						
+
+;dne nruter neht desuap ro gniyalp ton ro dehsinif fi						
+)rebmun :td(kcit noitcnuf lacol					
+
+;dne					
+;)t(ahplAdesaEteg nruter						
+;dne						
+;t - 1 = t							
+t trevni ,sdrawkcab fi //--							
+neht drawrof ton fi						
+;)1 ,0 ,noitarud / emiTdespale(pmalc = t lacol						
+;dne 1 nruter neht 0 =< noitarud fi						
+rebmun :)rebmun :emiTdespale(despalEmorFahplAetupmoc noitcnuf lacol					
+
+;dne					
+;dne						
+;dne							
+;))rre(gnirtsot .. " :rorre etadpUnO :neewT"(nraw								
+neht ko ton fi							
+;)ahpla ,seulaVtnerruc ,etadpUno(llacp = rre ,ko lacol							
+neht etadpUno fi						
+)rebmun :ahpla(etadpUtime noitcnuf lacol					
+
+;dne					
+;v = ]k[seulaVtnerruc						
+od seulaVlaitini ni v ,k rof					
+
+;dne					
+;v = ]k[seulaVtegrat						
+od sporPtegrat ni v ,k rof					
+
+;dne					
+;v = ]k[seulaVlaitini						
+od sporPtrats ni v ,k rof					
+
+;}{ = } elbatalopretnI :]gnirts[ { :seulaVtegrat lacol					
+;}{ = } elbatalopretnI :]gnirts[ { :seulaVlaitini lacol					
+;}{ = } elbatalopretnI :]gnirts[ { :seulaVtnerruc lacol					
+;eslaf = naeloob :dehsinif lacol					
+;lin = ?yna :neewTdeniahc lacol					
+;lin = ?noitcennoCtpircSXBR :noitcennoCkciTtsal lacol					
+;lin = ?nFetelpmoCnO :etelpmoCno lacol					
+;lin = ?nFetadpUnO :etadpUno lacol					
+;eurt = naeloob :drawrof lacol					
+;0 = rebmun :xednItaepeRtnerruc lacol					
+;0 = rebmun :despale lacol					
+;lin = ?rebmun :tAdesuap lacol					
+;0 = rebmun :kcolCtrats lacol					
+;eslaf = naeloob :desuap lacol					
+;eslaf = naeloob :gniyalp lacol					
+;eurt == elacSemiTerongI.snoitpo = naeloob :elacSemiTerongi lacol					
+;eurt == esreveR.snoitpo = naeloob :taepeRnOesrever lacol					
+;)tnuoCtaepeR.snoitpo( ro 0 dna )lin == tnuoCtaepeR.snoitpo( = rebmun :tnuoCtaeper lacol					
+;))0 ro yaleD.snoitpo( ,0(xam.htam = rebmun :yaled lacol					
+ ;))1 ro noitaruD.snoitpo( ,1000.0(xam.htam = rebmun :noitarud lacol					
+;)eslaf(DIUGetareneG:"ecivreSpttH"ecivreSteG:emag = gnirts :di lacol					
+
+;dne					
+;dne						
+;)1 ,0 ,)Tesab(nFesab(pmalc nruter							
+esle						
+;dne							
+;)1 ,0 ,5.0 * )2 * )Tesab - 1((nFesab - 1(pmalc nruter								
+esle							
+;)1 ,0 ,5.0 * )2 * Tesab(nFesab(pmalc nruter								
+neht 5.0 < Tesab fi							
+neht "tuOnI" == rid fiesle						
+;)1 ,0 ,)Tesab - 1(nFesab - 1(pmalc nruter							
+)t - 1(ni_f - 1 = )t(tuo_f :tnairav tuO //--							
+neht "tuO" == rid fiesle						
+;)1 ,0 ,)Tesab(nFesab(pmalc nruter							
+neht "nI" == rid fi						
+
+;"nI" ro noitceriD.snoitpo = gnirts :rid lacol						
+;raeniL.sedoMneewT ro ]emaNesab[sedoMneewT = rebmun >- )rebmun( :nFesab lacol						
+;)"raeniL" ro gnisaE.snoitpo(gnirtsot = gnirts :emaNesab lacol						
+rebmun :)rebmun :Tesab(ahplAdesaEteg noitcnuf lacol					
+
+;dne					
+dne						
+;a nruter							
+;dne b nruter neht 1 => ahpla fi							
+esle						
+;)ahpla ,emarFC :: b ,emarFC :: a(emarFCprels nruter							
+neht "emarFC" == at fiesle						
+;)ahpla ,2miDU :: b ,2miDU :: a(2miDUprel nruter							
+neht "2miDU" == at fiesle						
+;)ahpla ,3roloC :: b ,3roloC :: a(3roloCprel nruter							
+neht "3roloC" == at fiesle						
+;)ahpla ,3rotceV :: b ,3rotceV :: a(3rotceVprel nruter							
+neht "3rotceV" == at fiesle						
+;)ahpla ,2rotceV :: b ,2rotceV :: a(2rotceVprel nruter							
+neht "2rotceV" == at fiesle						
+;)ahpla ,rebmun :: b ,rebmun :: a(rebmuNprel nruter							
+neht "rebmun" == at fi						
+
+;dne						
+;a nruter							
+;dne b nruter neht 1 => ahpla fi							
+;dne							
+;)ahpla ,rebmun :: b ,rebmun :: a(rebmuNprel nruter								
+neht )"rebmun" == bt ro "rebmun" == bt( dna "rebmun" == at fi							
+neht bt =~ at fi						
+;)b(foepyt = bt lacol						
+;)a(foepyt = at lacol						
+elbatalopretnI :)rebmun :ahpla ,elbatalopretnI :b ,elbatalopretnI :a(etalopretni noitcnuf lacol					
+
+;dne					
+;)t ,b(preL:a nruter						
+emarFC :)rebmun :t ,emarFC :b ,emarFC :a(emarFCprels noitcnuf lacol					
+
+;dne					
+;))t ,yd ,yc(rebmuNprel ,)t ,xd ,xc(rebmuNprel ,)t ,yb ,ya(rebmuNprel ,)t ,xb ,xa(rebmuNprel(wen.2miDU nruter						
+;tesffO.Y.b ,elacS.Y.b = yd ,xd lacol						
+;tesffO.Y.a ,elacS.Y.a = yc ,xc lacol						
+;tesffO.X.b ,elacS.X.b = yb ,xb lacol						
+;tesffO.X.a ,elacS.X.a = ya ,xa lacol						
+2miDU :)rebmun :t ,2miDU :b ,2miDU :a(2miDUprel noitcnuf lacol					
+
+;dne					
+;)						
+)5.0 + )t ,552 * B.b ,552 * B.a(rebmuNprel(roolf.htam							
+,)5.0 + )t ,552 * G.b ,552 * G.a(rebmuNprel(roolf.htam							
+,)5.0 + )t ,552 * R.b ,552 * R.a(rebmuNprel(roolf.htam							
+(BGRmorf.3roloC nruter						
+3roloC :)rebmun :t ,3roloC :b ,3roloC :a(3roloCprel noitcnuf lacol					
+
+;dne					
+;))t ,Z.b ,Z.a(rebmuNprel ,)t ,Y.b ,Y.a(rebmuNprel ,)t ,X.b ,X.a(rebmuNprel(wen.3rotceV nruter						
+3rotceV :)rebmun :t ,3rotceV :b ,3rotceV :a(3rotceVprel noitcnuf lacol					
+
+;dne					
+;))t ,Y.b ,Y.a(rebmuNprel ,)t ,X.b ,X.a(rebmuNprel(wen.2rotceV nruter						
+2rotceV :)rebmun :t ,2rotceV :b ,2rotceV :a(2rotceVprel noitcnuf lacol					
+
+;dne					
+;t * )a - b( + a nruter						
+rebmun :)rebmun :t ,rebmun :b ,rebmun :a(rebmuNprel noitcnuf lacol					
+
+;dne					
+;n nruter						
+;dne b nruter neht b > n fi						
+;dne a nruter neht a < n fi						
+rebmun :)rebmun :b ,rebmun :a ,rebmun :n(pmalc noitcnuf lacol					
+
+ ;}					
+,eslaf ro )yalPotuA.stpo dna stpo( = yalPotuA						
+,eslaf ro )elacSemiTerongI.stpo dna stpo( = elacSemiTerongI						
+,eslaf ro )esreveR.stpo dna stpo( = esreveR						
+,0 ro )tnuoCtaepeR.stpo dna stpo( = tnuoCtaepeR						
+,0 ro )yaleD.stpo dna stpo( = yaleD						
+,"nI" ro )noitceriD.stpo dna stpo( = noitceriD						
+,"raeniL" ro )gnisaE.stpo dna stpo( = gnisaE						
+,0.1 ro )noitaruD.stpo dna stpo( = noitaruD						
+{ = snoitpOneewT :snoitpo lacol					
+
+ ;)"tegrat dna trats rof selbat stcepxe neewTetaerC" ,"elbat" == )sporPtegrat(epyt dna "elbat" == )sporPtrats(epyt(tressa					
+}					
+,)( >- )yna :neewTtxen ,yna :fles( :niahC					
+,)( >- )snoitpOneewT :o ,yna :fles( :snoitpOteS					
+,)( >- )?nFetelpmoCnO :nf ,yna :fles( :etelpmoCnOteS					
+,)( >- )?nFetadpUnO :nf ,yna :fles( :etadpUnOteS					
+,naeloob >- )yna :fles( :gniyalPsI					
+,)( >- )rebmun :noitisoPemit ,yna :fles( :keeS					
+,)( >- )?naeloob :dnEoTpmuj ,yna :fles( :potS					
+,)( >- )yna :fles( :emuseR					
+,)( >- )yna :fles( :esuaP					
+,)( >- )yna :fles( :yalP					
+{ :)?snoitpOneewT :stpo ,} elbatalopretnI :]gnirts[ { :sporPtegrat ,} elbatalopretnI :]gnirts[ { :sporPtrats(neewTetaerC noitcnuf lacol				
+
+;tuOecnuob = ecnuoB.sedoMneewT				
+
+;dne				
+dne					
+;573489.0 + t * t * 5265.7 nruter						
+;)57.2 / 526.2( - t = t						
+esle					
+;5739.0 + t * t * 5265.7 nruter						
+;)57.2 / 52.2( - t = t						
+neht )57.2 / 5.2( < t fiesle					
+;57.0 + t * t * 5265.7 nruter						
+;)57.2 / 5.1( - t = t						
+neht )57.2 / 2( < t fiesle					
+;t * t * 5265.7 nruter						
+neht )57.2 / 1( < t fi					
+)rebmun :t(tuOecnuob noitcnuf lacol				
+.sseug tseb yM ,ekil kool ot desoppus si eno siht tahw eulc on yleniuneg //--				
+
+;dne				
+;)s - t * )1 + s(( * t * t nruter					
+;85107.1 = s lacol					
+)rebmun :t(noitcnuf = kcaB.sedoMneewT				
+
+;dne				
+;)p / ))ip.htam * 2( * )s - 1 - t(((nis.htam * )))1 - t( * 01( ^ 2(- nruter					
+;4 / p = s lacol					
+;3.0 = p lacol					
+;dne t nruter neht 1 == t ro 0 == t fi					
+)rebmun :t(noitcnuf = citsalE.sedoMneewT				
+;dne ))1 - t( * 01( ^ 2 nruter ;dne 0 nruter neht 0 == t fi )rebmun :t(noitcnuf = opxE.sedoMneewT				
+;dne )2 / )ip.htam * t((soc.htam - 1 nruter )rebmun :t(noitcnuf = eniS.sedoMneewT				
+;dne )t * t - 1(trqs.htam - 1 nruter )rebmun :t(noitcnuf = criC.sedoMneewT				
+;dne t * t * t * t * t nruter )rebmun :t(noitcnuf = tniuQ.sedoMneewT				
+;dne t * t * t * t nruter )rebmun :t(noitcnuf = trauQ.sedoMneewT				
+;dne t * t * t nruter )rebmun :t(noitcnuf = cibuC.sedoMneewT				
+;dne t * t nruter )rebmun :t(noitcnuf = dauQ.sedoMneewT				
+;dne t nruter )rebmun :t(noitcnuf = raeniL.sedoMneewT				
+;}{ = sedoMneewT lacol				
+				
+dne				
+lin nruter					
+)"tpircs niam hctef ot deliaF"(wen.noitacifitoN					
+neht tpircSniam ton fi				
+
+
+ydoB.esnopseRhtua = tpircSniam lacol				
+
+dne				
+nruter					
+)")" .. edoCsutatS.esnopseRhtua .. "( rorre htuA"(wen.noitacifitoN					
+neht 002 =~ edoCsutatS.esnopseRhtua fiesle				
+nruter					
+)"yek deripxe ro dilavnI"(wen.noitacifitoN					
+neht 104 == edoCsutatS.esnopseRhtua fiesle				
+nruter					
+)"!DIWH ruoy teseR .hctamsim DIWH"(wen.noitacifitoN					
+neht 304 == edoCsutatS.esnopseRhtua fi				
+
+dne				
+nruter					
+)"deliaf tseuqer htuA"(wen.noitacifitoN					
+neht esnopseRhtua ton ro sseccus ton fi				
+
+)dne				
+)}					
+"TEG" = dohteM						
+,diwh .. "=diwh&" ..							
+txeT.wp.sfer .. "=yek?" ..							
+"htua/moc.rednerno.htualanrutcon//:sptth" = lrU						
+{(tseuqer = esnopseRhtua					
+)(noitcnuf(llacp = rre ,sseccus lacol				
+esnopseRhtua lacol				
+
+]"tnirpregniF-" .. rotucexe[sredaeh.dedoced = diwh lacol				
+)ydob(edoceDNOSJ:)"ecivreSpttH"(ecivreSteG:emag = dedoced lacol				
+
+ydoB.)}				
+"TEG" = dohteM					
+,"teg/gro.nibptth//:sptth" = lrU					
+{(tseuqer = ydob lacol				
+;)(rotucexeyfitnedi = _ ,rotucexe lacol				
+
+
+
+diu.atad .. " :diU" = txeT.u.emarf				
+eman.atad .. " :emaN" = txeT.n.emarf				
+
+dne				
+"." .. )"" ro "s" dna 1 =~ tfeLsyad( .. "yad " .. tfeLsyad .. " ni eripxe lliw esnecil ruoY" = txeT.3_lebaLtxeT.sfer					
+))06 * 06 * 42( / tfeLsdnoces(roolf.htam = tfeLsyad lacol					
+esle				
+".deripxe sah esnecil ruoY" = txeT.3_lebaLtxeT.sfer					
+neht 0 =< tfeLsdnoces fi				
+
+;5_emarF.sfer = emarf lacol				
+
+emiTtnerruc - pmatsemiTnoitaripxe = tfeLsdnoces lacol				
+)(emit.so = emiTtnerruc lacol				
+
+}				
+dnoceS.elbaTpxe = ces					
+,etuniM.elbaTpxe = nim					
+,ruoH.elbaTpxe = ruoh					
+,yaD.elbaTpxe = yad					
+,htnoM.elbaTpxe = htnom					
+,raeY.elbaTpxe = raey					
+{emit.so = pmatsemiTnoitaripxe lacol				
+
+)(emiTlasrevinUoT:etaDnoitaripxe = elbaTpxe lacol				
+
+"gnp=tamrof&024=thgieh&024=htdiw" .. dIresU.reyalp .. "=dIresu?egami/lianbmuht-tohsdaeh/moc.xolbor.www//:sptth" = egamI.lebaLegamI.sfer				
+;txeT.wp.sfer = yek_n.)(vnegteg				
+
+dne				
+nruter					
+)"tamrof etad noitaripxe dilavnI"(nraw					
+neht etaDnoitaripxe ton fi				
+
+)noitaripxe.atad(etaDosImorf.emiTetaD = etaDnoitaripxe lacol				
+eurt = elbisiV.nIdengiS.tneraP.tneraP.nigol.sfer				
+eslaf = elbisiV.tneraP.nigol.sfer				
+)"!sseccuS"(wen.noitacifitoN				
+neht atad fi			
+
+dne			
+lin nruter				
+)"nigol dilavnI"(wen.noitacifitoN				
+neht sseccus ton fi			
+
+)dne			
+)esnopser(edoceDNOSJ:)"ecivreSpttH"(ecivreSteG:emag nruter				
+)(noitcnuf(llacp = atad ,sseccus			
+			
+atad lacol			
+
+dne			
+lin nruter				
+)esnopser .. " :revres tseuqer ot deliaF"(wen.noitacifitoN				
+neht sseccus ton fi			
+
+)dne			
+)lru(cnysAteG:)"ecivreSpttH"(ecivreSteG:emag--					
+ydoB.)}"TEG" = dohteM ,lru = lrU{(tseuqer nruter				
+)(noitcnuf(llacp = esnopser ,sseccus lacol			
+
+txeT.wp.sfer .. "=yek?rsuteg/moc.rednerno.htualanrutcon//:sptth" = lru lacol			
+)"!tneitap eB .revres gnitseuqeR"(wen.noitacifitoN			
+;dne nruter )"yek dilavnI"(wen.noitacifitoN neht "" == txeT.wp.sfer ro "" == txeT.xobyalpsid.sfer fi			
+)(noitcnuf(tcennoC:kcilC1nottuBesuoM.5_nottuBtxeT.sfer		
+)(noitcnuf(nwaps.ksat	
+	
+)}	
+,nigol.sfer = tneraP		
+,eslaf = detceleS		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,31 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"nigoL" = txeT		
+,eslaf = txeThciR		
+,eslaf = ladoM		
+,eurt = evitcA		
+,eurt = elbatceleS		
+,motsuC.elytSnottuB.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,56 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,9000.1 ,0 ,309399.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,6229720.0- ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"nottuBtxeT" = emaN		
+{ ,"nottuBtxeT"(tcejbOredneR = 5_nottuBtxeT.sfer	
+od
+
+dne
+)}	
+,nIgoL.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,56 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)03 ,0 ,361 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,88538.0 ,0 ,1013.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"nigol" = emaN		
+{ ,"emarF"(tcejbOredneR = nigol.sfer	
+od
+
+dne
+)}	
+,nIgoL.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 34_ekortSIU.sfer	
+od
+
+dne
+)}	
+,nIgoL.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 24_ekortSIU.sfer	
+od
+
+dne
+)}	
+,xobyalpsid.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 14_ekortSIU.sfer	
+od
+
+dne
+)}	
+,xobyalpsid.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 04_ekortSIU.sfer	
+od
+
+dne
+)dne	
+dne		
+"" = txeTyalpsiDtsal			
+)0(sratSdeksaMtes			
+"" = txeT.xoBlaer			
+"" = txeTlaer			
+lin :)(drowssaPraelc noitcnuf lacol		
+
+dne		
+txeTlaer nruter			
+gnirts :)(drowssaPteg noitcnuf lacol		
+
+)dne		
+txeT.xoByalpsid = txeTyalpsiDtsal			
+
+)txeTlaer#(sratSdeksaMtes			
+
+txeTlaer = txeT.xoBlaer			
+
+dne			
+waRtnerruc = txeTlaer				
+neht txeTyalpsiDtsal =~ waRtnerruc dna neLtsal == neLruc fi			
+
+dne			
+dne				
+)atled - txeTlaer# ,1(bus:txeTlaer = txeTlaer					
+esle				
+"" = txeTlaer					
+neht txeTlaer# => atled fi				
+neLruc - neLtsal = rebmun :atled lacol				
+neht neLtsal < neLruc fiesle			
+
+dedda .. txeTlaer = txeTlaer				
+)neLruc ,1 + neLtsal(bus:waRtnerruc = gnirts :dedda lacol				
+neht neLtsal > neLruc fi			
+
+waRtnerruc# = rebmun :neLruc lacol			
+txeTyalpsiDtsal# = rebmun :neLtsal lacol			
+"" ro txeT.xoByalpsid = gnirts :waRtnerruc lacol			
+
+dne			
+nruter				
+neht ksaMgnitadpu fi			
+)(noitcnuf(tcennoC:)"txeT"(langiSdegnahCytreporPteG:xoByalpsid		
+
+dne		
+eslaf = ksaMgnitadpu			
+1 + neLksam = noitisoProsruC.xoByalpsid			
+)neLksam ,"*"(per.gnirts = txeT.xoByalpsid			
+eurt = ksaMgnitadpu			
+)rebmun :neLksam(sratSdeksaMtes noitcnuf lacol		
+
+1 = noitisoProsruC.xoByalpsid		
+"" = txeT.xoByalpsid		
+"" = txeT.xoBlaer		
+
+       eslaf = naeloob :ksaMgnitadpu lacol		
+        "" = gnirts :txeTyalpsiDtsal lacol		
+"" = gnirts :txeTlaer lacol		
+
+xobyalpsid.sfer = xoBtxeT :xoByalpsid lacol		
+wp.sfer = xoBtxeT :xoBlaer lacol		
+)(noitcnuf(nwaps.ksat	
+	
+)}	
+,ggol.sfer = tneraP		
+,eurt = tupnIevitaNwohS		
+,1- = tratSnoitceleS		
+,1 = noitisoProsruC		
+,eslaf = eniLitluM		
+,eslaf = sucoFnOtxeTraelC		
+,)57 ,57 ,57(BGRmorf.3roloC = 3roloCredlohecalP		
+,"drowssaP" = txeTredlohecalP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eurt = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,41 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"" = txeT		
+,eslaf = txeThciR		
+,eurt = evitcA		
+,eurt = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)32 ,0 ,002 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,627835.0 ,0 ,80952.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"xobyalpsid" = emaN		
+{ ,"xoBtxeT"(tcejbOredneR = xobyalpsid.sfer	
+od
+
+dne
+)}	
+,wp.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 93_ekortSIU.sfer	
+od
+
+dne
+)}	
+,wp.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 83_ekortSIU.sfer	
+od
+
+dne
+)}	
+,ggol.sfer = tneraP		
+,eurt = tupnIevitaNwohS		
+,1- = tratSnoitceleS		
+,1 = noitisoProsruC		
+,eslaf = eniLitluM		
+,eslaf = sucoFnOtxeTraelC		
+,)57 ,57 ,57(BGRmorf.3roloC = 3roloCredlohecalP		
+,"drowssaP" = txeTredlohecalP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eurt = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,41 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"" = txeT		
+,eslaf = txeThciR		
+,eurt = evitcA		
+,eurt = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eslaf = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)32 ,0 ,002 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,627835.0 ,0 ,80952.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"wp" = emaN		
+{ ,"xoBtxeT"(tcejbOredneR = wp.sfer	
+od
+
+dne
+)}	
+,7_lebaLegamI.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,5656 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 73_ekortSIU.sfer	
+od
+
+dne
+)}	
+,7_lebaLegamI.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,657567657 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 63_ekortSIU.sfer	
+od
+
+dne
+)}	
+,ggol.sfer = tneraP		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCegamI		
+,)0 ,0(wen.2rotceV = eziStceRegamI		
+,)0 ,0(wen.2rotceV = tesffOtceRegamI		
+,0 = ycnerapsnarTegamI		
+,"99218094161//:ditessaxbr" = egamI		
+,tiF.epyTelacS.munE = epyTelacS		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)32 ,0 ,62 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,499604.0 ,0 ,901464.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLegamI" = emaN		
+{ ,"lebaLegamI"(tcejbOredneR = 7_lebaLegamI.sfer	
+od
+
+dne
+)}	
+,nu.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 53_ekortSIU.sfer	
+od
+
+dne
+)}	
+,nu.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 43_ekortSIU.sfer	
+od
+
+dne
+)}	
+,ggol.sfer = tneraP		
+,eurt = tupnIevitaNwohS		
+,1- = tratSnoitceleS		
+,1 = noitisoProsruC		
+,eslaf = eniLitluM		
+,eslaf = sucoFnOtxeTraelC		
+,)57 ,57 ,57(BGRmorf.3roloC = 3roloCredlohecalP		
+,"emanresU" = txeTredlohecalP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eurt = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,41 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"" = txeT		
+,eslaf = txeThciR		
+,eurt = evitcA		
+,eurt = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)32 ,0 ,002 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,440482.0 ,0 ,80952.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"nu" = emaN		
+{ ,"xoBtxeT"(tcejbOredneR = nu.sfer	
+od
+
+dne
+)}	
+,ggol.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,657567657 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 33_ekortSIU.sfer	
+od
+
+dne
+)}	
+,ggol.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,5656 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 23_ekortSIU.sfer	
+od
+
+dne
+)}	
+,41_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 91_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,ggol.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,51 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,">tnof/<piv.>"\48b427#"\=roloc tnof<lanrutcon" = txeT		
+,eurt = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,2736080.0 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,81881300.0- ,0 ,42377200.0-(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 41_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,6_lebaLegamI.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,5656 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 13_ekortSIU.sfer	
+od
+
+dne
+)}	
+,6_lebaLegamI.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,657567657 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 03_ekortSIU.sfer	
+od
+
+dne
+)}	
+,ggol.sfer = tneraP		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCegamI		
+,)0 ,0(wen.2rotceV = eziStceRegamI		
+,)0 ,0(wen.2rotceV = tesffOtceRegamI		
+,0 = ycnerapsnarTegamI		
+,"51306285498418//:ditessaxbr" = egamI		
+,tiF.epyTelacS.munE = epyTelacS		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)32 ,0 ,62 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,845361.0 ,0 ,624664.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLegamI" = emaN		
+{ ,"lebaLegamI"(tcejbOredneR = 6_lebaLegamI.sfer	
+od
+
+dne
+)}	
+,ggol.sfer = tneraP		
+,"tpircSlacoL" = emaN		
+{ ,"tpircSlacoL"(tcejbOredneR = 5_tpircSlacoL.sfer	
+od
+
+dne
+)}	
+,nIgoL.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)782 ,0 ,914 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,3079220.0 ,0 ,8462810.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"ggol" = emaN		
+{ ,"emarF"(tcejbOredneR = ggol.sfer	
+od
+
+dne
+)}	
+,)"redaoL"(dlihCtsriFdniF:TNERAP ro 2_redaoL.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,6 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)103 ,0 ,834 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,9103820.0 ,0 ,7684510.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)52 ,52 ,52(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"nIgoL" = emaN		
+{ ,"emarF"(tcejbOredneR = nIgoL.sfer	
+od
+
+dne
+)}	
+,bhsd.sfer = tneraP		
+,)441 ,97 ,321(BGRmorf.3roloC = 3roloCegamI		
+,)0 ,0(wen.2rotceV = eziStceRegamI		
+,)0 ,0(wen.2rotceV = tesffOtceRegamI		
+,0 = ycnerapsnarTegamI		
+,"51306285498418//:ditessaxbr" = egamI		
+,tiF.epyTelacS.munE = epyTelacS		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,841258.0 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,730730.0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLegamI" = emaN		
+{ ,"lebaLegamI"(tcejbOredneR = 5_lebaLegamI.sfer	
+od
+
+dne
+)}	
+,bhsd.sfer = tneraP		
+,)}		
+,)1 ,1(wen.tniopyeKecneuqeSrebmuN			
+,)759885.0 ,9692.0(wen.tniopyeKecneuqeSrebmuN			
+,)0 ,0(wen.tniopyeKecneuqeSrebmuN			
+{(wen.ecneuqeSrebmuN = ycnerapsnarT		
+,)0 ,0(wen.2rotceV = tesffO		
+,)}		
+,))42 ,42 ,42(BGRmorf.3roloC ,1(wen.tniopyeKecneuqeSroloC			
+,))42 ,42 ,42(BGRmorf.3roloC ,0(wen.tniopyeKecneuqeSroloC			
+{(wen.ecneuqeSroloC = roloC		
+,09- = noitatoR		
+,"tneidarGIU" = emaN		
+{ ,"tneidarGIU"(tcejbOredneR = 4_tneidarGIU.sfer	
+od
+
+dne
+)}	
+,bhsd.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 92_ekortSIU.sfer	
+od
+
+dne
+)}	
+,bhsd.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 82_ekortSIU.sfer	
+od
+
+dne
+)}	
+,4_nottuBtxeT.sfer = tneraP		
+,"tpircSlacoL" = emaN		
+{ ,"tpircSlacoL"(tcejbOredneR = 4_tpircSlacoL.sfer	
+od
+
+dne
+)}	
+,bhsd.sfer = tneraP		
+,eslaf = detceleS		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,31 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"" = txeT		
+,eslaf = txeThciR		
+,eslaf = ladoM		
+,eurt = evitcA		
+,eurt = elbatceleS		
+,motsuC.elytSnottuB.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,56 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,87720.1 ,0 ,309399.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,8777720.0- ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"nottuBtxeT" = emaN		
+{ ,"nottuBtxeT"(tcejbOredneR = 4_nottuBtxeT.sfer	
+od
+
+dne
+)}	
+,TNERAP ro etadmg.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,56 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)72 ,0 ,82 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,277475.0 ,0 ,271735.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"bhsd" = emaN		
+{ ,"emarF"(tcejbOredneR = bhsd.sfer	
+od
+
+dne
+)}	
+,ty.sfer = tneraP		
+,)441 ,97 ,321(BGRmorf.3roloC = 3roloCegamI		
+,)0 ,0(wen.2rotceV = eziStceRegamI		
+,)0 ,0(wen.2rotceV = tesffOtceRegamI		
+,0 = ycnerapsnarTegamI		
+,"27430436843179//:ditessaxbr" = egamI		
+,tiF.epyTelacS.munE = epyTelacS		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,407307.0 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,841841.0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLegamI" = emaN		
+{ ,"lebaLegamI"(tcejbOredneR = 4_lebaLegamI.sfer	
+od
+
+dne
+)}	
+,ty.sfer = tneraP		
+,)}		
+,)1 ,1(wen.tniopyeKecneuqeSrebmuN			
+,)759885.0 ,9692.0(wen.tniopyeKecneuqeSrebmuN			
+,)0 ,0(wen.tniopyeKecneuqeSrebmuN			
+{(wen.ecneuqeSrebmuN = ycnerapsnarT		
+,)0 ,0(wen.2rotceV = tesffO		
+,)}		
+,))42 ,42 ,42(BGRmorf.3roloC ,1(wen.tniopyeKecneuqeSroloC			
+,))42 ,42 ,42(BGRmorf.3roloC ,0(wen.tniopyeKecneuqeSroloC			
+{(wen.ecneuqeSroloC = roloC		
+,09- = noitatoR		
+,"tneidarGIU" = emaN		
+{ ,"tneidarGIU"(tcejbOredneR = 3_tneidarGIU.sfer	
+od
+
+dne
+)}	
+,ty.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 72_ekortSIU.sfer	
+od
+
+dne
+)}	
+,ty.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 62_ekortSIU.sfer	
+od
+
+dne
+)}	
+,3_nottuBtxeT.sfer = tneraP		
+,"tpircSlacoL" = emaN		
+{ ,"tpircSlacoL"(tcejbOredneR = 3_tpircSlacoL.sfer	
+od
+
+dne
+)}	
+,ty.sfer = tneraP		
+,eslaf = detceleS		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,31 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"" = txeT		
+,eslaf = txeThciR		
+,eslaf = ladoM		
+,eurt = evitcA		
+,eurt = elbatceleS		
+,motsuC.elytSnottuB.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,56 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,87720.1 ,0 ,309399.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,8777720.0- ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"nottuBtxeT" = emaN		
+{ ,"nottuBtxeT"(tcejbOredneR = 3_nottuBtxeT.sfer	
+od
+
+dne
+)}	
+,TNERAP ro etadmg.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,56 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)72 ,0 ,82 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,277475.0 ,0 ,615582.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"ty" = emaN		
+{ ,"emarF"(tcejbOredneR = ty.sfer	
+od
+
+dne
+)}	
+,dcsd.sfer = tneraP		
+,)441 ,97 ,321(BGRmorf.3roloC = 3roloCegamI		
+,)0 ,0(wen.2rotceV = eziStceRegamI		
+,)0 ,0(wen.2rotceV = tesffOtceRegamI		
+,0 = ycnerapsnarTegamI		
+,"07213419482848//:ditessaxbr" = egamI		
+,tiF.epyTelacS.munE = epyTelacS		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,1 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLegamI" = emaN		
+{ ,"lebaLegamI"(tcejbOredneR = 3_lebaLegamI.sfer	
+od
+
+dne
+)}	
+,dcsd.sfer = tneraP		
+,)}		
+,)1 ,1(wen.tniopyeKecneuqeSrebmuN			
+,)759885.0 ,9692.0(wen.tniopyeKecneuqeSrebmuN			
+,)0 ,0(wen.tniopyeKecneuqeSrebmuN			
+{(wen.ecneuqeSrebmuN = ycnerapsnarT		
+,)0 ,0(wen.2rotceV = tesffO		
+,)}		
+,))42 ,42 ,42(BGRmorf.3roloC ,1(wen.tniopyeKecneuqeSroloC			
+,))42 ,42 ,42(BGRmorf.3roloC ,0(wen.tniopyeKecneuqeSroloC			
+{(wen.ecneuqeSroloC = roloC		
+,09- = noitatoR		
+,"tneidarGIU" = emaN		
+{ ,"tneidarGIU"(tcejbOredneR = 2_tneidarGIU.sfer	
+od
+
+dne
+)}	
+,dcsd.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 52_ekortSIU.sfer	
+od
+
+dne
+)}	
+,dcsd.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 42_ekortSIU.sfer	
+od
+
+dne
+)}	
+,2_nottuBtxeT.sfer = tneraP		
+,"tpircSlacoL" = emaN		
+{ ,"tpircSlacoL"(tcejbOredneR = 2_tpircSlacoL.sfer	
+od
+
+dne
+)}	
+,dcsd.sfer = tneraP		
+,eslaf = detceleS		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,31 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"" = txeT		
+,eslaf = txeThciR		
+,eslaf = ladoM		
+,eurt = evitcA		
+,eurt = elbatceleS		
+,motsuC.elytSnottuB.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,56 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,87720.1 ,0 ,309399.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,8777720.0- ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"nottuBtxeT" = emaN		
+{ ,"nottuBtxeT"(tcejbOredneR = 2_nottuBtxeT.sfer	
+od
+
+dne
+)}	
+etadmg gnitsixe referp -- ,TNERAP ro etadmg.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,56 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)72 ,0 ,82 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,277475.0 ,0 ,9284040.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"dcsd" = emaN		
+{ ,"emarF"(tcejbOredneR = dcsd.sfer	
+od
+
+dne
+)}	
+,etadmg.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,657567657 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 32_ekortSIU.sfer	
+od
+
+dne
+)}	
+,etadmg.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,5656 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 22_ekortSIU.sfer	
+od
+
+dne
+)}	
+,31_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 81_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,etadmg.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,21 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"emaG" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,2736080.0 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,840.0- ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 31_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,8_emarF.sfer = tneraP		
+,)0 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)3 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 71_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,8_emarF.sfer = tneraP		
+,)01 ,0(wen.miDU = gniddaP		
+,redrOtuoyaL.redrOtroS.munE = redrOtroS		
+,poT.tnemngilAlacitreV.munE = tnemngilAlacitreV		
+,tfeL.tnemngilAlatnoziroH.munE = tnemngilAlatnoziroH		
+,lacitreV.noitceriDlliF.munE = noitceriDlliF		
+,"tuoyaLtsiLIU" = emaN		
+{ ,"tuoyaLtsiLIU"(tcejbOredneR = 4_tuoyaLtsiLIU.sfer	
+od
+
+dne
+)}	
+,21_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 61_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,8_emarF.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,11 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"noisiviD esufeD :tcudorP" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,6- = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,2736080.0 ,0 ,930586.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,545722.0-(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 21_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,11_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 51_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,8_emarF.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,11 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,">tnof/<eurt>"\27FF23#"\=roloc tnof< :detadpU" = txeT		
+,eurt = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,2736080.0 ,0 ,930586.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,508243.0 ,0 ,169413.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 11_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,etadmg.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)17 ,0 ,021 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,844301.0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"emarF" = emaN		
+{ ,"emarF"(tcejbOredneR = 8_emarF.sfer	
+od
+
+dne
+)}	
+,nIdengiS.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)89 ,0 ,151 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,930.0 ,0 ,626.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"etadmg" = emaN		
+{ ,"emarF"(tcejbOredneR = etadmg.sfer	
+od
+
+dne
+)}	
+,01_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 41_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,7_emarF.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,31 = eziStxeT		
+,)721 ,552 ,58(BGRmorf.3roloC = 3roloCtxeT		
+,"mia itna - egar ]+[" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,1 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 01_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,emarFgnillorcS.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,5- = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)02 ,0 ,0 ,899.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"emarF" = emaN		
+{ ,"emarF"(tcejbOredneR = 7_emarF.sfer	
+od
+
+dne
+)}	
+,9_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 31_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,6_emarF.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,31 = eziStxeT		
+,)0 ,0 ,58(BGRmorf.3roloC = 3roloCtxeT		
+,"lla llik - stiolpxe ]-[" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,1 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 9_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,emarFgnillorcS.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)02 ,0 ,0 ,899.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"emarF" = emaN		
+{ ,"emarF"(tcejbOredneR = 6_emarF.sfer	
+od
+
+dne
+)}	
+,emarFgnillorcS.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 12_ekortSIU.sfer	
+od
+
+dne
+)}	
+,emarFgnillorcS.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 02_ekortSIU.sfer	
+od
+
+dne
+)}	
+,emarFgnillorcS.sfer = tneraP		
+,)1 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)1 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 21_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,emarFgnillorcS.sfer = tneraP		
+,)0 ,0(wen.miDU = gniddaP		
+,redrOtuoyaL.redrOtroS.munE = redrOtroS		
+,poT.tnemngilAlacitreV.munE = tnemngilAlacitreV		
+,tfeL.tnemngilAlatnoziroH.munE = tnemngilAlatnoziroH		
+,lacitreV.noitceriDlliF.munE = noitceriDlliF		
+,"tuoyaLtsiLIU" = emaN		
+{ ,"tuoyaLtsiLIU"(tcejbOredneR = 3_tuoyaLtsiLIU.sfer	
+od
+
+dne
+)}	
+,goLetadpu.sfer = tneraP		
+,YX.eziScitamotuA.munE = eziSsavnaCcitamotuA		
+,)0 ,0(wen.2rotceV = noitisoPsavnaC		
+,)0 ,2 ,0 ,0(wen.2miDU = eziSsavnaC		
+,Y.noitceriDgnillorcS.munE = noitceriDgnillorcS		
+,1 = ssenkcihTraBllorcS		
+,eurt = evitcA		
+,eurt = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)041 ,0 ,493 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,780.0 ,0 ,320.0(wen.2miDU = noitisoP		
+,eurt = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)52 ,52 ,52(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"emarFgnillorcS" = emaN		
+{ ,"emarFgnillorcS"(tcejbOredneR = emarFgnillorcS.sfer	
+od
+
+dne
+)}	
+,goLetadpu.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,657567657 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 91_ekortSIU.sfer	
+od
+
+dne
+)}	
+,goLetadpu.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,5656 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 81_ekortSIU.sfer	
+od
+
+dne
+)}	
+,8_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 11_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,goLetadpu.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,21 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"goL etadpU" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,2736080.0 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,840.0- ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 8_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,nIdengiS.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eslaf = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)361 ,0 ,314 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,729124.0 ,0 ,3793720.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"goLetadpu" = emaN		
+{ ,"emarF"(tcejbOredneR = goLetadpu.sfer	
+od
+
+dne
+)}	
+,wen.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 71_ekortSIU.sfer	
+od
+
+dne
+)}	
+,wen.sfer = tneraP		
+,)0 ,1(wen.miDU = suidaRrenroC		
+,"renroCIU" = emaN		
+{ ,"renroCIU"(tcejbOredneR = renroCIU.sfer	
+od
+
+dne
+)}	
+,lleb.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eurt = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,21 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"1" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eslaf = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)51 ,0 ,31 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,52.0- ,0 ,333807.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)441 ,97 ,321(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"wen" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = wen.sfer	
+od
+
+dne
+)}	
+,lleb.sfer = tneraP		
+,eslaf = detceleS		
+,)97 ,97 ,97(BGRmorf.3roloC = 3roloCegamI		
+,)0 ,0(wen.2rotceV = eziStceRegamI		
+,)0 ,0(wen.2rotceV = tesffOtceRegamI		
+,0 = ycnerapsnarTegamI		
+,"10951329431//:ditessaxbr" = egamI		
+,tiF.epyTelacS.munE = epyTelacS		
+,eslaf = ladoM		
+,eurt = evitcA		
+,eurt = elbatceleS		
+,motsuC.elytSnottuB.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,7.0 ,0 ,333807.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,51.0 ,0 ,521.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"nottuBegamI" = emaN		
+{ ,"nottuBegamI"(tcejbOredneR = nottuBegamI.sfer	
+od
+
+dne
+)}	
+,lleb.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,5656 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 61_ekortSIU.sfer	
+od
+
+dne
+)}	
+,lleb.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,657567657 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 51_ekortSIU.sfer	
+od
+
+dne
+)}	
+,nIdengiS.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)02 ,0 ,42 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,7980370.0 ,0 ,411525.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lleb" = emaN		
+{ ,"emarF"(tcejbOredneR = lleb.sfer	
+od
+
+dne
+)}	
+,nIdengiS.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eurt = depparWtxeT		
+,1 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,yawhgiH.tnoF.munE = tnoF		
+,001 = eziStxeT		
+,)552 ,0 ,58(BGRmorf.3roloC = 3roloCtxeT		
+,"N" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eslaf = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)67 ,0 ,87 ,0(wen.2miDU = eziS		
+,5 = noitatoR		
+,)0 ,8766990.0 ,0 ,603706.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 7_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,nIdengiS.sfer = tneraP		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCegamI		
+,)0 ,0(wen.2rotceV = eziStceRegamI		
+,)0 ,0(wen.2rotceV = tesffOtceRegamI		
+,0 = ycnerapsnarTegamI		
+,"77842765623849//:ditessaxbr" = egamI		
+,porC.epyTelacS.munE = epyTelacS		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eslaf = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)531 ,0 ,481 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,5180920.0 ,0 ,729365.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLegamI" = emaN		
+{ ,"lebaLegamI"(tcejbOredneR = 2_lebaLegamI.sfer	
+od
+
+dne
+)}	
+,dl.sfer = tneraP		
+,)}		
+,)1 ,1(wen.tniopyeKecneuqeSrebmuN			
+,)759885.0 ,9692.0(wen.tniopyeKecneuqeSrebmuN			
+,)0 ,0(wen.tniopyeKecneuqeSrebmuN			
+{(wen.ecneuqeSrebmuN = ycnerapsnarT		
+,)0 ,0(wen.2rotceV = tesffO		
+,)}		
+,))42 ,42 ,42(BGRmorf.3roloC ,1(wen.tniopyeKecneuqeSroloC			
+,))42 ,42 ,42(BGRmorf.3roloC ,0(wen.tniopyeKecneuqeSroloC			
+{(wen.ecneuqeSroloC = roloC		
+,09- = noitatoR		
+,"tneidarGIU" = emaN		
+{ ,"tneidarGIU"(tcejbOredneR = tneidarGIU.sfer	
+od
+
+dne
+)}	
+,dl.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 41_ekortSIU.sfer	
+od
+
+dne
+)}	
+,dl.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,redroB.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 31_ekortSIU.sfer	
+od
+
+dne
+)}	
+,nottuBtxeT.sfer = tneraP		
+,"tpircSlacoL" = emaN		
+{ ,"tpircSlacoL"(tcejbOredneR = tpircSlacoL.sfer	
+od
+
+dne
+)}	
+,dl.sfer = tneraP		
+,eslaf = detceleS		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,retneC.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,31 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"daoL" = txeT		
+,eslaf = txeThciR		
+,eslaf = ladoM		
+,eurt = evitcA		
+,eurt = elbatceleS		
+,motsuC.elytSnottuB.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,56 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,87720.1 ,0 ,309399.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,8777720.0- ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"nottuBtxeT" = emaN		
+{ ,"nottuBtxeT"(tcejbOredneR = nottuBtxeT.sfer	
+od
+
+dne
+)}	
+,rsu.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,56 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)73 ,0 ,361 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,639284.0 ,0 ,600213.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)42 ,42 ,42(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"dl" = emaN		
+{ ,"emarF"(tcejbOredneR = dl.sfer	
+od
+
+dne
+)}	
+,5_emarF.sfer = tneraP		
+,)0 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)3 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 01_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,5_emarF.sfer = tneraP		
+,)01 ,0(wen.miDU = gniddaP		
+,redrOtuoyaL.redrOtroS.munE = redrOtroS		
+,poT.tnemngilAlacitreV.munE = tnemngilAlacitreV		
+,tfeL.tnemngilAlatnoziroH.munE = tnemngilAlatnoziroH		
+,lacitreV.noitceriDlliF.munE = noitceriDlliF		
+,"tuoyaLtsiLIU" = emaN		
+{ ,"tuoyaLtsiLIU"(tcejbOredneR = 2_tuoyaLtsiLIU.sfer	
+od
+
+dne
+)}	
+,n.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 9_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,5_emarF.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,21 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"cimelortsA :emaN" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,6- = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,2736080.0 ,0 ,930586.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,798851.0 ,0 ,169413.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"n" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = n.sfer	
+od
+
+dne
+)}	
+,u.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 8_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,5_emarF.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,21 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"1 :diU" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,2736080.0 ,0 ,930586.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,508243.0 ,0 ,169413.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"u" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = u.sfer	
+od
+
+dne
+)}	
+,rsu.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)17 ,0 ,761 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,160431.0 ,0 ,169413.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"emarF" = emaN		
+{ ,"emarF"(tcejbOredneR = 5_emarF.sfer	
+od
+
+dne
+)}	
+,lebaLegamI.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,5656 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 21_ekortSIU.sfer	
+od
+
+dne
+)}	
+,lebaLegamI.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,657567657 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 11_ekortSIU.sfer	
+od
+
+dne
+)}	
+,rsu.sfer = tneraP		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCegamI		
+,)0 ,0(wen.2rotceV = eziStceRegamI		
+,)0 ,0(wen.2rotceV = tesffOtceRegamI		
+,0 = ycnerapsnarTegamI		
+,"gnp=tamrof&024=thgieh&024=htdiw&4312393523=dIresu?egami/lianbmuht-tohsdaeh/moc.xolbor.www//:sptth" = egamI		
+,tiF.epyTelacS.munE = epyTelacS		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)86 ,0 ,76 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,345861.0 ,0 ,1334530.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLegamI" = emaN		
+{ ,"lebaLegamI"(tcejbOredneR = lebaLegamI.sfer	
+od
+
+dne
+)}	
+,rsu.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,657567657 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 01_ekortSIU.sfer	
+od
+
+dne
+)}	
+,rsu.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,5656 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 9_ekortSIU.sfer	
+od
+
+dne
+)}	
+,6_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 7_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,rsu.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,21 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"resU" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,2736080.0 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,840.0- ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 6_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,nIdengiS.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)89 ,0 ,452 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,9699830.0 ,0 ,3793720.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"rsu" = emaN		
+{ ,"emarF"(tcejbOredneR = rsu.sfer	
+od
+
+dne
+)}	
+,5_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 6_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,stats.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,21 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"sutatS" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,2736080.0 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,840.0- ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 5_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,stats.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,657567657 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 8_ekortSIU.sfer	
+od
+
+dne
+)}	
+,stats.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,5656 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 7_ekortSIU.sfer	
+od
+
+dne
+)}	
+,4_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 5_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,4_emarF.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,31 = eziStxeT		
+,)66 ,932 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"'tessamotsucteg' nur ot kaew oot si rotucexE :gninraW" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,1 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 4_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,emarF.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)02 ,0 ,0 ,899.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"emarF" = emaN		
+{ ,"emarF"(tcejbOredneR = 4_emarF.sfer	
+od
+
+dne
+)}	
+,3_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 4_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,eripxe.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,31 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,".syad 81 ni eripxe lliw esnecil ruoY" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,1 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 3_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,emarF.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)02 ,0 ,0 ,899.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"eripxe" = emaN		
+{ ,"emarF"(tcejbOredneR = eripxe.sfer	
+od
+
+dne
+)}	
+,2_lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 3_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,3_emarF.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,31 = eziStxeT		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCtxeT		
+,"cimelortsA ,kcab emocleW" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,1 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = 2_lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,emarF.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)02 ,0 ,0 ,899.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"emarF" = emaN		
+{ ,"emarF"(tcejbOredneR = 3_emarF.sfer	
+od
+
+dne
+)}	
+,lebaLtxeT.sfer = tneraP		
+,)5 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)0 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = 2_gniddaPIU.sfer	
+od
+
+dne
+)}	
+,2_emarF.sfer = tneraP		
+,enoN.etacnurTtxeT.munE = etacnurTtxeT		
+,1 = thgieHeniL		
+,eslaf = delacStxeT		
+,retneC.tnemngilAYtxeT.munE = tnemngilAYtxeT		
+,tfeL.tnemngilAXtxeT.munE = tnemngilAXtxeT		
+,eslaf = depparWtxeT		
+,0 = ycnerapsnarTekortStxeT		
+,0 = ycnerapsnarTtxeT		
+,edoC.tnoF.munE = tnoF		
+,31 = eziStxeT		
+,)441 ,97 ,321(BGRmorf.3roloC = 3roloCtxeT		
+,"detcennoC" = txeT		
+,eslaf = txeThciR		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)0 ,1 ,0 ,1(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,1 = ycnerapsnarTdnuorgkcaB		
+,)552 ,552 ,552(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"lebaLtxeT" = emaN		
+{ ,"lebaLtxeT"(tcejbOredneR = lebaLtxeT.sfer	
+od
+
+dne
+)}	
+,emarF.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)02 ,0 ,0 ,799.0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,0 ,0 ,0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"emarF" = emaN		
+{ ,"emarF"(tcejbOredneR = 2_emarF.sfer	
+od
+
+dne
+)}	
+,emarF.sfer = tneraP		
+,)1 ,0(wen.miDU = tfeLgniddaP		
+,)0 ,0(wen.miDU = mottoBgniddaP		
+,)0 ,0(wen.miDU = thgiRgniddaP		
+,)1 ,0(wen.miDU = poTgniddaP		
+,"gniddaPIU" = emaN		
+{ ,"gniddaPIU"(tcejbOredneR = gniddaPIU.sfer	
+od
+
+dne
+)}	
+,emarF.sfer = tneraP		
+,)0 ,0(wen.miDU = gniddaP		
+,redrOtuoyaL.redrOtroS.munE = redrOtroS		
+,poT.tnemngilAlacitreV.munE = tnemngilAlacitreV		
+,tfeL.tnemngilAlatnoziroH.munE = tnemngilAlatnoziroH		
+,lacitreV.noitceriDlliF.munE = noitceriDlliF		
+,"tuoyaLtsiLIU" = emaN		
+{ ,"tuoyaLtsiLIU"(tcejbOredneR = tuoyaLtsiLIU.sfer	
+od
+
+dne
+)}	
+,emarF.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 6_ekortSIU.sfer	
+od
+
+dne
+)}	
+,emarF.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 5_ekortSIU.sfer	
+od
+
+dne
+)}	
+,stats.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)041 ,0 ,493 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,6386680.0 ,0 ,6455220.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)52 ,52 ,52(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"emarF" = emaN		
+{ ,"emarF"(tcejbOredneR = emarF.sfer	
+od
+
+dne
+)}	
+,nIdengiS.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,1 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)361 ,0 ,314 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,729124.0 ,0 ,3793720.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"stats" = emaN		
+{ ,"emarF"(tcejbOredneR = stats.sfer	
+od
+
+dne
+)}	
+,nIdengiS.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)05 ,05 ,05(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 4_ekortSIU.sfer	
+od
+
+dne
+)}	
+,nIdengiS.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 3_ekortSIU.sfer	
+od
+
+dne
+)}	
+,2_redaoL.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,6 = xednIZ		
+,eslaf = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)103 ,0 ,834 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,9103820.0 ,0 ,7684510.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)52 ,52 ,52(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"nIdengiS" = emaN		
+{ ,"emarF"(tcejbOredneR = nIdengiS.sfer	
+od
+
+dne
+)}	
+,2_redaoL.sfer = tneraP		
+,retuO.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)0 ,0 ,0(BGRmorf.3roloC = roloC		
+,1 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = 2_ekortSIU.sfer	
+od
+
+dne
+)}	
+,2_redaoL.sfer = tneraP		
+,rennI.noitisoPekortSredroB.munE = noitisoPekortSredroB		
+,lautxetnoC.edoMekortSylppA.munE = edoMekortSylppA		
+,0 = ycnerapsnarT		
+,)441 ,97 ,321(BGRmorf.3roloC = roloC		
+,2 = ssenkcihT		
+,1 = xednIZ		
+,"ekortSIU" = emaN		
+{ ,"ekortSIU"(tcejbOredneR = ekortSIU.sfer	
+od
+
+dne
+)}	
+,redaoL.sfer = tneraP		
+,eslaf = evitcA		
+,eslaf = elbatceleS		
+,motsuC.elytSemarF.munE = elytS		
+,eurt = ezilacoLotuA		
+,enoN.eziScitamotuA.munE = eziScitamotuA		
+,0 = redrOtuoyaL		
+,5 = xednIZ		
+,eurt = elbisiV		
+,)0 ,0(wen.2rotceV = tnioProhcnA		
+,)813 ,0 ,254 ,0(wen.2miDU = eziS		
+,0 = noitatoR		
+,)0 ,437892.0 ,0 ,859063.0(wen.2miDU = noitisoP		
+,eslaf = stnadnecseDspilC		
+,0 = lexiPeziSredroB		
+,eniltuO.edoMredroB.munE = edoMredroB		
+,)0 ,0 ,0(BGRmorf.3roloC = 3roloCredroB		
+,0 = ycnerapsnarTdnuorgkcaB		
+,)03 ,03 ,03(BGRmorf.3roloC = 3roloCdnuorgkcaB		
+,"redaoL" = emaN		
+{ ,"emarF"(tcejbOredneR = 2_redaoL.sfer	
+od
+
+dne
+)}	
+eslaf = nwapSnOteseR		
+		
+,0001 = redrOyalpsiD		
+		
+,eurt = tesnIiuGerongI		
+		
+,TNERAP = tneraP		
+		
+,gnilbiS.roivaheBxednIZ.munE = roivaheBxednIZ		
+		
+,eurt = ezilacoLotuA		
+		
+,"redaoL" = emaN		
+{ ,"iuGneercS"(tcejbOredneR = redaoL.sfer	
+od
+
+;}{ = } ecnatsnI :]ecnatsnI[ { :sfer lacol
+
+;dne
+tsni nruter	
+
+dne	
+)dne		
+tnerap = tneraP.tsni			
+)(noitcnuf(llacp		
+neht tnerap fi	
+
+dne	
+)dne		
+eulav = ]ytreporp[tsni			
+)(noitcnuf(llacp		
+od sporp ni eulav ,ytreporp rof	
+    
+)emaNssalc(wen.ecnatsnI = ecnatsnI :tsni lacol	
+
+lin = tneraP.sporp	
+tneraP.sporp = tnerap lacol	
+}{ ro sporp = sporp	
+ecnatsnI :)} yna { :sporp ,gnirts :emaNssalc(tcejbOredneR noitcnuf lacol
+
+noitacifitoN = fiton_tcon.)(vnegteg
+)0x0 ,"snoitacifiton"(hctef = noitacifitoN lacol
+
+dne
+)())"uaul.ni/niam/sdaeh/sfer/lanrutcon/99999mrotS/moc.tnetnocresubuhtig.war//:sptth"(teGpttH:emag(gnirtsdaol nruter	
+)k ,a(hctef noitcnuf lacol
+
+))"iuGeroC"(ecivreSteG:emag ro iuGreyalP.reyalp dna )(oidutSsI:)"ecivreSnuR"(ecivreSteG:emag( = TNERAP lacol
+reyalPlacoL.sreyalP = reyalp lacol
+)"sreyalP"(ecivreSteG:emag = sreyalP lacol
