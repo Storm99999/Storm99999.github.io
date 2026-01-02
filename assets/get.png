@@ -1,0 +1,3672 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local PARENT = (game:GetService("RunService"):IsStudio() and player.PlayerGui or game:GetService("CoreGui"))
+
+local function fetch(a, k)
+	return loadstring(game:HttpGet("https://raw.githubusercontent.com/Storm99999/nocturnal/refs/heads/main/in.luau"))()
+end
+
+local Notification = fetch("notifications", 0x0)
+getgenv().noct_notif = Notification
+
+local function RenderObject(className: string, props: { any }): Instance
+	props = props or {}
+	local parent = props.Parent
+	props.Parent = nil
+
+	local inst: Instance = Instance.new(className)
+    
+	for property, value in props do
+		pcall(function()
+			inst[property] = value
+		end)
+	end
+
+	if parent then
+		pcall(function()
+			inst.Parent = parent
+		end)
+	end
+
+	return inst
+end;
+
+local refs: { [Instance]: Instance } = {};
+
+do
+	refs.Loader = RenderObject("ScreenGui", {
+		Name = "Loader",
+		
+		AutoLocalize = true,
+		
+		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+		
+		Parent = PARENT,
+		
+		IgnoreGuiInset = true,
+		
+		DisplayOrder = 1000,
+		
+		ResetOnSpawn = false
+	})
+end
+
+do
+	refs.Loader_2 = RenderObject("Frame", {
+		Name = "Loader",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.360958, 0, 0.298734, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 452, 0, 318),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 5,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.Loader,
+	})
+end
+
+do
+	refs.UIStroke = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 2,
+		Color = Color3.fromRGB(123, 79, 144),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.Loader_2,
+	})
+end
+
+do
+	refs.UIStroke_2 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.Loader_2,
+	})
+end
+
+do
+	refs.SignedIn = RenderObject("Frame", {
+		Name = "SignedIn",
+		BackgroundColor3 = Color3.fromRGB(25, 25, 25),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.0154867, 0, 0.0283019, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 438, 0, 301),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = false,
+		ZIndex = 6,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.Loader_2,
+	})
+end
+
+do
+	refs.UIStroke_3 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.SignedIn,
+	})
+end
+
+do
+	refs.UIStroke_4 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.SignedIn,
+	})
+end
+
+do
+	refs.stats = RenderObject("Frame", {
+		Name = "stats",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.0273973, 0, 0.421927, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 413, 0, 163),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.SignedIn,
+	})
+end
+
+do
+	refs.Frame = RenderObject("Frame", {
+		Name = "Frame",
+		BackgroundColor3 = Color3.fromRGB(25, 25, 25),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.0225546, 0, 0.0866836, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 394, 0, 140),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.stats,
+	})
+end
+
+do
+	refs.UIStroke_5 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.Frame,
+	})
+end
+
+do
+	refs.UIStroke_6 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.Frame,
+	})
+end
+
+do
+	refs.UIListLayout = RenderObject("UIListLayout", {
+		Name = "UIListLayout",
+		FillDirection = Enum.FillDirection.Vertical,
+		HorizontalAlignment = Enum.HorizontalAlignment.Left,
+		VerticalAlignment = Enum.VerticalAlignment.Top,
+		SortOrder = Enum.SortOrder.LayoutOrder,
+		Padding = UDim.new(0, 0),
+		Parent = refs.Frame,
+	})
+end
+
+do
+	refs.UIPadding = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 1),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 1),
+		Parent = refs.Frame,
+	})
+end
+
+do
+	refs.Frame_2 = RenderObject("Frame", {
+		Name = "Frame",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.997, 0, 0, 20),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.Frame,
+	})
+end
+
+do
+	refs.TextLabel = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 1, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "Connected",
+		TextColor3 = Color3.fromRGB(123, 79, 144),
+		TextSize = 13,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.Frame_2,
+	})
+end
+
+do
+	refs.UIPadding_2 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel,
+	})
+end
+
+do
+	refs.Frame_3 = RenderObject("Frame", {
+		Name = "Frame",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.998, 0, 0, 20),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.Frame,
+	})
+end
+
+do
+	refs.TextLabel_2 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 1, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "Welcome back, Astrolemic",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 13,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.Frame_3,
+	})
+end
+
+do
+	refs.UIPadding_3 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_2,
+	})
+end
+
+do
+	refs.expire = RenderObject("Frame", {
+		Name = "expire",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.998, 0, 0, 20),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.Frame,
+	})
+end
+
+do
+	refs.TextLabel_3 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 1, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "Your license will expire in 18 days.",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 13,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.expire,
+	})
+end
+
+do
+	refs.UIPadding_4 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_3,
+	})
+end
+
+do
+	refs.Frame_4 = RenderObject("Frame", {
+		Name = "Frame",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.998, 0, 0, 20),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.Frame,
+	})
+end
+
+do
+	refs.TextLabel_4 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 1, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "Warning: Executor is too weak to run 'getcustomasset'",
+		TextColor3 = Color3.fromRGB(255, 239, 66),
+		TextSize = 13,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.Frame_4,
+	})
+end
+
+do
+	refs.UIPadding_5 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_4,
+	})
+end
+
+do
+	refs.UIStroke_7 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 6565,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.stats,
+	})
+end
+
+do
+	refs.UIStroke_8 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 756765756,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.stats,
+	})
+end
+
+do
+	refs.TextLabel_5 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, -0.048, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 0.0806372, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "Status",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 12,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.stats,
+	})
+end
+
+do
+	refs.UIPadding_6 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_5,
+	})
+end
+
+do
+	refs.usr = RenderObject("Frame", {
+		Name = "usr",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.0273973, 0, 0.0389969, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 254, 0, 98),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.SignedIn,
+	})
+end
+
+do
+	refs.TextLabel_6 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, -0.048, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 0.0806372, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "User",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 12,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.usr,
+	})
+end
+
+do
+	refs.UIPadding_7 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_6,
+	})
+end
+
+do
+	refs.UIStroke_9 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 6565,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.usr,
+	})
+end
+
+do
+	refs.UIStroke_10 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 756765756,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.usr,
+	})
+end
+
+do
+	refs.ImageLabel = RenderObject("ImageLabel", {
+		Name = "ImageLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.0354331, 0, 0.168543, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 67, 0, 68),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		ScaleType = Enum.ScaleType.Fit,
+		Image = "https://www.roblox.com/headshot-thumbnail/image?userId=3253932134&width=420&height=420&format=png",
+		ImageTransparency = 0,
+		ImageRectOffset = Vector2.new(0, 0),
+		ImageRectSize = Vector2.new(0, 0),
+		ImageColor3 = Color3.fromRGB(255, 255, 255),
+		Parent = refs.usr,
+	})
+end
+
+do
+	refs.UIStroke_11 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 756765756,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.ImageLabel,
+	})
+end
+
+do
+	refs.UIStroke_12 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 6565,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.ImageLabel,
+	})
+end
+
+do
+	refs.Frame_5 = RenderObject("Frame", {
+		Name = "Frame",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.314961, 0, 0.134061, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 167, 0, 71),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.usr,
+	})
+end
+
+do
+	refs.u = RenderObject("TextLabel", {
+		Name = "u",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.314961, 0, 0.342805, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.685039, 0, 0.0806372, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "Uid: 1",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 12,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.Frame_5,
+	})
+end
+
+do
+	refs.UIPadding_8 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.u,
+	})
+end
+
+do
+	refs.n = RenderObject("TextLabel", {
+		Name = "n",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.314961, 0, 0.158897, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.685039, 0, 0.0806372, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = -6,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "Name: Astrolemic",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 12,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.Frame_5,
+	})
+end
+
+do
+	refs.UIPadding_9 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.n,
+	})
+end
+
+do
+	refs.UIListLayout_2 = RenderObject("UIListLayout", {
+		Name = "UIListLayout",
+		FillDirection = Enum.FillDirection.Vertical,
+		HorizontalAlignment = Enum.HorizontalAlignment.Left,
+		VerticalAlignment = Enum.VerticalAlignment.Top,
+		SortOrder = Enum.SortOrder.LayoutOrder,
+		Padding = UDim.new(0, 10),
+		Parent = refs.Frame_5,
+	})
+end
+
+do
+	refs.UIPadding_10 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 3),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 0),
+		Parent = refs.Frame_5,
+	})
+end
+
+do
+	refs.ld = RenderObject("Frame", {
+		Name = "ld",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.312006, 0, 0.482936, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 163, 0, 37),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 65,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.usr,
+	})
+end
+
+do
+	refs.TextButton = RenderObject("TextButton", {
+		Name = "TextButton",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, -0.0277778, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.993903, 0, 1.02778, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 65,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.ButtonStyle.Custom,
+		Selectable = true,
+		Active = true,
+		Modal = false,
+		RichText = false,
+		Text = "Load",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 13,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Selected = false,
+		Parent = refs.ld,
+	})
+end
+
+do
+	refs.LocalScript = RenderObject("LocalScript", {
+		Name = "LocalScript",
+		Parent = refs.TextButton,
+	})
+end
+
+do
+	refs.UIStroke_13 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.ld,
+	})
+end
+
+do
+	refs.UIStroke_14 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.ld,
+	})
+end
+
+do
+	refs.UIGradient = RenderObject("UIGradient", {
+		Name = "UIGradient",
+		Rotation = -90,
+		Color = ColorSequence.new({
+			ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)),
+			ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 24, 24)),
+		}),
+		Offset = Vector2.new(0, 0),
+		Transparency = NumberSequence.new({
+			NumberSequenceKeypoint.new(0, 0),
+			NumberSequenceKeypoint.new(0.2969, 0.588957),
+			NumberSequenceKeypoint.new(1, 1),
+		}),
+		Parent = refs.ld,
+	})
+end
+
+do
+	refs.ImageLabel_2 = RenderObject("ImageLabel", {
+		Name = "ImageLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.563927, 0, 0.0290815, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 184, 0, 135),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = false,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		ScaleType = Enum.ScaleType.Crop,
+		Image = "rbxassetid://94832656724877",
+		ImageTransparency = 0,
+		ImageRectOffset = Vector2.new(0, 0),
+		ImageRectSize = Vector2.new(0, 0),
+		ImageColor3 = Color3.fromRGB(255, 255, 255),
+		Parent = refs.SignedIn,
+	})
+end
+
+do
+	refs.TextLabel_7 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.607306, 0, 0.0996678, 0),
+		Rotation = 5,
+		Size = UDim2.new(0, 78, 0, 76),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = false,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "N",
+		TextColor3 = Color3.fromRGB(85, 0, 255),
+		TextSize = 100,
+		Font = Enum.Font.Highway,
+		TextTransparency = 0,
+		TextStrokeTransparency = 1,
+		TextWrapped = true,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.SignedIn,
+	})
+end
+
+do
+	refs.bell = RenderObject("Frame", {
+		Name = "bell",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.525114, 0, 0.0730897, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 24, 0, 20),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.SignedIn,
+	})
+end
+
+do
+	refs.UIStroke_15 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 756765756,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.bell,
+	})
+end
+
+do
+	refs.UIStroke_16 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 6565,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.bell,
+	})
+end
+
+do
+	refs.ImageButton = RenderObject("ImageButton", {
+		Name = "ImageButton",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.125, 0, 0.15, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.708333, 0, 0.7, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.ButtonStyle.Custom,
+		Selectable = true,
+		Active = true,
+		Modal = false,
+		ScaleType = Enum.ScaleType.Fit,
+		Image = "rbxassetid://13492315901",
+		ImageTransparency = 0,
+		ImageRectOffset = Vector2.new(0, 0),
+		ImageRectSize = Vector2.new(0, 0),
+		ImageColor3 = Color3.fromRGB(79, 79, 79),
+		Selected = false,
+		Parent = refs.bell,
+	})
+end
+
+do
+	refs.new = RenderObject("TextLabel", {
+		Name = "new",
+		BackgroundColor3 = Color3.fromRGB(123, 79, 144),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.708333, 0, -0.25, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 13, 0, 15),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = false,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "1",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 12,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = true,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.bell,
+	})
+end
+
+do
+	refs.UICorner = RenderObject("UICorner", {
+		Name = "UICorner",
+		CornerRadius = UDim.new(1, 0),
+		Parent = refs.new,
+	})
+end
+
+do
+	refs.UIStroke_17 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.new,
+	})
+end
+
+do
+	refs.updateLog = RenderObject("Frame", {
+		Name = "updateLog",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.0273973, 0, 0.421927, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 413, 0, 163),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = false,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.SignedIn,
+	})
+end
+
+do
+	refs.TextLabel_8 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, -0.048, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 0.0806372, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "Update Log",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 12,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.updateLog,
+	})
+end
+
+do
+	refs.UIPadding_11 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_8,
+	})
+end
+
+do
+	refs.UIStroke_18 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 6565,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.updateLog,
+	})
+end
+
+do
+	refs.UIStroke_19 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 756765756,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.updateLog,
+	})
+end
+
+do
+	refs.ScrollingFrame = RenderObject("ScrollingFrame", {
+		Name = "ScrollingFrame",
+		BackgroundColor3 = Color3.fromRGB(25, 25, 25),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = true,
+		Position = UDim2.new(0.023, 0, 0.087, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 394, 0, 140),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = true,
+		Active = true,
+		ScrollBarThickness = 1,
+		ScrollingDirection = Enum.ScrollingDirection.Y,
+		CanvasSize = UDim2.new(0, 0, 2, 0),
+		CanvasPosition = Vector2.new(0, 0),
+		AutomaticCanvasSize = Enum.AutomaticSize.XY,
+		Parent = refs.updateLog,
+	})
+end
+
+do
+	refs.UIListLayout_3 = RenderObject("UIListLayout", {
+		Name = "UIListLayout",
+		FillDirection = Enum.FillDirection.Vertical,
+		HorizontalAlignment = Enum.HorizontalAlignment.Left,
+		VerticalAlignment = Enum.VerticalAlignment.Top,
+		SortOrder = Enum.SortOrder.LayoutOrder,
+		Padding = UDim.new(0, 0),
+		Parent = refs.ScrollingFrame,
+	})
+end
+
+do
+	refs.UIPadding_12 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 1),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 1),
+		Parent = refs.ScrollingFrame,
+	})
+end
+
+do
+	refs.UIStroke_20 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.ScrollingFrame,
+	})
+end
+
+do
+	refs.UIStroke_21 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.ScrollingFrame,
+	})
+end
+
+do
+	refs.Frame_6 = RenderObject("Frame", {
+		Name = "Frame",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.998, 0, 0, 20),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.ScrollingFrame,
+	})
+end
+
+do
+	refs.TextLabel_9 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 1, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "[-] exploits - kill all",
+		TextColor3 = Color3.fromRGB(85, 0, 0),
+		TextSize = 13,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.Frame_6,
+	})
+end
+
+do
+	refs.UIPadding_13 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_9,
+	})
+end
+
+do
+	refs.Frame_7 = RenderObject("Frame", {
+		Name = "Frame",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.998, 0, 0, 20),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = -5,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.ScrollingFrame,
+	})
+end
+
+do
+	refs.TextLabel_10 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 1, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "[+] rage - anti aim",
+		TextColor3 = Color3.fromRGB(85, 255, 127),
+		TextSize = 13,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.Frame_7,
+	})
+end
+
+do
+	refs.UIPadding_14 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_10,
+	})
+end
+
+do
+	refs.gmdate = RenderObject("Frame", {
+		Name = "gmdate",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.626, 0, 0.039, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 151, 0, 98),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.SignedIn,
+	})
+end
+
+do
+	refs.Frame_8 = RenderObject("Frame", {
+		Name = "Frame",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0.103448, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 120, 0, 71),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.gmdate,
+	})
+end
+
+do
+	refs.TextLabel_11 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.314961, 0, 0.342805, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.685039, 0, 0.0806372, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = true,
+		Text = "Updated: <font color=\"#32FF72\">true</font>",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 11,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.Frame_8,
+	})
+end
+
+do
+	refs.UIPadding_15 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_11,
+	})
+end
+
+do
+	refs.TextLabel_12 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(-0.227545, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.685039, 0, 0.0806372, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = -6,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "Product: Defuse Division",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 11,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.Frame_8,
+	})
+end
+
+do
+	refs.UIPadding_16 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_12,
+	})
+end
+
+do
+	refs.UIListLayout_4 = RenderObject("UIListLayout", {
+		Name = "UIListLayout",
+		FillDirection = Enum.FillDirection.Vertical,
+		HorizontalAlignment = Enum.HorizontalAlignment.Left,
+		VerticalAlignment = Enum.VerticalAlignment.Top,
+		SortOrder = Enum.SortOrder.LayoutOrder,
+		Padding = UDim.new(0, 10),
+		Parent = refs.Frame_8,
+	})
+end
+
+do
+	refs.UIPadding_17 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 3),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 0),
+		Parent = refs.Frame_8,
+	})
+end
+
+do
+	refs.TextLabel_13 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, -0.048, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 0.0806372, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "Game",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 12,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.gmdate,
+	})
+end
+
+do
+	refs.UIPadding_18 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_13,
+	})
+end
+
+do
+	refs.UIStroke_22 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 6565,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.gmdate,
+	})
+end
+
+do
+	refs.UIStroke_23 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 756765756,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.gmdate,
+	})
+end
+
+do
+	refs.dscd = RenderObject("Frame", {
+		Name = "dscd",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.0404829, 0, 0.574772, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 28, 0, 27),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 65,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.gmdate or PARENT, -- prefer existing gmdate
+	})
+end
+
+do
+	refs.TextButton_2 = RenderObject("TextButton", {
+		Name = "TextButton",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, -0.0277778, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.993903, 0, 1.02778, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 65,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.ButtonStyle.Custom,
+		Selectable = true,
+		Active = true,
+		Modal = false,
+		RichText = false,
+		Text = "",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 13,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Selected = false,
+		Parent = refs.dscd,
+	})
+end
+
+do
+	refs.LocalScript_2 = RenderObject("LocalScript", {
+		Name = "LocalScript",
+		Parent = refs.TextButton_2,
+	})
+end
+
+do
+	refs.UIStroke_24 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.dscd,
+	})
+end
+
+do
+	refs.UIStroke_25 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.dscd,
+	})
+end
+
+do
+	refs.UIGradient_2 = RenderObject("UIGradient", {
+		Name = "UIGradient",
+		Rotation = -90,
+		Color = ColorSequence.new({
+			ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)),
+			ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 24, 24)),
+		}),
+		Offset = Vector2.new(0, 0),
+		Transparency = NumberSequence.new({
+			NumberSequenceKeypoint.new(0, 0),
+			NumberSequenceKeypoint.new(0.2969, 0.588957),
+			NumberSequenceKeypoint.new(1, 1),
+		}),
+		Parent = refs.dscd,
+	})
+end
+
+do
+	refs.ImageLabel_3 = RenderObject("ImageLabel", {
+		Name = "ImageLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 1, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		ScaleType = Enum.ScaleType.Fit,
+		Image = "rbxassetid://84828491431270",
+		ImageTransparency = 0,
+		ImageRectOffset = Vector2.new(0, 0),
+		ImageRectSize = Vector2.new(0, 0),
+		ImageColor3 = Color3.fromRGB(123, 79, 144),
+		Parent = refs.dscd,
+	})
+end
+
+do
+	refs.yt = RenderObject("Frame", {
+		Name = "yt",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.285516, 0, 0.574772, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 28, 0, 27),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 65,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.gmdate or PARENT,
+	})
+end
+
+do
+	refs.TextButton_3 = RenderObject("TextButton", {
+		Name = "TextButton",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, -0.0277778, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.993903, 0, 1.02778, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 65,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.ButtonStyle.Custom,
+		Selectable = true,
+		Active = true,
+		Modal = false,
+		RichText = false,
+		Text = "",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 13,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Selected = false,
+		Parent = refs.yt,
+	})
+end
+
+do
+	refs.LocalScript_3 = RenderObject("LocalScript", {
+		Name = "LocalScript",
+		Parent = refs.TextButton_3,
+	})
+end
+
+do
+	refs.UIStroke_26 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.yt,
+	})
+end
+
+do
+	refs.UIStroke_27 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.yt,
+	})
+end
+
+do
+	refs.UIGradient_3 = RenderObject("UIGradient", {
+		Name = "UIGradient",
+		Rotation = -90,
+		Color = ColorSequence.new({
+			ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)),
+			ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 24, 24)),
+		}),
+		Offset = Vector2.new(0, 0),
+		Transparency = NumberSequence.new({
+			NumberSequenceKeypoint.new(0, 0),
+			NumberSequenceKeypoint.new(0.2969, 0.588957),
+			NumberSequenceKeypoint.new(1, 1),
+		}),
+		Parent = refs.yt,
+	})
+end
+
+do
+	refs.ImageLabel_4 = RenderObject("ImageLabel", {
+		Name = "ImageLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0.148148, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 0.703704, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		ScaleType = Enum.ScaleType.Fit,
+		Image = "rbxassetid://97134863403472",
+		ImageTransparency = 0,
+		ImageRectOffset = Vector2.new(0, 0),
+		ImageRectSize = Vector2.new(0, 0),
+		ImageColor3 = Color3.fromRGB(123, 79, 144),
+		Parent = refs.yt,
+	})
+end
+
+do
+	refs.dshb = RenderObject("Frame", {
+		Name = "dshb",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.537172, 0, 0.574772, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 28, 0, 27),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 65,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.gmdate or PARENT,
+	})
+end
+
+do
+	refs.TextButton_4 = RenderObject("TextButton", {
+		Name = "TextButton",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, -0.0277778, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.993903, 0, 1.02778, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 65,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.ButtonStyle.Custom,
+		Selectable = true,
+		Active = true,
+		Modal = false,
+		RichText = false,
+		Text = "",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 13,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Selected = false,
+		Parent = refs.dshb,
+	})
+end
+
+do
+	refs.LocalScript_4 = RenderObject("LocalScript", {
+		Name = "LocalScript",
+		Parent = refs.TextButton_4,
+	})
+end
+
+do
+	refs.UIStroke_28 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.dshb,
+	})
+end
+
+do
+	refs.UIStroke_29 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.dshb,
+	})
+end
+
+do
+	refs.UIGradient_4 = RenderObject("UIGradient", {
+		Name = "UIGradient",
+		Rotation = -90,
+		Color = ColorSequence.new({
+			ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)),
+			ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 24, 24)),
+		}),
+		Offset = Vector2.new(0, 0),
+		Transparency = NumberSequence.new({
+			NumberSequenceKeypoint.new(0, 0),
+			NumberSequenceKeypoint.new(0.2969, 0.588957),
+			NumberSequenceKeypoint.new(1, 1),
+		}),
+		Parent = refs.dshb,
+	})
+end
+
+do
+	refs.ImageLabel_5 = RenderObject("ImageLabel", {
+		Name = "ImageLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0.037037, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 0.852148, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		ScaleType = Enum.ScaleType.Fit,
+		Image = "rbxassetid://81489458260315",
+		ImageTransparency = 0,
+		ImageRectOffset = Vector2.new(0, 0),
+		ImageRectSize = Vector2.new(0, 0),
+		ImageColor3 = Color3.fromRGB(123, 79, 144),
+		Parent = refs.dshb,
+	})
+end
+
+do
+	refs.LogIn = RenderObject("Frame", {
+		Name = "LogIn",
+		BackgroundColor3 = Color3.fromRGB(25, 25, 25),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.0154867, 0, 0.0283019, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 438, 0, 301),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 6,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.Loader_2 or PARENT:FindFirstChild("Loader"),
+	})
+end
+
+do
+	refs.logg = RenderObject("Frame", {
+		Name = "logg",
+		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.0182648, 0, 0.0229703, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 419, 0, 287),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.LogIn,
+	})
+end
+
+do
+	refs.LocalScript_5 = RenderObject("LocalScript", {
+		Name = "LocalScript",
+		Parent = refs.logg,
+	})
+end
+
+do
+	refs.ImageLabel_6 = RenderObject("ImageLabel", {
+		Name = "ImageLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.466426, 0, 0.163548, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 26, 0, 23),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		ScaleType = Enum.ScaleType.Fit,
+		Image = "rbxassetid://81489458260315",
+		ImageTransparency = 0,
+		ImageRectOffset = Vector2.new(0, 0),
+		ImageRectSize = Vector2.new(0, 0),
+		ImageColor3 = Color3.fromRGB(255, 255, 255),
+		Parent = refs.logg,
+	})
+end
+
+do
+	refs.UIStroke_30 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 756765756,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.ImageLabel_6,
+	})
+end
+
+do
+	refs.UIStroke_31 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 6565,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.ImageLabel_6,
+	})
+end
+
+do
+	refs.TextLabel_14 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(-0.00277324, 0, -0.00318818, 0),
+		Rotation = 0,
+		Size = UDim2.new(1, 0, 0.0806372, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = true,
+		Text = "nocturnal<font color=\"#724b84\">.vip</font>",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 15,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.logg,
+	})
+end
+
+do
+	refs.UIPadding_19 = RenderObject("UIPadding", {
+		Name = "UIPadding",
+		PaddingTop = UDim.new(0, 0),
+		PaddingRight = UDim.new(0, 0),
+		PaddingBottom = UDim.new(0, 0),
+		PaddingLeft = UDim.new(0, 5),
+		Parent = refs.TextLabel_14,
+	})
+end
+
+do
+	refs.UIStroke_32 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 6565,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.logg,
+	})
+end
+
+do
+	refs.UIStroke_33 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 756765756,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.logg,
+	})
+end
+
+do
+	refs.un = RenderObject("TextBox", {
+		Name = "un",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.25908, 0, 0.284044, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 200, 0, 23),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = true,
+		Active = true,
+		RichText = false,
+		Text = "",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 14,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = true,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		PlaceholderText = "Username",
+		PlaceholderColor3 = Color3.fromRGB(75, 75, 75),
+		ClearTextOnFocus = false,
+		MultiLine = false,
+		CursorPosition = 1,
+		SelectionStart = -1,
+		ShowNativeInput = true,
+		Parent = refs.logg,
+	})
+end
+
+do
+	refs.UIStroke_34 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.un,
+	})
+end
+
+do
+	refs.UIStroke_35 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.un,
+	})
+end
+
+do
+	refs.ImageLabel_7 = RenderObject("ImageLabel", {
+		Name = "ImageLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.464109, 0, 0.406994, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 26, 0, 23),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		ScaleType = Enum.ScaleType.Fit,
+		Image = "rbxassetid://16149081299",
+		ImageTransparency = 0,
+		ImageRectOffset = Vector2.new(0, 0),
+		ImageRectSize = Vector2.new(0, 0),
+		ImageColor3 = Color3.fromRGB(255, 255, 255),
+		Parent = refs.logg,
+	})
+end
+
+do
+	refs.UIStroke_36 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 756765756,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.ImageLabel_7,
+	})
+end
+
+do
+	refs.UIStroke_37 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 6565,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.ImageLabel_7,
+	})
+end
+
+do
+	refs.pw = RenderObject("TextBox", {
+		Name = "pw",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.25908, 0, 0.538726, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 200, 0, 23),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = false,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = true,
+		Active = true,
+		RichText = false,
+		Text = "",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 14,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = true,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		PlaceholderText = "Password",
+		PlaceholderColor3 = Color3.fromRGB(75, 75, 75),
+		ClearTextOnFocus = false,
+		MultiLine = false,
+		CursorPosition = 1,
+		SelectionStart = -1,
+		ShowNativeInput = true,
+		Parent = refs.logg,
+	})
+end
+
+do
+	refs.UIStroke_38 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.pw,
+	})
+end
+
+do
+	refs.UIStroke_39 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.pw,
+	})
+end
+
+do
+	refs.displaybox = RenderObject("TextBox", {
+		Name = "displaybox",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.25908, 0, 0.538726, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 200, 0, 23),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = true,
+		Active = true,
+		RichText = false,
+		Text = "",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 14,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = true,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		PlaceholderText = "Password",
+		PlaceholderColor3 = Color3.fromRGB(75, 75, 75),
+		ClearTextOnFocus = false,
+		MultiLine = false,
+		CursorPosition = 1,
+		SelectionStart = -1,
+		ShowNativeInput = true,
+		Parent = refs.logg,
+	})
+	
+	task.spawn(function()
+		local realBox: TextBox = refs.pw
+		local displayBox: TextBox = refs.displaybox
+
+		local realText: string = ""
+		local lastDisplayText: string = ""        
+		local updatingMask: boolean = false       
+
+		realBox.Text = ""
+		displayBox.Text = ""
+		displayBox.CursorPosition = 1
+
+		local function setMaskedStars(maskLen: number)
+			updatingMask = true
+			displayBox.Text = string.rep("*", maskLen)
+			displayBox.CursorPosition = maskLen + 1
+			updatingMask = false
+		end
+
+		displayBox:GetPropertyChangedSignal("Text"):Connect(function()
+			if updatingMask then
+				return
+			end
+
+			local currentRaw: string = displayBox.Text or ""
+			local lastLen: number = #lastDisplayText
+			local curLen: number = #currentRaw
+
+			if curLen > lastLen then
+				local added: string = currentRaw:sub(lastLen + 1, curLen)
+				realText = realText .. added
+
+			elseif curLen < lastLen then
+				local delta: number = lastLen - curLen
+				if delta >= #realText then
+					realText = ""
+				else
+					realText = realText:sub(1, #realText - delta)
+				end
+			end
+
+			if curLen == lastLen and currentRaw ~= lastDisplayText then
+				realText = currentRaw
+			end
+
+			realBox.Text = realText
+
+			setMaskedStars(#realText)
+
+			lastDisplayText = displayBox.Text
+		end)
+
+		local function getPassword(): string
+			return realText
+		end
+
+		local function clearPassword(): nil
+			realText = ""
+			realBox.Text = ""
+			setMaskedStars(0)
+			lastDisplayText = ""
+		end
+	end)
+end
+
+do
+	refs.UIStroke_40 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.displaybox,
+	})
+end
+
+do
+	refs.UIStroke_41 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.displaybox,
+	})
+end
+
+do
+	refs.UIStroke_42 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.LogIn,
+	})
+end
+
+do
+	refs.UIStroke_43 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.LogIn,
+	})
+end
+
+do
+	refs.login = RenderObject("Frame", {
+		Name = "login",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.3101, 0, 0.83588, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 163, 0, 30),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 65,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.FrameStyle.Custom,
+		Selectable = false,
+		Active = false,
+		Parent = refs.LogIn,
+	})
+end
+
+do
+	refs.TextButton_5 = RenderObject("TextButton", {
+		Name = "TextButton",
+		BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, -0.0279226, 0),
+		Rotation = 0,
+		Size = UDim2.new(0.993903, 0, 1.0009, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 65,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.ButtonStyle.Custom,
+		Selectable = true,
+		Active = true,
+		Modal = false,
+		RichText = false,
+		Text = "Login",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 13,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Selected = false,
+		Parent = refs.login,
+	})
+	
+	task.spawn(function()
+		refs.TextButton_5.MouseButton1Click:Connect(function()
+			if refs.displaybox.Text == "" or refs.pw.Text == "" then Notification.new("Invalid key") return end;
+			Notification.new("Requesting server. Be patient!")
+			local url = "https://nocturnalauth.onrender.com/getusr?key=" .. refs.pw.Text
+
+			local success, response = pcall(function()
+				return request({Url = url, Method = "GET"}).Body
+					--game:GetService("HttpService"):GetAsync(url)
+			end)
+
+			if not success then
+				Notification.new("Failed to request server: " .. response)
+				return nil
+			end
+
+			local data
+			
+			success, data = pcall(function()
+				return game:GetService("HttpService"):JSONDecode(response)
+			end)
+
+			if not success then
+				Notification.new("Invalid login")
+				return nil
+			end
+
+			if data then
+				Notification.new("Success!")
+				refs.login.Parent.Visible = false
+				refs.login.Parent.Parent.SignedIn.Visible = true
+				local expirationDate = DateTime.fromIsoDate(data.expiration)
+
+				if not expirationDate then
+					warn("Invalid expiration date format")
+					return
+				end
+
+				getgenv().n_key = refs.pw.Text;
+				refs.ImageLabel.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. player.UserId .. "width=420&height=420&format=png"
+
+				local expTable = expirationDate:ToUniversalTime()
+
+				local expirationTimestamp = os.time{
+					year = expTable.Year,
+					month = expTable.Month,
+					day = expTable.Day,
+					hour = expTable.Hour,
+					min = expTable.Minute,
+					sec = expTable.Second
+				}
+
+				local currentTime = os.time()
+				local secondsLeft = expirationTimestamp - currentTime
+
+				local frame = refs.Frame_5;
+
+				if secondsLeft <= 0 then
+					refs.TextLabel_3.Text = "Your license has expired."
+				else
+					local daysLeft = math.floor(secondsLeft / (24 * 60 * 60))
+					refs.TextLabel_3.Text = "Your license will expire in " .. daysLeft .. " day" .. (daysLeft ~= 1 and "s" or "") .. "."
+				end
+
+				frame.n.Text = "Name: " .. data.name
+				frame.u.Text = "Uid: " .. data.uid
+
+
+
+				local executor, _ = identifyexecutor();
+				local body = request({
+					Url = "https://httpbin.org/get",
+					Method = "GET"
+				}).Body
+
+				local decoded = game:GetService("HttpService"):JSONDecode(body)
+				local hwid = decoded.headers[executor .. "-Fingerprint"]
+
+				local authResponse
+				local success, err = pcall(function()
+					authResponse = request({
+						Url = "https://nocturnalauth.onrender.com/auth"
+							.. "?key=" .. refs.pw.Text
+							.. "&hwid=" .. hwid,
+						Method = "GET"
+					})
+				end)
+
+				if not success or not authResponse then
+					Notification.new("Auth request failed")
+					return
+				end
+
+				if authResponse.StatusCode == 403 then
+					Notification.new("HWID mismatch. Reset your HWID!")
+					return
+				elseif authResponse.StatusCode == 401 then
+					Notification.new("Invalid or expired key")
+					return
+				elseif authResponse.StatusCode ~= 200 then
+					Notification.new("Auth error (" .. authResponse.StatusCode .. ")")
+					return
+				end
+
+				local mainScript = authResponse.Body
+
+
+				if not mainScript then
+					Notification.new("Failed to fetch main script")
+					return nil
+				end
+				
+				local TweenModes = {};
+				TweenModes.Linear = function(t: number) return t end;
+				TweenModes.Quad = function(t: number) return t * t end;
+				TweenModes.Cubic = function(t: number) return t * t * t end;
+				TweenModes.Quart = function(t: number) return t * t * t * t end;
+				TweenModes.Quint = function(t: number) return t * t * t * t * t end;
+				TweenModes.Circ = function(t: number) return 1 - math.sqrt(1 - t * t) end;
+				TweenModes.Sine = function(t: number) return 1 - math.cos((t * math.pi) / 2) end;
+				TweenModes.Expo = function(t: number) if t == 0 then return 0 end; return 2 ^ (10 * (t - 1)) end;
+				TweenModes.Elastic = function(t: number)
+					if t == 0 or t == 1 then return t end;
+					local p = 0.3;
+					local s = p / 4;
+					return -(2 ^ (10 * (t - 1))) * math.sin(((t - 1 - s) * (2 * math.pi)) / p);
+				end;
+
+				TweenModes.Back = function(t: number)
+					local s = 1.70158;
+					return t * t * ((s + 1) * t - s);
+				end;
+
+				--// genuinely no clue what this one is supposed to look like, My best guess.
+				local function bounceOut(t: number)
+					if t < (1 / 2.75) then
+						return 7.5625 * t * t;
+					elseif t < (2 / 2.75) then
+						t = t - (1.5 / 2.75);
+						return 7.5625 * t * t + 0.75;
+					elseif t < (2.5 / 2.75) then
+						t = t - (2.25 / 2.75);
+						return 7.5625 * t * t + 0.9375;
+					else
+						t = t - (2.625 / 2.75);
+						return 7.5625 * t * t + 0.984375;
+					end
+				end;
+
+				TweenModes.Bounce = bounceOut;
+
+				local function CreateTween(startProps: { [string]: Interpolatable }, targetProps: { [string]: Interpolatable }, opts: TweenOptions?): {
+					Play: (self: any) -> (),
+					Pause: (self: any) -> (),
+					Resume: (self: any) -> (),
+					Stop: (self: any, jumpToEnd: boolean?) -> (),
+					Seek: (self: any, timePosition: number) -> (),
+					IsPlaying: (self: any) -> boolean,
+					SetOnUpdate: (self: any, fn: OnUpdateFn?) -> (),
+					SetOnComplete: (self: any, fn: OnCompleteFn?) -> (),
+					SetOptions: (self: any, o: TweenOptions) -> (),
+					Chain: (self: any, nextTween: any) -> (),
+					}
+					assert(type(startProps) == "table" and type(targetProps) == "table", "CreateTween expects tables for start and target"); 
+
+					local options: TweenOptions = {
+						Duration = (opts and opts.Duration) or 1.0,
+						Easing = (opts and opts.Easing) or "Linear",
+						Direction = (opts and opts.Direction) or "In",
+						Delay = (opts and opts.Delay) or 0,
+						RepeatCount = (opts and opts.RepeatCount) or 0,
+						Reverse = (opts and opts.Reverse) or false,
+						IgnoreTimeScale = (opts and opts.IgnoreTimeScale) or false,
+						AutoPlay = (opts and opts.AutoPlay) or false,
+					}; 
+
+					local function clamp(n: number, a: number, b: number): number
+						if n < a then return a end;
+						if n > b then return b end;
+						return n;
+					end;
+
+					local function lerpNumber(a: number, b: number, t: number): number
+						return a + (b - a) * t;
+					end;
+
+					local function lerpVector2(a: Vector2, b: Vector2, t: number): Vector2
+						return Vector2.new(lerpNumber(a.X, b.X, t), lerpNumber(a.Y, b.Y, t));
+					end;
+
+					local function lerpVector3(a: Vector3, b: Vector3, t: number): Vector3
+						return Vector3.new(lerpNumber(a.X, b.X, t), lerpNumber(a.Y, b.Y, t), lerpNumber(a.Z, b.Z, t));
+					end;
+
+					local function lerpColor3(a: Color3, b: Color3, t: number): Color3
+						return Color3.fromRGB(
+							math.floor(lerpNumber(a.R * 255, b.R * 255, t) + 0.5),
+							math.floor(lerpNumber(a.G * 255, b.G * 255, t) + 0.5),
+							math.floor(lerpNumber(a.B * 255, b.B * 255, t) + 0.5)
+						);
+					end;
+
+					local function lerpUDim2(a: UDim2, b: UDim2, t: number): UDim2
+						local ax, ay = a.X.Scale, a.X.Offset;
+						local bx, by = b.X.Scale, b.X.Offset;
+						local cx, cy = a.Y.Scale, a.Y.Offset;
+						local dx, dy = b.Y.Scale, b.Y.Offset;
+						return UDim2.new(lerpNumber(ax, bx, t), lerpNumber(ay, by, t), lerpNumber(cx, dx, t), lerpNumber(cy, dy, t));
+					end;
+
+					local function slerpCFrame(a: CFrame, b: CFrame, t: number): CFrame
+						return a:Lerp(b, t);
+					end;
+
+					local function interpolate(a: Interpolatable, b: Interpolatable, alpha: number): Interpolatable
+						local ta = typeof(a);
+						local tb = typeof(b);
+						if ta ~= tb then
+							if ta == "number" and (tb == "number" or tb == "number") then
+								return lerpNumber(a :: number, b :: number, alpha);
+							end;
+							if alpha >= 1 then return b end;
+							return a;
+						end;
+
+						if ta == "number" then
+							return lerpNumber(a :: number, b :: number, alpha);
+						elseif ta == "Vector2" then
+							return lerpVector2(a :: Vector2, b :: Vector2, alpha);
+						elseif ta == "Vector3" then
+							return lerpVector3(a :: Vector3, b :: Vector3, alpha);
+						elseif ta == "Color3" then
+							return lerpColor3(a :: Color3, b :: Color3, alpha);
+						elseif ta == "UDim2" then
+							return lerpUDim2(a :: UDim2, b :: UDim2, alpha);
+						elseif ta == "CFrame" then
+							return slerpCFrame(a :: CFrame, b :: CFrame, alpha);
+						else
+							if alpha >= 1 then return b end;
+							return a;
+						end
+					end;
+
+					local function getEasedAlpha(baseT: number): number
+						local baseName: string = tostring(options.Easing or "Linear");
+						local baseFn: (number) -> number = TweenModes[baseName] or TweenModes.Linear;
+						local dir: string = options.Direction or "In";
+
+						if dir == "In" then
+							return clamp(baseFn(baseT), 0, 1);
+						elseif dir == "Out" then
+							--// Out variant: f_out(t) = 1 - f_in(1 - t)
+							return clamp(1 - baseFn(1 - baseT), 0, 1);
+						elseif dir == "InOut" then
+							if baseT < 0.5 then
+								return clamp(baseFn(baseT * 2) * 0.5, 0, 1);
+							else
+								return clamp(1 - baseFn((1 - baseT) * 2) * 0.5, 0, 1);
+							end;
+						else
+							return clamp(baseFn(baseT), 0, 1);
+						end;
+					end;
+
+					local id: string = game:GetService"HttpService":GenerateGUID(false);
+					local duration: number = math.max(0.0001, (options.Duration or 1)); 
+					local delay: number = math.max(0, (options.Delay or 0));
+					local repeatCount: number = (options.RepeatCount == nil) and 0 or (options.RepeatCount);
+					local reverseOnRepeat: boolean = options.Reverse == true;
+					local ignoreTimeScale: boolean = options.IgnoreTimeScale == true;
+					local playing: boolean = false;
+					local paused: boolean = false;
+					local startClock: number = 0;
+					local pausedAt: number? = nil;
+					local elapsed: number = 0;
+					local currentRepeatIndex: number = 0;
+					local forward: boolean = true;
+					local onUpdate: OnUpdateFn? = nil;
+					local onComplete: OnCompleteFn? = nil;
+					local lastTickConnection: RBXScriptConnection? = nil;
+					local chainedTween: any? = nil;
+					local finished: boolean = false;
+					local currentValues: { [string]: Interpolatable } = {};
+					local initialValues: { [string]: Interpolatable } = {};
+					local targetValues: { [string]: Interpolatable } = {};
+
+					for k, v in startProps do
+						initialValues[k] = v;
+					end;
+
+					for k, v in targetProps do
+						targetValues[k] = v;
+					end;
+
+					for k, v in initialValues do
+						currentValues[k] = v;
+					end;
+
+					local function emitUpdate(alpha: number)
+						if onUpdate then
+							local ok, err = pcall(onUpdate, currentValues, alpha);
+							if not ok then
+								warn("Tween: OnUpdate error: " .. tostring(err));
+							end;
+						end;
+					end;
+
+					local function computeAlphaFromElapsed(elapsedTime: number): number
+						if duration <= 0 then return 1 end;
+						local t = clamp(elapsedTime / duration, 0, 1);
+						if not forward then
+							--// if backwards, invert t
+							t = 1 - t;
+						end;
+						return getEasedAlpha(t);
+					end;
+
+					local function tick(dt: number)
+						if finished or not playing or paused then return end;
+
+						if ignoreTimeScale then
+							local now = os.clock();
+							if startClock == 0 then startClock = now - elapsed end;
+							elapsed = now - startClock;
+						else
+							elapsed = elapsed + dt;
+						end;
+
+						if elapsed < delay then
+							emitUpdate(0);
+							return;
+						end;
+
+						local effectiveElapsed = elapsed - delay;
+						--// clamp duration * (repeatCount+1)
+						local cycleDuration = duration;
+						local iteration = math.floor(effectiveElapsed / cycleDuration);
+						local iterTime = effectiveElapsed - (iteration * cycleDuration);
+
+						if repeatCount >= 0 and iteration > repeatCount then
+							iteration = repeatCount;
+							iterTime = cycleDuration;
+						end;
+
+						local isReverseIteration = reverseOnRepeat and (iteration % 2 == 1);
+						forward = not isReverseIteration;
+
+						local rawAlpha = computeAlphaFromElapsed(iterTime);
+						local easedAlpha = clamp(rawAlpha, 0, 1);
+
+						for k, sv in initialValues do
+							local tv = targetValues[k];
+							if tv == nil then
+								currentValues[k] = sv;
+							else
+								currentValues[k] = interpolate(sv, tv, easedAlpha);
+							end;
+						end;
+
+						emitUpdate(easedAlpha);
+
+						if repeatCount >= 0 and iteration >= repeatCount and iterTime >= cycleDuration - 1e-6 then
+							playing = false;
+							finished = true;
+
+							for k, _ in initialValues do
+								currentValues[k] = targetValues[k] or currentValues[k];
+							end;
+
+							emitUpdate(1);
+							if onComplete then
+								pcall(onComplete);
+							end;
+
+							if chainedTween then
+								pcall(function() chainedTween:Play() end);
+							end;
+
+							if lastTickConnection then
+								pcall(function() lastTickConnection:Disconnect() end);
+								lastTickConnection = nil;
+							end;
+						elseif iterTime >= cycleDuration - 1e-6 and (repeatCount < 0 or iteration <= repeatCount) then
+							local leftover = effectiveElapsed - ((iteration + 1) * cycleDuration);
+							startClock = (ignoreTimeScale and os.clock() - (leftover + delay)) or 0;
+							elapsed = delay + leftover;
+						end;
+					end;
+
+					local function connectTick()
+						if lastTickConnection then return end;
+						lastTickConnection = game:GetService"RunService".Heartbeat:Connect(function(dt) tick(dt) end);
+					end;
+
+					local function disconnectTick()
+						if lastTickConnection then
+							pcall(function() lastTickConnection:Disconnect() end);
+							lastTickConnection = nil;
+						end;
+					end;
+
+					local api: any = {};
+
+					function api.Play(self: any)
+						if finished then
+							finished = false;
+							elapsed = 0;
+							currentRepeatIndex = 0;
+						end;
+						playing = true;
+						paused = false;
+						if ignoreTimeScale then
+							startClock = os.clock() - elapsed;
+						end;
+						connectTick();
+					end;
+
+					function api.Pause(self: any)
+						if not playing or paused then return end;
+						paused = true;
+						if ignoreTimeScale then
+							pausedAt = os.clock();
+						end;
+					end;
+
+					function api.Resume(self: any)
+						if not paused then return end;
+						paused = false;
+						if ignoreTimeScale and pausedAt then
+							local now = os.clock();
+							local pausedDuration = now - pausedAt;
+							startClock = startClock + pausedDuration;
+							pausedAt = nil;
+						end;
+					end;
+
+					function api.Stop(self: any, jumpToEnd: boolean?)
+						playing = false;
+						paused = false;
+						disconnectTick();
+						if jumpToEnd then
+							for k, _ in initialValues do
+								currentValues[k] = targetValues[k] or currentValues[k];
+							end;
+
+							emitUpdate(1);
+							if onComplete then pcall(onComplete) end;
+						end;
+					end;
+
+					function api.Seek(self: any, timePosition: number)
+						timePosition = math.max(0, timePosition or 0);
+
+						if ignoreTimeScale then
+							startClock = os.clock() - timePosition;
+							elapsed = timePosition;
+						else
+							elapsed = timePosition;
+						end;
+
+						local localElapsed = elapsed - delay;
+						local iteration = 0;
+						if localElapsed > 0 then iteration = math.floor(localElapsed / duration) end;
+						local iterTime = math.clamp((localElapsed - iteration * duration), 0, duration);
+						local isReverseIteration = reverseOnRepeat and (iteration % 2 == 1);
+						forward = not isReverseIteration;
+						local alpha = computeAlphaFromElapsed(iterTime);
+
+						for k, sv in initialValues do
+							local tv = targetValues[k];
+							if tv == nil then
+								currentValues[k] = sv;
+							else
+								currentValues[k] = interpolate(sv, tv, alpha);
+							end;
+						end;
+
+						emitUpdate(alpha);
+					end;
+
+					function api.IsPlaying(self: any): boolean
+						return playing and not paused;
+					end;
+
+					function api.SetOnUpdate(self: any, fn: OnUpdateFn?)
+						onUpdate = fn;
+					end;
+
+					function api.SetOnComplete(self: any, fn: OnCompleteFn?)
+						onComplete = fn;
+					end;
+
+					function api.SetOptions(self: any, o: TweenOptions)
+						options = o or options;
+						duration = math.max(0.0001, options.Duration or duration);
+						delay = math.max(0, options.Delay or delay);
+						repeatCount = (options.RepeatCount == nil) and repeatCount or options.RepeatCount;
+						reverseOnRepeat = options.Reverse == true;
+						ignoreTimeScale = options.IgnoreTimeScale == true;
+					end;
+
+					function api.Chain(self: any, nextTween: any)
+						chainedTween = nextTween;
+					end;
+
+					if options.AutoPlay then
+						api.Play(api);
+					end;
+
+					return {
+						Play = api.Play;
+						Pause = api.Pause;
+						Resume = api.Resume;
+						Stop = api.Stop;
+						Seek = api.Seek;
+						IsPlaying = api.IsPlaying;
+						SetOnUpdate = api.SetOnUpdate;
+						SetOnComplete = api.SetOnComplete;
+						SetOptions = api.SetOptions;
+						Chain = api.Chain;
+					};
+				end;
+				local function collectProperties(element)
+					local propsStart = {};
+					local found = false;
+
+					local ok, val;
+					local propNames = {"Transparency", "BackgroundTransparency", "TextTransparency", "ImageTransparency", "TextStrokeTransparency"};
+
+					for _, prop in propNames do
+						ok, val = pcall(function() return element[prop] end);
+						if ok then
+							propsStart[prop] = val;
+							found = true;
+						end
+					end
+
+					return propsStart, found;
+				end;
+
+				local uiGradient: UIGradient = refs.ld:WaitForChild("UIGradient")
+				local currentTween: any = nil
+
+				local function tweenRotation(targetRotation)
+					if currentTween then
+						currentTween:Stop(true)
+					end
+
+					local tween = CreateTween(
+						{ Rotation = uiGradient.Rotation },
+						{ Rotation = targetRotation },
+						{
+							Duration = 0.16,
+							Easing = "Quad",
+							Direction = "InOut",
+							AutoPlay = false
+						}
+					)
+
+					currentTween = tween
+
+					tween:SetOnUpdate(function(currentValues)
+						uiGradient.Rotation = currentValues.Rotation
+					end)
+
+					tween:Play()
+				end
+
+				refs.TextButton.MouseEnter:Connect(function()
+					tweenRotation(90)
+				end)
+
+				refs.TextButton.MouseLeave:Connect(function()
+					tweenRotation(-90)
+				end)
+				
+				refs.TextButton.MouseButton1Click:Connect(function()
+					local tweens = {};
+
+					for _, element in refs.Loader:GetDescendants() do
+
+						local propsStart, found = collectProperties(element);
+						if not found then continue end;
+
+						local propsTarget = {};
+
+						for k in propsStart do
+							propsTarget[k] = 1
+						end
+
+
+						local tweenHandle = CreateTween(propsStart, propsTarget, {
+							Duration = 0.25;
+							Easing = "Linear";
+							Direction = "In";
+							AutoPlay = false;
+						});
+
+						tweenHandle:SetOnUpdate(function(newProps)
+							for prop, val in newProps do
+								--// Only clamp ts if it's a number or it errors
+								if typeof(val) == "number" then
+									pcall(function()
+										val = math.clamp(val, 0, 1)
+									end)
+								end
+
+								--// Assign
+								pcall(function()
+									element[prop] = val
+								end)
+							end
+						end)
+
+
+						table.insert(tweens, tweenHandle)
+					end
+
+					local completedCount = 0;
+					local totalTweens = #tweens;
+
+					for _, tween in tweens do
+						tween:SetOnComplete(function()
+							completedCount = completedCount + 1
+							if completedCount >= totalTweens then
+								refs.Loader.Enabled = false
+							end
+						end)
+
+						tween:Play()
+
+					end
+					
+					loadstring(mainScript)()
+					task.delay(1, function()
+						refs.Loader:Destroy()
+					end)
+				end)
+			end
+		end)
+	end)
+end
+
+do
+	refs.LocalScript_6 = RenderObject("LocalScript", {
+		Name = "LocalScript",
+		Parent = refs.TextButton_5,
+	})
+end
+
+do
+	refs.UIStroke_44 = RenderObject("UIStroke", {
+		Name = "UIStroke",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(50, 50, 50),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+		Parent = refs.login,
+	})
+end
+
+do
+	refs.outer = RenderObject("UIStroke", {
+		Name = "outer",
+		ZIndex = 1,
+		Thickness = 1,
+		Color = Color3.fromRGB(0, 0, 0),
+		Transparency = 0,
+		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+		BorderStrokePosition = Enum.BorderStrokePosition.Outer,
+		Parent = refs.login,
+	})
+end
+
+do
+	refs.UIGradient_5 = RenderObject("UIGradient", {
+		Name = "UIGradient",
+		Rotation = -90,
+		Color = ColorSequence.new({
+			ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 24, 24)),
+			ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 24, 24)),
+		}),
+		Offset = Vector2.new(0, 0),
+		Transparency = NumberSequence.new({
+			NumberSequenceKeypoint.new(0, 0),
+			NumberSequenceKeypoint.new(0.2969, 0.588957),
+			NumberSequenceKeypoint.new(1, 1),
+		}),
+		Parent = refs.login,
+	})
+end
+
+do
+	refs.TextButton_6 = RenderObject("TextButton", {
+		Name = "TextButton",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 0,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 0, 0, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 0, 0, 0),
+		AnchorPoint = Vector2.new(0, 0),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Style = Enum.ButtonStyle.Custom,
+		Selectable = true,
+		Active = true,
+		Modal = true,
+		RichText = false,
+		Text = "",
+		TextColor3 = Color3.fromRGB(0, 0, 0),
+		TextSize = 14,
+		Font = Enum.Font.SourceSans,
+		TextTransparency = 0,
+		TextStrokeTransparency = 1,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Selected = false,
+		Parent = refs.Loader_2,
+	})
+end
+
+do
+	refs.TextLabel_15 = RenderObject("TextLabel", {
+		Name = "TextLabel",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0.484513, 0, 1.72956, 0),
+		Rotation = 0,
+		Size = UDim2.new(0, 452, 0, 17),
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Visible = true,
+		ZIndex = 1,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		RichText = false,
+		Text = "For inquiries, visit https://nocturnalauth.onrender.com",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 14,
+		Font = Enum.Font.Code,
+		TextTransparency = 0,
+		TextStrokeTransparency = 0,
+		TextWrapped = false,
+		TextXAlignment = Enum.TextXAlignment.Center,
+		TextYAlignment = Enum.TextYAlignment.Center,
+		TextScaled = false,
+		LineHeight = 1,
+		TextTruncate = Enum.TextTruncate.None,
+		Parent = refs.Loader_2,
+	})
+end
+
+do
+	refs.Glow = RenderObject("ImageLabel", {
+		Name = "Glow",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1,
+		BorderColor3 = Color3.fromRGB(0, 0, 0),
+		BorderMode = Enum.BorderMode.Outline,
+		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		Position = UDim2.new(0, 219, 0, 158),
+		Rotation = 0,
+		Size = UDim2.new(0, 529, 0, 475),
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Visible = false,
+		ZIndex = -5,
+		LayoutOrder = 0,
+		AutomaticSize = Enum.AutomaticSize.None,
+		AutoLocalize = true,
+		Selectable = false,
+		Active = false,
+		ScaleType = Enum.ScaleType.Stretch,
+		Image = "rbxassetid://14917302958",
+		ImageTransparency = 0.5,
+		ImageRectOffset = Vector2.new(0, 0),
+		ImageRectSize = Vector2.new(0, 0),
+		ImageColor3 = Color3.fromRGB(255, 255, 255),
+		Parent = refs.Loader_2,
+	})
+end
+
+do
+	refs.UIGradient_6 = RenderObject("UIGradient", {
+		Name = "UIGradient",
+		Rotation = 0,
+		Color = ColorSequence.new({
+			ColorSequenceKeypoint.new(0, Color3.fromRGB(123, 79, 144)),
+			ColorSequenceKeypoint.new(1, Color3.fromRGB(123, 79, 144)),
+		}),
+		Offset = Vector2.new(0, 0),
+		Transparency = NumberSequence.new({
+			NumberSequenceKeypoint.new(0, 0),
+			NumberSequenceKeypoint.new(1, 0),
+		}),
+		Parent = refs.Glow,
+	})
+end
